@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Silver Spurs Breeding Matchmaker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:    #0f0c07;
+    --parch:  #f2ead8;
+    --parch2: #e8dfc8;
+    --gold:   #b8892a;
+    --gold2:  #d4a83c;
+    --rust:   #8b3318;
+    --sage:   #3d5c3a;
+    --mist:   #c8bfa8;
+    --rule:   1px solid rgba(15,12,7,0.18);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--parch);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    min-height: 100vh;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--ink);
+    color: var(--parch);
+    padding: 20px 24px 16px;
+    border-bottom: 3px solid var(--gold);
+    position: relative;
+    overflow: hidden;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(184,137,42,0.04) 60px, rgba(184,137,42,0.04) 61px);
+    pointer-events: none;
+  }
+  .header-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+  .brand { display: flex; flex-direction: column; gap: 3px; }
+  .brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 5vw, 2.2rem);
+    font-weight: 700;
+    color: var(--gold2);
+    letter-spacing: -0.5px;
+    line-height: 1;
+  }
+  .brand-sub {
+    font-size: 0.6rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(242,234,216,0.45);
+  }
+  .header-badge {
+    margin-left: auto;
+    background: rgba(184,137,42,0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold2);
+    font-size: 0.58rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+  }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 900px; margin: 0 auto; padding: 28px 20px 60px; }
+
+  /* ── MARE FORM ── */
+  .form-card {
+    background: var(--parch2);
+    border: 1px solid rgba(15,12,7,0.2);
+    border-top: 3px solid var(--gold);
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .form-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: var(--rule);
+  }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 560px) { .form-grid { grid-template-columns: 1fr; } }
+  .form-group { display: flex; flex-direction: column; gap: 5px; }
+  .form-group.full { grid-column: 1 / -1; }
+  .form-label {
+    font-size: 0.58rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+  }
+  select, input[type="text"], textarea {
+    background: var(--parch);
+    border: 1px solid rgba(15,12,7,0.25);
+    border-radius: 0;
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+    padding: 9px 11px;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.15s;
+    -webkit-appearance: none;
+  }
+  select:focus, input[type="text"]:focus, textarea:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 2px rgba(184,137,42,0.12);
+  }
+  textarea { resize: vertical; min-height: 64px; }
+
+  /* trait chips */
+  .trait-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .trait-chip {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border: 1px solid rgba(15,12,7,0.25);
+    background: var(--parch);
+    cursor: pointer;
+    transition: all 0.1s;
+    user-select: none;
+  }
+  .trait-chip.on { background: var(--ink); color: var(--gold2); border-color: var(--ink); }
+  .trait-chip:hover:not(.on) { border-color: var(--gold); color: var(--gold); }
+
+  /* ── RUN BUTTON ── */
+  .run-wrap { margin-top: 20px; }
+  .run-btn {
+    width: 100%;
+    background: var(--rust);
+    color: var(--parch);
+    border: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    padding: 15px 24px;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.08s;
+    position: relative;
+  }
+  .run-btn:hover { background: #6d2810; }
+  .run-btn:active { transform: scale(0.99); }
+  .run-btn:disabled { background: var(--mist); color: rgba(15,12,7,0.4); cursor: not-allowed; }
+  .spinner {
+    display: inline-block; width: 14px; height: 14px;
+    border: 2px solid rgba(242,234,216,0.3);
+    border-top-color: var(--parch);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    vertical-align: middle; margin-right: 8px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── ERROR ── */
+  .error-bar {
+    background: #fdf0ee;
+    border-left: 3px solid var(--rust);
+    color: var(--rust);
+    padding: 10px 14px;
+    font-size: 0.78rem;
+    margin-bottom: 16px;
+    display: none;
+  }
+
+  /* ── RESULTS ── */
+  .results-header {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--mist);
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: var(--rule);
+  }
+
+  .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 680px) { .cards-grid { grid-template-columns: 1fr; } }
+
+  .match-card {
+    border: 1px solid rgba(15,12,7,0.18);
+    display: flex;
+    flex-direction: column;
+    background: var(--parch2);
+    animation: riseIn 0.35s ease both;
+  }
+  .match-card:nth-child(2) { animation-delay: 0.08s; }
+  .match-card:nth-child(3) { animation-delay: 0.16s; }
+  @keyframes riseIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
+  .card-tier-bar {
+    padding: 7px 14px 6px;
+    font-size: 0.56rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    border-bottom: 1px solid rgba(15,12,7,0.12);
+  }
+  .card-tier-bar.premium { background: var(--ink); color: var(--gold2); }
+  .card-tier-bar.mid     { background: var(--sage); color: #c8e8c4; }
+  .card-tier-bar.value   { background: #4a3820; color: var(--mist); }
+  .tier-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .premium .tier-dot { background: var(--gold2); }
+  .mid .tier-dot     { background: #7fc87a; }
+  .value .tier-dot   { background: var(--mist); }
+
+  .card-body { padding: 16px 14px; flex: 1; display: flex; flex-direction: column; gap: 12px; }
+
+  .score-row { display: flex; align-items: flex-end; gap: 8px; }
+  .score-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .score-num.premium { color: var(--gold); }
+  .score-num.mid     { color: var(--sage); }
+  .score-num.value   { color: #7a6040; }
+  .score-denom { font-size: 0.62rem; color: var(--mist); margin-bottom: 6px; letter-spacing: 1px; }
+  .confidence-pill {
+    margin-left: auto;
+    font-size: 0.55rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border: 1px solid currentColor;
+    align-self: flex-end;
+    margin-bottom: 6px;
+  }
+  .confidence-pill.high   { color: var(--sage); }
+  .confidence-pill.medium { color: var(--gold); }
+  .confidence-pill.low    { color: var(--mist); }
+
+  .score-bar-wrap { height: 3px; background: rgba(15,12,7,0.1); margin-top: -8px; }
+  .score-bar-fill { height: 100%; transition: width 0.6s ease; }
+  .score-bar-fill.premium { background: var(--gold); }
+  .score-bar-fill.mid     { background: var(--sage); }
+  .score-bar-fill.value   { background: #7a6040; }
+
+  .stallion-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .stallion-disc { font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: var(--mist); margin-top: 2px; }
+
+  .stat-row { display: flex; flex-direction: column; gap: 3px; }
+  .stat-item { font-size: 0.68rem; color: rgba(15,12,7,0.6); display: flex; gap: 6px; }
+  .stat-item strong { color: var(--ink); }
+
+  .explanation { font-size: 0.75rem; line-height: 1.55; font-style: italic; color: rgba(15,12,7,0.7); border-left: 2px solid var(--mist); padding-left: 10px; }
+
+  .card-fee {
+    background: var(--ink);
+    color: var(--parch);
+    padding: 11px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(15,12,7,0.2);
+  }
+  .fee-label { font-size: 0.55rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.45; }
+  .fee-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--gold2);
+  }
+  .fee-amount.free { color: #7fc87a; }
+
+  /* empty */
+  .empty { text-align: center; padding: 48px 20px; opacity: 0.3; }
+  .empty-icon { font-size: 3.5rem; margin-bottom: 12px; }
+  .empty-text { font-family: 'Cormorant Garamond', serif; font-size: 1rem; letter-spacing: 3px; text-transform: uppercase; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-name">Silver Spurs Breeding Matchmaker</div>
+      <div class="brand-sub">Scottsdale, AZ · 2026 Roster · 32 Stallions</div>
+    </div>
+    <div class="header-badge">AI Scoring</div>
+  </div>
+</header>
+
+<div class="page">
+
+  <!-- MARE FORM -->
+  <div class="form-card">
+    <div class="form-title">Mare Profile</div>
+    <div class="form-grid">
+
+      <div class="form-group">
+        <label class="form-label">Discipline</label>
+        <select id="mare-disc">
+          <option value="">— Select —</option>
+          <option value="reining">Reining</option>
+          <option value="reined cow horse">Reined Cow Horse</option>
+          <option value="cutting">Cutting</option>
+          <option value="ranch">Ranch / Versatility</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Mare Sire / Key Bloodlines</label>
+        <input type="text" id="mare-blood" placeholder="e.g. Shining Spark, Nu Chex To Cash">
+      </div>
+
+      <div class="form-group full">
+        <label class="form-label">Desired Traits — select all that apply</label>
+        <div class="trait-chips" id="trait-chips"></div>
+      </div>
+
+      <div class="form-group full">
+        <label class="form-label">Additional Notes (optional)</label>
+        <textarea id="mare-notes" placeholder="e.g. mare is small-framed, needs size; prefers cow horse outcross"></textarea>
+      </div>
+
+    </div>
+    <div class="run-wrap">
+      <div class="error-bar" id="error-bar"></div>
+      <button class="run-btn" id="run-btn" onclick="runMatch()">Find My Top Matches</button>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="results-section" style="display:none;">
+    <div class="results-header" id="results-header">Results</div>
+    <div class="cards-grid" id="cards-grid"></div>
+  </div>
+
+  <div class="empty" id="empty-state">
+    <div class="empty-icon">🐴</div>
+    <div class="empty-text">Enter mare details to find matches</div>
+  </div>
+
+</div>
+
+<script>
+// ── STALLION DATA ─────────────────────────────────────────────────────────────
+const STALLIONS = [
+  // PREMIUM (The Greats)
+  {
+    name: "A Sparkling Vintage", tier: "premium",
+    discipline: ["reining","reined cow horse"], stud_fee: 6000,
+    lifetime_earnings: 54516, performance_summary: "NRHA 4 Million Dollar Sire · Sire of 2 Triple Crown Champions",
+    enrollments: ["NRHA Sire & Dam","NRBC","IRHBA","AQHA Incentive Fund"],
+    bloodlines: ["Shining Spark","Peppy San Badger","Genuine Doc","Vintage Badger"],
+    traits: ["stop","athleticism","handle","softness","scope"],
+    description: "ICSI only. Only sire in history to produce 2 NRHA Triple Crown Champions. Offspring $4.6M+."
+  },
+  {
+    name: "Big Chex To Cash", tier: "premium",
+    discipline: ["reining"], stud_fee: 750,
+    lifetime_earnings: 220826, performance_summary: "2005 NRHA Open Futurity Reserve Champion · NRHA Million Dollar Sire",
+    enrollments: ["NRHA Sire & Dam","NRBC"],
+    bloodlines: ["Nu Chex To Cash","Colonel Freckles","One Gun","Bueno Chex"],
+    traits: ["stop","athleticism","speed","softness","handle"],
+    description: "ICSI only. NRHA Million Dollar Sire. Offspring $1.37M+."
+  },
+  {
+    name: "Boomernic", tier: "premium",
+    discipline: ["reining","reined cow horse"], stud_fee: 3500,
+    lifetime_earnings: 0, performance_summary: "Elite reining and cow horse sire",
+    enrollments: ["NRHA Sire & Dam"],
+    bloodlines: ["Reminic","Colonel Freckles","Nu Chex To Cash"],
+    traits: ["cow sense","athleticism","handle","rate","stop"],
+    description: "The Greats tier. Elite reining and cow horse bloodlines."
+  },
+  {
+    name: "Conquistador Whiz", tier: "premium",
+    discipline: ["reining"], stud_fee: 4000,
+    lifetime_earnings: 0, performance_summary: "Topsail Whiz son · elite reining sire",
+    enrollments: ["NRHA Sire & Dam","NRBC"],
+    bloodlines: ["Topsail Whiz","Colonel Freckles","Smart Chic Olena"],
+    traits: ["stop","speed","athleticism","power","scope"],
+    description: "The Greats tier. Whiz/Gunner cross."
+  },
+  {
+    name: "Spooks Gotta Gun", tier: "premium",
+    discipline: ["reining","ranch"], stud_fee: 6500,
+    lifetime_earnings: 81637, performance_summary: "NRHA Triple Crown Champion Sire · $4M+ Offspring",
+    enrollments: ["NRHA Sire & Dam","NRBC","AQHA Incentive Fund"],
+    bloodlines: ["Grays Starlight","Peppy San Badger","One Gun","Katie Gun"],
+    traits: ["stop","athleticism","cow sense","versatility","speed","scope"],
+    description: "Triple Crown Champion Sire. Ranch offspring $202K+. Frozen & ICSI."
+  },
+  {
+    name: "Trashadeous", tier: "premium",
+    discipline: ["reining"], stud_fee: 4000,
+    lifetime_earnings: 0, performance_summary: "The Greats · Elite reining sire",
+    enrollments: ["NRHA Sire & Dam"],
+    bloodlines: ["Topsail Whiz","Smart Chic Olena","Nu Chex To Cash"],
+    traits: ["stop","speed","power","scope","athleticism"],
+    description: "The Greats tier. Top reining sire."
+  },
+  {
+    name: "Wimpys Little Step", tier: "premium",
+    discipline: ["reining"], stud_fee: 6500,
+    lifetime_earnings: 185757, performance_summary: "NRHA Hall of Fame · 2002 NRHA Futurity Open Champion · $15M+ Sire",
+    enrollments: ["NRHA Sire & Dam","NRBC","IRHBA","AQHA Incentive Fund"],
+    bloodlines: ["Nu Chex To Cash","Colonel Freckles","Wimpy Leo","Leolita Step"],
+    traits: ["stop","athleticism","handle","softness","scope","speed","power"],
+    description: "ICSI only. $15M sire. NRHA HOF. 2002 Futurity Champion with highest composite score in NRHA history."
+  },
+
+  // MID
+  {
+    name: "HF Mobster", tier: "mid",
+    discipline: ["reining"], stud_fee: 2500,
+    lifetime_earnings: 123626, performance_summary: "2013 NRHA Derby Champion · NRHA Million Dollar Sire",
+    enrollments: ["NRHA Sire & Dam","NRBC","AQHA Incentive Fund"],
+    bloodlines: ["Colonels Smoking Gun","Colonel Freckles","Hollywood Dun It","Dun Its Black Gold"],
+    traits: ["stop","athleticism","handle","scope","power","speed"],
+    description: "2013 NRHA Derby Champion. WEG Team Member. Offspring $1.7M+."
+  },
+  {
+    name: "Shiners Voodoo Dr", tier: "mid",
+    discipline: ["reining","reined cow horse"], stud_fee: 6000,
+    lifetime_earnings: 87098, performance_summary: "NRHA $7M Sire · NRCHA $1M Sire · Total $8M+",
+    enrollments: ["NRHA Sire & Dam","NRBC","NRCHA Sire & Dam"],
+    bloodlines: ["Shining Spark","Smart Chic Olena","Genuine Doc","Voodoo Chic"],
+    traits: ["stop","athleticism","cow sense","softness","scope","handle"],
+    description: "NRHA $7M + NRCHA $1M sire. Elite dual-discipline producer."
+  },
+  {
+    name: "Tinker With Guns", tier: "mid",
+    discipline: ["reining"], stud_fee: 2000,
+    lifetime_earnings: 346366, performance_summary: "2011 NRHA Derby Champion · NRHA Million Dollar Sire",
+    enrollments: ["NRHA Sire & Dam","NRBC","AQHA Incentive Fund"],
+    bloodlines: ["Colonels Smoking Gun","Colonel Freckles","Reminic","Tinker Nic"],
+    traits: ["stop","speed","athleticism","power","scope","handle"],
+    description: "2011 NRHA Open Derby Champion. Offspring $1.52M+."
+  },
+  {
+    name: "Wimpyneedsacocktail", tier: "mid",
+    discipline: ["reining"], stud_fee: 3500,
+    lifetime_earnings: 281804, performance_summary: "NRBC Open Derby Champion · AQHA Reserve World Champion",
+    enrollments: ["NRHA Sire & Dam","NRBC","AQHA Incentive Fund"],
+    bloodlines: ["Nu Chex To Cash","Colonel Freckles","Wimpy Leo","Wimpys Little Step"],
+    traits: ["stop","athleticism","scope","speed","handle","softness"],
+    description: "Son of Wimpys Little Step. NRBC Derby Champion. LTE $281K."
+  },
+  {
+    name: "Platinum Vintage", tier: "mid",
+    discipline: ["reining"], stud_fee: 2500,
+    lifetime_earnings: 390828, performance_summary: "2015 NRHA Derby Champion",
+    enrollments: ["NRHA Sire & Dam","NRBC","AQHA Incentive Fund"],
+    bloodlines: ["Shining Spark","Peppy San Badger","A Sparkling Vintage"],
+    traits: ["stop","athleticism","scope","softness","handle"],
+    description: "2015 NRHA Derby Champion. Son of A Sparkling Vintage. LTE $390K."
+  },
+  {
+    name: "Xtra New Pal Voodoo", tier: "mid",
+    discipline: ["reining","reined cow horse"], stud_fee: 3000,
+    lifetime_earnings: 109894, performance_summary: "NRHA/NRCHA earner $109K · Son of Shiners Voodoo Dr",
+    enrollments: ["NRHA Sire & Dam","NRCHA Sire & Dam"],
+    bloodlines: ["Shining Spark","Nu Chex To Cash","Smart Chic Olena","Wimpys Little Step"],
+    traits: ["stop","cow sense","athleticism","softness","scope"],
+    description: "Son of Shiners Voodoo Dr. NRHA + NRCHA earner."
+  },
+  {
+    name: "Ifwhizswereguns", tier: "mid",
+    discipline: ["reining"], stud_fee: 3000,
+    lifetime_earnings: 118578, performance_summary: "High Roller Open Classic Futurity Champion · NRBC Top Ten",
+    enrollments: ["NRHA Sire & Dam","NRBC"],
+    bloodlines: ["Grays Starlight","Topsail Whiz","Colonel Freckles","Spooks Gotta Gun"],
+    traits: ["stop","speed","athleticism","scope","power"],
+    description: "Son of Spooks Gotta Gun. LTE $118K. High Roller Futurity Champion."
+  },
+  {
+    name: "Custom Cash Advance", tier: "mid",
+    discipline: ["reining"], stud_fee: 3000,
+    lifetime_earnings: 0, performance_summary: "Nu Chex To Cash son · reining specialist",
+    enrollments: ["NRHA Sire & Dam"],
+    bloodlines: ["Nu Chex To Cash","Colonels Smoking Gun","Colonel Freckles"],
+    traits: ["stop","athleticism","handle","scope","softness"],
+    description: "Nu Chex To Cash bloodlines. Reining specialist."
+  },
+  {
+    name: "Smart Shiners Spook", tier: "mid",
+    discipline: ["reining","reined cow horse"], stud_fee: 3000,
+    lifetime_earnings: 0, performance_summary: "Dual discipline · Spooks Gotta Gun x Shining Spark cross",
+    enrollments: ["NRHA Sire & Dam","NRCHA Sire & Dam"],
+    bloodlines: ["Grays Starlight","Shining Spark","Smart Chic Olena"],
+    traits: ["stop","athleticism","cow sense","handle","scope"],
+    description: "Dual reining/cow horse cross."
+  },
+  {
+    name: "Nic It In The Bud", tier: "mid",
+    discipline: ["reining","reined cow horse"], stud_fee: 3000,
+    lifetime_earnings: 0, performance_summary: "Reminic son · reining and cow horse",
+    enrollments: ["NRHA Sire & Dam"],
+    bloodlines: ["Reminic","Smart Chic Olena","Colonel Freckles"],
+    traits: ["cow sense","athleticism","stop","handle","rate"],
+    description: "Reminic son with cow horse aptitude."
+  },
+  {
+    name: "Einsteins Revolution", tier: "mid",
+    discipline: ["reining"], stud_fee: 2500,
+    lifetime_earnings: 0, performance_summary: "Topsail Whiz / Smart Chic Olena cross",
+    enrollments: ["NRHA Sire & Dam"],
+    bloodlines: ["Topsail Whiz","Smart Chic Olena","Nu Chex To Cash"],
+    traits: ["stop","athleticism","softness","scope"],
+    description: "Topsail Whiz son."
+  },
+  {
+    name: "Mister Montana Nic", tier: "mid",
+    discipline: ["reining","reined cow horse"], stud_fee: 2500,
+    lifetime_earnings: 0, performance_summary: "Reminic son · reining and cow horse specialist",
+    enrollments: ["NRHA Sire & Dam"],
+    bloodlines: ["Reminic","Colonel Freckles","Nu Chex To Cash"],
+    traits: ["cow sense","athleticism","handle","rate","stop"],
+    description: "Reminic son. Reining and cow horse."
+  },
+
+  // VALUE
+  {
+    name: "Chic Dreamin", tier: "value",
+    discipline: ["reining","reined cow horse"], stud_fee: 0,
+    lifetime_earnings: 0, performance_summary: "FREE breeding 2026 · Smart Chic Olena son",
+    enrollments: ["NRHA Sire & Dam"],
+    bloodlines: ["Smart Chic Olena","Grays Starlight","Colonel Freckles"],
+    traits: ["athleticism","softness","cow sense","handle"],
+    description: "FREE breeding 2026. Smart Chic Olena bloodlines."
+  },
+  {
+    name: "Electric Wind", tier: "value",
+    discipline: ["reining","ranch"], stud_fee: 0,
+    lifetime_earnings: 0, performance_summary: "FREE breeding 2026 · Colonels Smoking Gun son",
+    enrollments: ["NRHA Sire & Dam"],
+    bloodlines: ["Colonels Smoking Gun","Grays Starlight","Smart Chic Olena"],
+    traits: ["speed","athleticism","versatility","stop"],
+    description: "FREE breeding 2026. Gunner bloodlines."
+  },
+  {
+    name: "Pale Face Dunnit", tier: "value",
+    discipline: ["reining","ranch"], stud_fee: 2000,
+    lifetime_earnings: 0, performance_summary: "Reduced fee 2026 · Hollywood Dun It son",
+    enrollments: ["NRHA Sire & Dam"],
+    bloodlines: ["Hollywood Dun It","Smart Chic Olena","Colonel Freckles"],
+    traits: ["athleticism","versatility","softness","stop","handle"],
+    description: "Reduced fee $2000 for 2026. Hollywood Dun It bloodlines."
+  },
+  {
+    name: "Tinker With Guns", tier: "value", // also mid but best value pick
+    discipline: ["reining"], stud_fee: 2000,
+    lifetime_earnings: 346366, performance_summary: "2011 NRHA Derby Champion at value fee",
+    enrollments: ["NRHA Sire & Dam","NRBC"],
+    bloodlines: ["Colonels Smoking Gun","Colonel Freckles","Reminic"],
+    traits: ["stop","speed","athleticism","power","scope"],
+    description: "2011 NRHA Derby Champion at $2,000 fee. Exceptional value."
+  },
+  {
+    name: "Boemil Twin Robotop", tier: "value",
+    discipline: ["reining"], stud_fee: 2000,
+    lifetime_earnings: 0, performance_summary: "Topsail Whiz / Colonels Smoking Gun cross",
+    enrollments: ["NRHA Sire & Dam"],
+    bloodlines: ["Topsail Whiz","Colonels Smoking Gun","Colonel Freckles"],
+    traits: ["stop","speed","athleticism","power"],
+    description: "Whiz/Gunner bloodlines at value price."
+  },
+  {
+    name: "Catatomic", tier: "value",
+    discipline: ["reining","reined cow horse"], stud_fee: 1500,
+    lifetime_earnings: 0, performance_summary: "Junior stallion · High Brow Cat / Gunner cross",
+    enrollments: ["NRHA Sire & Dam"],
+    bloodlines: ["High Brow Cat","Colonels Smoking Gun","Smart Chic Olena"],
+    traits: ["cow sense","athleticism","quick feet","stop"],
+    description: "Junior stallion. Cutting bloodlines cross into reining."
+  },
+  {
+    name: "My Customized Whiz", tier: "value",
+    discipline: ["reining"], stud_fee: 1500,
+    lifetime_earnings: 0, performance_summary: "Junior stallion · Topsail Whiz / Gunner / Smart Chic Olena",
+    enrollments: ["NRHA Sire & Dam"],
+    bloodlines: ["Topsail Whiz","Smart Chic Olena","Colonels Smoking Gun"],
+    traits: ["stop","speed","power","athleticism","scope"],
+    description: "Junior stallion. Elite reining bloodline combination."
+  },
+  {
+    name: "Docs Soula", tier: "value",
+    discipline: ["reined cow horse","cutting"], stud_fee: 1500,
+    lifetime_earnings: 0, performance_summary: "Junior stallion · Doc Bar / Smart Chic Olena · cow horse / cutting",
+    enrollments: ["NRCHA Sire & Dam"],
+    bloodlines: ["Doc Bar","Smart Chic Olena","Colonel Freckles"],
+    traits: ["cow sense","athleticism","rate","turn","quick feet"],
+    description: "Junior stallion. Cow horse and cutting lineage."
+  },
+];
+
+// ── BLOODLINE COMPAT MAP ──────────────────────────────────────────────────────
+const COMPAT = {
+  "nu chex to cash":        ["shining spark","colonels smoking gun","smart chic olena","colonel freckles","peppy san badger","topsail whiz","wimpy leo"],
+  "shining spark":          ["nu chex to cash","smart chic olena","peppy san badger","genuine doc","colonel freckles","voodoo chic"],
+  "colonels smoking gun":   ["nu chex to cash","shining spark","smart chic olena","grays starlight","topsail whiz","reminic","colonel freckles"],
+  "smart chic olena":       ["shining spark","nu chex to cash","colonel freckles","peppy san badger","topsail whiz","grays starlight"],
+  "colonel freckles":       ["nu chex to cash","smart chic olena","peppy san badger","reminic","one gun","bueno chex"],
+  "topsail whiz":           ["nu chex to cash","colonels smoking gun","shining spark","smart chic olena","colonel freckles","reminic"],
+  "grays starlight":        ["colonels smoking gun","peppy san badger","shining spark","smart chic olena","one gun"],
+  "peppy san badger":       ["smart chic olena","shining spark","colonel freckles","nu chex to cash","genuine doc","doc bar"],
+  "reminic":                ["colonel freckles","nu chex to cash","smart chic olena","colonels smoking gun","topsail whiz"],
+  "genuine doc":            ["peppy san badger","shining spark","smart chic olena","colonel freckles","doc bar"],
+  "hollywood dun it":       ["colonels smoking gun","smart chic olena","topsail whiz","grays starlight"],
+  "one gun":                ["colonel freckles","nu chex to cash","peppy san badger","grays starlight"],
+  "high brow cat":          ["smart chic olena","peppy san badger","genuine doc","colonel freckles","doc bar"],
+  "doc bar":                ["peppy san badger","smart chic olena","genuine doc","colonel freckles","high brow cat"],
+  "wimpy leo":              ["nu chex to cash","colonel freckles","peppy san badger"],
+  "wimpys little step":     ["nu chex to cash","shining spark","colonel freckles","peppy san badger"],
+  "a sparkling vintage":    ["nu chex to cash","shining spark","peppy san badger"],
+  "spooks gotta gun":       ["grays starlight","colonels smoking gun","peppy san badger"],
+  "voodoo chic":            ["shining spark","smart chic olena","genuine doc"],
+  "bueno chex":             ["colonel freckles","nu chex to cash"],
+  "katie gun":              ["one gun","grays starlight","peppy san badger"],
+};
+
+const TRAITS = ['stop','athleticism','cow sense','handle','softness','speed','power','scope','rate','turn','versatility','quick feet'];
+let selectedTraits = new Set();
+
+// Render trait chips
+const chipWrap = document.getElementById('trait-chips');
+TRAITS.forEach(t => {
+  const c = document.createElement('span');
+  c.className = 'trait-chip'; c.textContent = t;
+  c.onclick = () => { selectedTraits.has(t) ? (selectedTraits.delete(t), c.classList.remove('on')) : (selectedTraits.add(t), c.classList.add('on')); };
+  chipWrap.appendChild(c);
+});
+
+// ── DETERMINISTIC SCORER ─────────────────────────────────────────────────────
+function scoreStallion(s, mareDisc, mBlood, mTraits) {
+  let discPts = 0, bloodPts = 0, traitPts = 0;
+
+  // Discipline (40)
+  const sDisc = (s.discipline||[]).map(d=>d.toLowerCase());
+  if (mareDisc && sDisc.includes(mareDisc.toLowerCase())) discPts = 40;
+
+  // Bloodline compatibility (30)
+  const sBlood = (s.bloodlines||[]).map(b=>b.toLowerCase());
+  let compat = 0, conflict = 0;
+  sBlood.forEach(sb => {
+    if (mBlood.includes(sb)) { conflict++; return; }
+    const sbC = COMPAT[sb]||[];
+    mBlood.forEach(mb => {
+      if (sbC.includes(mb)) compat++;
+      const mc = COMPAT[mb]||[];
+      if (mc.includes(sb)) compat++;
+    });
+  });
+  compat = Math.min(compat, sBlood.length + mBlood.length);
+  if (sBlood.length === 0 || mBlood.length === 0) bloodPts = 15;
+  else bloodPts = Math.max(0, Math.min(30, compat * 8 - conflict * 10));
+
+  // Traits (30)
+  const sTraits = (s.traits||[]).map(t=>t.toLowerCase());
+  const overlap = sTraits.filter(t => mTraits.has(t)).length;
+  if (mTraits.size > 0) traitPts = Math.min(30, Math.round((overlap / mTraits.size) * 30));
+  else traitPts = 15; // neutral if no traits selected
+
+  return Math.min(100, discPts + bloodPts + traitPts);
+}
+
+function confidenceLabel(score) {
+  if (score >= 75) return { text: 'High Confidence', cls: 'high' };
+  if (score >= 55) return { text: 'Good Match', cls: 'medium' };
+  return { text: 'Moderate', cls: 'low' };
+}
+
+function fmtFee(fee) {
+  if (fee === 0) return { text: 'FREE', cls: 'free' };
+  return { text: '$' + fee.toLocaleString(), cls: '' };
+}
+
+function fmtEarnings(s, disc) {
+  if (s.lifetime_earnings > 0) return '$' + s.lifetime_earnings.toLocaleString() + ' LTE';
+  return null;
+}
+
+// ── CLAUDE API EXPLANATION ───────────────────────────────────────────────────
+async function getExplanation(mare, matches) {
+  const prompt = `You are a horse breeding advisor. A breeder has a ${mare.disc} mare with bloodlines: ${mare.blood||'unknown'}. Desired traits: ${mare.traits||'none specified'}.
+
+Here are 3 stallion matches. Write exactly one sentence of explanation for each (why it's the right fit for THIS mare). Be specific — mention bloodlines or traits. Be direct, no fluff.
+
+${matches.map((m,i)=>`${i+1}. ${m.name} (${m.tier} tier, score ${m.score}): bloodlines=${m.bloodlines.join(', ')}; traits=${m.traits.join(', ')}; ${m.performance_summary}`).join('\n')}
+
+Return ONLY a JSON array of 3 strings, one per stallion, in order. No other text.`;
+
+  const resp = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model: "claude-sonnet-4-20250514",
+      max_tokens: 400,
+      messages: [{ role: "user", content: prompt }]
+    })
+  });
+  const data = await resp.json();
+  const raw = data.content?.[0]?.text || '[]';
+  try {
+    const clean = raw.replace(/```json|```/g,'').trim();
+    return JSON.parse(clean);
+  } catch { return matches.map(()=>'Strong match based on discipline, bloodline, and trait alignment.'); }
+}
+
+// ── BUILD CARD ───────────────────────────────────────────────────────────────
+function buildCard(s, score, explanation, type) {
+  const conf = confidenceLabel(score);
+  const fee = fmtFee(s.stud_fee);
+  const earnings = fmtEarnings(s);
+  const disc = (s.discipline||[]).join(' / ');
+
+  const card = document.createElement('div');
+  card.className = 'match-card';
+  card.innerHTML = `
+    <div class="card-tier-bar ${type}">
+      <div class="tier-dot"></div>
+      ${ type==='premium' ? '★ Premium Match' : type==='mid' ? '✓ Best Value Match' : '$ Budget Match' }
+    </div>
+    <div class="card-body">
+      <div>
+        <div class="score-row">
+          <div class="score-num ${type}">${score}</div>
+          <div class="score-denom">/ 100</div>
+          <div class="confidence-pill ${conf.cls}">${conf.text}</div>
+        </div>
+        <div class="score-bar-wrap">
+          <div class="score-bar-fill ${type}" style="width:${score}%"></div>
+        </div>
+      </div>
+      <div>
+        <div class="stallion-name">${s.name}</div>
+        <div class="stallion-disc">${disc}</div>
+      </div>
+      <div class="stat-row">
+        ${earnings ? `<div class="stat-item"><strong>${earnings}</strong></div>` : ''}
+        ${s.performance_summary ? `<div class="stat-item">${s.performance_summary}</div>` : ''}
+        ${s.enrollments?.length ? `<div class="stat-item"><strong>Programs:</strong> ${s.enrollments.slice(0,2).join(', ')}</div>` : ''}
+      </div>
+      <div class="explanation">${explanation}</div>
+    </div>
+    <div class="card-fee">
+      <span class="fee-label">2026 Stud Fee</span>
+      <span class="fee-amount ${fee.cls}">${fee.text}</span>
+    </div>`;
+  return card;
+}
+
+// ── MAIN ─────────────────────────────────────────────────────────────────────
+async function runMatch() {
+  const btn = document.getElementById('run-btn');
+  const errBar = document.getElementById('error-bar');
+  const grid = document.getElementById('cards-grid');
+  const section = document.getElementById('results-section');
+  const empty = document.getElementById('empty-state');
+
+  const mareDisc = document.getElementById('mare-disc').value;
+  const mareBloodRaw = document.getElementById('mare-blood').value;
+  const mareNotes = document.getElementById('mare-notes').value;
+  const mBlood = mareBloodRaw.split(',').map(s=>s.trim().toLowerCase()).filter(Boolean);
+
+  // Validate
+  errBar.style.display = 'none';
+  if (!mareDisc) { errBar.textContent = '⚠ Please select a discipline.'; errBar.style.display = 'block'; return; }
+
+  // Loading state
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Finding matches…';
+  grid.innerHTML = '';
+  section.style.display = 'none';
+  empty.style.display = 'none';
+
+  try {
+    // Score all
+    const scored = STALLIONS.map(s => ({ ...s, score: scoreStallion(s, mareDisc, mBlood, selectedTraits) }))
+                             .sort((a,b) => b.score - a.score);
+
+    // Pick best per tier
+    const premium = scored.filter(s=>s.tier==='premium')[0];
+    const mid     = scored.filter(s=>s.tier==='mid')[0];
+    const value   = scored.filter(s=>s.tier==='value')[0];
+
+    const picks = [premium, mid, value].filter(Boolean);
+    if (!picks.length) throw new Error('No matches found.');
+
+    // Get AI explanations
+    const mare = { disc: mareDisc, blood: mareBloodRaw, traits: [...selectedTraits].join(', '), notes: mareNotes };
+    const explanations = await getExplanation(mare, picks);
+
+    // Render
+    const types = ['premium','mid','value'];
+    picks.forEach((s, i) => {
+      const card = buildCard(s, s.score, explanations[i] || '—', types[i]);
+      grid.appendChild(card);
+    });
+
+    document.getElementById('results-header').textContent =
+      `Top Matches — ${mareDisc.charAt(0).toUpperCase()+mareDisc.slice(1)} Mare`;
+    section.style.display = 'block';
+
+  } catch (err) {
+    errBar.textContent = '⚠ ' + (err.message || 'Error running match. Try again.');
+    errBar.style.display = 'block';
+    empty.style.display = 'block';
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = 'Find My Top Matches';
+  }
+}
+</script>
+</body>
+</html>
