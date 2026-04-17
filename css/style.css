@@ -17,6 +17,7 @@ body {
   font-family: 'Menlo','Courier New',Courier,monospace;
   min-height: 100vh;
   font-size: 15px;
+  overflow-x: hidden;
 }
 
 /* NAV */
@@ -30,8 +31,9 @@ nav {
   margin: 0 auto;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0;
-  height: 54px;
+  min-height: 54px;
 }
 .nav-brand {
   font-family: 'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
@@ -44,22 +46,24 @@ nav {
 }
 .nav-links { display: flex; gap: 0; }
 .nav-links a {
-  color: rgba(242,234,216,0.6);
+  color: rgba(242,234,216,0.85);
   text-decoration: none;
-  font-size: 0.65rem;
-  letter-spacing: 2px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  padding: 0 14px;
+  padding: 0 12px;
+  min-height: 44px;
   height: 54px;
   display: flex;
   align-items: center;
-  border-left: 1px solid rgba(255,255,255,0.06);
+  border-left: 1px solid rgba(255,255,255,0.1);
   transition: color 0.15s, background 0.15s;
 }
 .nav-links a:hover, .nav-links a.active { color: var(--gold2); background: rgba(184,137,42,0.08); }
 
 /* PAGE */
-.page { max-width: 1100px; margin: 0 auto; padding: 32px 20px 80px; }
+.page { max-width: 1100px; margin: 0 auto; padding: clamp(16px, 4vw, 32px) clamp(14px, 4vw, 20px) 80px; }
 
 /* HEADINGS */
 h1 {
@@ -143,7 +147,7 @@ h3 {
 .sc-tier.value { color: #7a6040; }
 .sc-name {
   font-family: 'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
-  font-size: 1.05rem;
+  font-size: clamp(0.95rem, 3vw, 1.05rem);
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 6px;
@@ -250,9 +254,10 @@ h3 {
   color: var(--parch);
   border: none;
   font-family: 'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
-  font-size: 1rem;
-  font-weight: 600;
-  padding: 13px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 16px;
+  min-height: 48px;
   cursor: pointer;
   letter-spacing: 1px;
   transition: background 0.15s;
@@ -304,10 +309,12 @@ h3 {
 .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
 .filter-btn {
   font-family: monospace;
-  font-size: 0.62rem;
-  letter-spacing: 2px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  padding: 6px 14px;
+  padding: 10px 16px;
+  min-height: 44px;
   border: 1px solid rgba(15,12,7,0.25);
   background: var(--parch);
   cursor: pointer;
@@ -330,6 +337,7 @@ footer {
 footer a { color: var(--gold); text-decoration: none; }
 
 @media (max-width: 600px) {
-  .nav-links a { padding: 0 10px; font-size: 0.6rem; letter-spacing: 1px; }
+  .nav-links a { padding: 0 8px; font-size: 0.7rem; letter-spacing: 1px; min-height: 44px; }
   .stallion-grid { grid-template-columns: 1fr; }
+  nav { padding: 0 12px; }
 }
