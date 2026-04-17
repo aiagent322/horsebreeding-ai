@@ -377,7 +377,7 @@ const STALLIONS = [
     sire: "Smart Chic Olena",
     dam: "Grays Starlight mare",
     description: "Smart Chic Olena son with Grays Starlight athleticism. Chic Dreamin offers FREE breeding for the entire 2026 season — an extraordinary opportunity to access elite reining and cow horse bloodlines at zero stud fee. Enrolled in the NRHA Sire and Dam program.",
-    breeding_note: "FREE breeding 2026. Available cooled or ICSI."
+    breeding_note: "Standing at Silver Spurs Equine. $500 booking fee, balance due on confirmed pregnancy."
   },
   {
     name: "Electric Wind",
@@ -396,7 +396,7 @@ const STALLIONS = [
     sire: "Colonels Smoking Gun",
     dam: "Grays Starlight mare",
     description: "Colonels Smoking Gun son with Grays Starlight athleticism. Electric Wind offers FREE breeding for the entire 2026 season. A versatile producer for reining and ranch horse programs, carrying Gunner's proven athleticism and trainability at no cost to the breeder.",
-    breeding_note: "FREE breeding 2026. Available cooled or ICSI."
+    breeding_note: "Standing at Silver Spurs Equine. $500 booking fee, balance due on confirmed pregnancy."
   },
   {
     name: "Pale Face Dunnit",
