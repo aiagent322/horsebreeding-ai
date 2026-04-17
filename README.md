@@ -1,2 +1,3 @@
-# horsebreeding-ai
-Silver Spurs Breeding Matchmaker – HorseBreeding.ai
+# HorseBreeding.ai
+
+Stallion Matchmaker — Silver Spurs Equine 2026
