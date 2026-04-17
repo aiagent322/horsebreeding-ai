@@ -223,7 +223,7 @@ h3 {
   padding: 16px 18px;
   margin-bottom: 16px;
 }
-.perf-box .perf-label { font-size: 0.55rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+.perf-box .perf-label { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
 .perf-box .perf-text { font-size: 0.85rem; line-height: 1.6; color: rgba(242,234,216,0.8); }
 
 /* LEAD FORM */
@@ -309,7 +309,7 @@ h3 {
 .cta-btn:hover { background: #6d2810; }
 
 /* FILTER BAR */
-.filter-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
+.filter-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; align-items: center; }
 .filter-btn {
   font-family: monospace;
   font-size: 0.75rem;
