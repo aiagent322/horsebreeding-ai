@@ -776,29 +776,53 @@ function fmtEarnings(s, disc) {
 
 // ── CLAUDE API EXPLANATION ───────────────────────────────────────────────────
 async function getExplanation(mare, matches) {
-  const prompt = `You are a horse breeding advisor. A breeder has a ${mare.age||'unknown age'} ${mare.breed||'AQHA'} ${mare.disc} mare. Bloodlines: ${mare.blood||'unknown'}. Lifetime earnings: ${mare.earnings||'unknown'}. Show record: ${mare.record||'none provided'}. Offspring: ${mare.offspring||'unknown'}. Breeding goal: ${mare.goal||'not specified'}. Desired traits: ${mare.traits||'none specified'}.
+  const SYSTEM = "You are an elite equine breeding analyst specializing in Western performance horses. Your job is to justify stallion recommendations with clear, confident, and commercially persuasive reasoning. You do NOT speculate, you do NOT hedge, and you do NOT diagnose. You explain WHY the match works. Return ONLY a JSON array of exactly 3 strings. Each string is one paragraph of 120-160 words with no bullet points, no line breaks, no disclaimers, no uncertainty language. Tone: confident, expert, decisive. Each paragraph must follow this structure: (1) direct statement of fit, (2) key weaknesses in the mare this stallion corrects, (3) stallion strengths and offspring record, (4) discipline alignment, (5) value statement tied to the tier. No text outside the JSON array.";
 
-Here are 3 stallion matches. Write exactly one sentence of explanation for each (why it's the right fit for THIS mare). Be specific — mention bloodlines or traits. Be direct, no fluff.
-
-${matches.map((m,i)=>`${i+1}. ${m.name} (${m.tier} tier, score ${m.score}): bloodlines=${m.bloodlines.join(', ')}; traits=${m.traits.join(', ')}; ${m.performance_summary}`).join('\n')}
-
-Return ONLY a JSON array of 3 strings, one per stallion, in order. No other text.`;
+  const tierMap = {premium:"Gold", mid:"Silver", value:"Bronze"};
+  const USER = "Mare Profile:\n" +
+    "- Discipline: " + mare.disc + "\n" +
+    "- Breed: " + (mare.breed||"AQHA") + "\n" +
+    "- Age: " + (mare.age||"unknown") + "\n" +
+    "- Lifetime Earnings: " + (mare.earnings||"unknown") + "\n" +
+    "- Show Record: " + (mare.record||"none provided") + "\n" +
+    "- Offspring Record: " + (mare.offspring||"no foals yet") + "\n" +
+    "- Breeding Goal: " + (mare.goal||"not specified") + "\n" +
+    "- Bloodlines: " + (mare.blood||"unknown") + "\n" +
+    "- Desired Traits: " + (mare.traits||"none specified") + "\n" +
+    "- Notes: " + (mare.notes||"none") + "\n\n" +
+    "Stallion Matches:\n" +
+    matches.map((m,i) => {
+      const tl = tierMap[m.tier]||m.tier;
+      const fee = m.stud_fee===0?"FREE 2026":"$"+m.stud_fee.toLocaleString();
+      const off = m.offspring_earnings>0?"$"+m.offspring_earnings.toLocaleString():"N/A";
+      return (i+1)+". "+m.name+" ("+tl+" tier, score "+m.score+"/100)\n" +
+        "   - Discipline: "+(m.discipline||[]).join(", ")+"\n" +
+        "   - Show Record: "+m.performance_summary+"\n" +
+        "   - Offspring Earnings: "+off+"\n" +
+        "   - Known Traits: "+(m.traits||[]).join(", ")+"\n" +
+        "   - Bloodlines: "+(m.bloodlines||[]).join(", ")+"\n" +
+        "   - Stud Fee: "+fee;
+    }).join("\n\n") +
+    "\n\nWrite one paragraph per stallion. Return ONLY a JSON array of 3 strings.";
 
   const resp = await fetch("https://stallion-matchmaker-proxy.bridleandbit.workers.dev", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       model: "claude-sonnet-4-20250514",
-      max_tokens: 400,
-      messages: [{ role: "user", content: prompt }]
+      max_tokens: 900,
+      system: SYSTEM,
+      messages: [{ role: "user", content: USER }]
     })
   });
   const data = await resp.json();
-  const raw = data.content?.[0]?.text || '[]';
+  const raw = data.content?.[0]?.text || "[]";
   try {
-    const clean = raw.replace(/```json|```/g,'').trim();
+    const clean = raw.replace(/```json|```/g,"").trim();
     return JSON.parse(clean);
-  } catch { return matches.map(()=>'Strong match based on discipline, bloodline, and trait alignment.'); }
+  } catch {
+    return matches.map(() => "This stallion represents a strong, discipline-aligned match that directly addresses the mare's profile and breeding goals.");
+  }
 }
 
 // ── BUILD CARD ───────────────────────────────────────────────────────────────
