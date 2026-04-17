@@ -302,6 +302,29 @@
   .empty { text-align: center; padding: clamp(24px, 6vw, 48px) 20px; opacity: 0.3; }
   .empty-icon { font-size: 3.5rem; margin-bottom: 12px; }
   .empty-text { font-family: 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif; font-size: 1rem; letter-spacing: 3px; text-transform: uppercase; }
+  /* Second row */
+  .more-btn {
+    width: 100%;
+    background: var(--parch2);
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    font-family: 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 14px 24px;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: background 0.15s;
+    display: none;
+  }
+  .more-btn:hover { background: var(--tan, #d4a96a); }
+  .more-btn.visible { display: block; }
+  .second-row { display: none; margin-top: 14px; }
+  .second-row.visible { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+  @media (max-width: 680px) { .second-row.visible { grid-template-columns: 1fr; } }
+  .alt-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #0f0c07; }
+
   /* Bold black all copy sitewide */
   body { font-weight: 700; color: #0f0c07; }
   select, input, textarea, option { font-weight: 700; color: #0f0c07; }
@@ -874,7 +897,7 @@ async function getExplanation(mare, matches) {
         "   - Bloodlines: "+(m.bloodlines||[]).join(", ")+"\n" +
         "   - Stud Fee: "+fee;
     }).join("\n\n") +
-    "\n\nWrite one paragraph per stallion. Return ONLY a JSON array of 3 strings.";
+    "\n\nWrite one paragraph per stallion. Return ONLY a JSON array of " + matches.length + " strings, one per stallion in order.";
 
   try {
     const r2 = await fetch(PROXY, {
@@ -882,7 +905,7 @@ async function getExplanation(mare, matches) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         model: "claude-sonnet-4-20250514",
-        max_tokens: 900,
+        max_tokens: 1800,
         system: ANALYST_SYSTEM,
         messages: [{ role: "user", content: analystUser }]
       })
@@ -977,7 +1000,7 @@ async function runMatch() {
     const picks = [premium, mid, value].filter(Boolean);
     if (!picks.length) throw new Error('No matches found.');
 
-    // Get AI explanations
+    // Build mare profile
     const mare = {
     disc:      mareDisc,
     breed:     document.getElementById('mare-breed').value,
@@ -990,14 +1013,6 @@ async function runMatch() {
     traits:    [...selectedTraits].join(', '),
     notes:     mareNotes
   };
-    const explanations = await getExplanation(mare, picks);
-
-    // Render
-    const types = ['premium','mid','value'];
-    picks.forEach((s, i) => {
-      const card = buildCard(s, s.score, explanations[i] || '—', types[i]);
-      grid.appendChild(card);
-    });
 
     document.getElementById('results-header').textContent =
       `Top Matches — ${mareDisc.charAt(0).toUpperCase()+mareDisc.slice(1)} Mare`;
