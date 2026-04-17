@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 Stallion Roster | HorseBreeding.ai — Silver Spurs Equine</title>
+<meta name="description" content="Browse all 26 Silver Spurs Equine stallions for the 2026 breeding season. Premium, mid-tier, and value stallions available for reining, reined cow horse, cutting, and ranch disciplines.">
+<link rel="canonical" href="https://horsebreeding-ai.pages.dev/stallions/">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">HorseBreeding.ai</a>
+    <div class="nav-links">
+      <a href="../" >Matchmaker</a>
+      <a href="./" class="active">Stallions</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="hero">
+    <div class="hero-eyebrow">Silver Spurs Equine · Scottsdale, AZ</div>
+    <h1 class="hero-title">2026 Stallion Roster</h1>
+    <p class="hero-sub">26 stallions across three tiers — premium proven sires, proven mid-tier performers, and value opportunities including two free 2026 breedings. All bloodlines, fees, and offspring stats in one place.</p>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterBy('all',this)">All Stallions</button>
+    <button class="filter-btn" onclick="filterBy('premium',this)">★ The Greats</button>
+    <button class="filter-btn" onclick="filterBy('mid',this)">Main Roster</button>
+    <button class="filter-btn" onclick="filterBy('value',this)">Value / Jr</button>
+    <button class="filter-btn" onclick="filterBy('reining',this)">Reining</button>
+    <button class="filter-btn" onclick="filterBy('reined cow horse',this)">Cow Horse</button>
+    <button class="filter-btn" onclick="filterBy('cutting',this)">Cutting</button>
+    <button class="filter-btn" onclick="filterBy('ranch',this)">Ranch</button>
+  </div>
+
+  <div id="stallion-grid" class="stallion-grid"></div>
+
+  <div class="cta-strip">
+    <div>
+      <strong>Not sure which stallion fits your mare?</strong>
+      <p>Use our AI matchmaker — enter your mare's discipline, bloodlines, and traits to get a ranked recommendation in seconds.</p>
+    </div>
+    <a href="../" class="cta-btn">Run the Matchmaker →</a>
+  </div>
+</div>
+
+<footer>
+  <p>HorseBreeding.ai · Powered by Silver Spurs Equine data · 2026 Breeding Season</p>
+  <p style="margin-top:6px;"><a href="https://www.silverspursequine.com" target="_blank">silverspursequine.com</a> · Scottsdale AZ 480.563.1966 · Purcell OK 405.600.1990</p>
+</footer>
+
+<script src="../js/stallions.js"></script>
+<script>
+let currentFilter = 'all';
+
+function renderGrid(filter) {
+  const grid = document.getElementById('stallion-grid');
+  grid.innerHTML = '';
+  const filtered = STALLIONS.filter(s => {
+    if (filter === 'all') return true;
+    if (filter === 'premium' || filter === 'mid' || filter === 'value') return s.tier === filter;
+    return (s.discipline||[]).some(d => d.toLowerCase().includes(filter.toLowerCase()));
+  });
+
+  if (!filtered.length) {
+    grid.innerHTML = '<p style="color:var(--mist);font-size:0.8rem;">No stallions match this filter.</p>';
+    return;
+  }
+
+  filtered.forEach(s => {
+    const fee = s.stud_fee === 0 ? '<span class="free">FREE 2026</span>' : '$' + s.stud_fee.toLocaleString();
+    const tierLabel = s.tier === 'premium' ? '★ The Greats' : s.tier === 'mid' ? 'Main Roster' : 'Value / Jr';
+    const earnings = s.offspring_earnings > 0 ? '$' + (s.offspring_earnings/1000000).toFixed(1) + 'M offspring' : (s.lifetime_earnings > 0 ? 'LTE $' + s.lifetime_earnings.toLocaleString() : '');
+    const disc = (s.discipline||[]).join(' / ');
+
+    const a = document.createElement('a');
+    a.href = './' + s.slug + '.html';
+    a.className = 'stallion-card ' + s.tier;
+    a.innerHTML = `
+      <div class="sc-body">
+        <div class="sc-tier ${s.tier}">${tierLabel}</div>
+        <div class="sc-name">${s.name}</div>
+        <div class="sc-disc">${disc}</div>
+        ${earnings ? `<div class="sc-stats">${earnings}</div>` : ''}
+        <div class="sc-stats" style="margin-top:6px;font-size:0.68rem;color:rgba(15,12,7,0.45);">${s.performance_summary}</div>
+      </div>
+      <div class="sc-fee">
+        <span class="fee-label">2026 Fee</span>
+        <span>${fee}</span>
+      </div>`;
+    grid.appendChild(a);
+  });
+}
+
+function filterBy(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid(filter);
+}
+
+renderGrid('all');
+</script>
+</body>
+</html>
