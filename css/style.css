@@ -148,8 +148,8 @@ h3 {
   line-height: 1.2;
   margin-bottom: 6px;
 }
-.sc-disc { font-size: 0.65rem; color: rgba(15,12,7,0.5); letter-spacing: 1px; text-transform: uppercase; }
-.sc-stats { font-size: 0.72rem; color: rgba(15,12,7,0.65); margin-top: 8px; }
+.sc-disc { font-size: 0.68rem; color: #0f0c07; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; }
+.sc-stats { font-size: 0.72rem; color: #0f0c07; margin-top: 8px; font-weight: 700; }
 .sc-fee {
   background: var(--ink);
   color: var(--gold2);
