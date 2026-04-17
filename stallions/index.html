@@ -82,11 +82,7 @@ function renderGrid(filter) {
     const a = document.createElement('a');
     a.href = './' + s.slug + '.html';
     a.className = 'stallion-card ' + s.tier;
-    const photoEl = s.photo
-      ? `<img class="sc-photo" src="${s.photo}" alt="${s.name}" loading="lazy">`
-      : `<div class="sc-photo-placeholder">🐴</div>`;
     a.innerHTML = `
-      ${photoEl}
       <div class="sc-body">
         <div class="sc-tier ${s.tier}">${tierLabel}</div>
         <div class="sc-name">${s.name}</div>
