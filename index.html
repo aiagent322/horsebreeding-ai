@@ -988,36 +988,167 @@ async function runMatch() {
   empty.style.display = 'none';
 
   try {
-    // Score all
+    // Score all stallions
     const scored = STALLIONS.map(s => ({ ...s, score: scoreStallion(s, mareDisc, mBlood, selectedTraits) }))
                              .sort((a,b) => b.score - a.score);
 
-    // Pick best per tier
+    // TOP ROW — best per tier
     const premium = scored.filter(s=>s.tier==='premium')[0];
     const mid     = scored.filter(s=>s.tier==='mid')[0];
     const value   = scored.filter(s=>s.tier==='value')[0];
+    const topPicks = [
+      { type:'premium', label:'Premium Match',    stallion: premium },
+      { type:'mid',     label:'Best Value Match', stallion: mid },
+      { type:'value',   label:'Budget Match',     stallion: value },
+    ].filter(c => c.stallion);
+    if (!topPicks.length) throw new Error('No matches found.');
 
-    const picks = [premium, mid, value].filter(Boolean);
-    if (!picks.length) throw new Error('No matches found.');
+    // SECOND ROW — next 3 highest scorers not already shown
+    const shownNames = new Set(topPicks.map(c => c.stallion.name));
+    const altPicks = scored
+      .filter(s => !shownNames.has(s.name))
+      .slice(0, 3)
+      .map((s, i) => ({
+        type: 'alt',
+        label: i===0 ? 'Strong Alternative' : i===1 ? 'Next Best Value' : 'Additional Option',
+        stallion: s
+      }));
+
+    const allPicks = [...topPicks, ...altPicks];
 
     // Build mare profile
     const mare = {
-    disc:      mareDisc,
-    breed:     document.getElementById('mare-breed').value,
-    age:       document.getElementById('mare-age').value,
-    earnings:  document.getElementById('mare-earnings').value,
-    record:    document.getElementById('mare-record').value,
-    offspring: document.getElementById('mare-offspring').value,
-    goal:      document.getElementById('mare-goal').value,
-    blood:     mareBloodRaw,
-    traits:    [...selectedTraits].join(', '),
-    notes:     mareNotes
-  };
+      disc:      mareDisc,
+      breed:     document.getElementById('mare-breed').value,
+      age:       document.getElementById('mare-age').value,
+      earnings:  document.getElementById('mare-earnings').value,
+      record:    document.getElementById('mare-record').value,
+      offspring: document.getElementById('mare-offspring').value,
+      goal:      document.getElementById('mare-goal').value,
+      blood:     mareBloodRaw,
+      traits:    [...selectedTraits].join(', '),
+      notes:     mareNotes
+    };
+
+    // Get AI explanations for all 6
+    const explanations = await getExplanation(mare, allPicks.map(p => p.stallion));
+
+    // Render TOP ROW
+    const area = document.getElementById('results-area');
+    area.innerHTML = '';
+
+    const grid3 = document.createElement('div');
+    grid3.className = 'three-cards';
+
+    topPicks.forEach(({ type, label, stallion: s }, i) => {
+      const expl = explanations[i] || '—';
+      const fee = fmtFee(s.stud_fee);
+      const earnings = fmtEarnings(s);
+      const disc = (s.discipline||[]).join(' / ');
+      const conf = s.score>=75?'High Confidence':s.score>=55?'Good Match':'Moderate';
+      const confCls = s.score>=75?'high':s.score>=55?'medium':'low';
+      const tierType = type;
+
+      const card = document.createElement('div');
+      card.className = 'match-card';
+      card.innerHTML = `
+    <div class="card-tier-bar ${tierType}">
+      <div class="tier-dot"></div>
+      ${label}
+    </div>
+    <div class="card-body">
+      <div>
+        <div class="score-row">
+          <div class="score-num ${tierType}">${s.score}</div>
+          <div class="score-denom">/ 100</div>
+          <div class="confidence-pill ${confCls}">${conf}</div>
+        </div>
+        <div class="score-bar-wrap"><div class="score-bar-fill ${tierType}" style="width:${s.score}%"></div></div>
+      </div>
+      <div>
+        <div style="font-size:0.62rem;font-weight:700;color:#0f0c07;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;">${s.tier==='premium'?'The Greats':s.tier==='mid'?'Main Roster':'Value / Jr'}</div>
+        <div class="stallion-name">${s.name}</div>
+        <div class="stallion-disc">${disc}</div>
+      </div>
+      <div class="stat-row">
+        ${earnings ? `<div class="stat-item"><strong>${earnings}</strong></div>` : ''}
+        ${s.performance_summary ? `<div class="stat-item">${s.performance_summary}</div>` : ''}
+        ${s.enrollments?.length ? `<div class="stat-item"><strong>Programs:</strong> ${s.enrollments.slice(0,2).join(', ')}</div>` : ''}
+      </div>
+      <div class="explanation">${expl}</div>
+    </div>
+    <div class="card-fee">
+      <span class="fee-label">2026 Stud Fee</span>
+      <span class="fee-amount ${fee.cls}">${fee.text}</span>
+    </div>`;
+      grid3.appendChild(card);
+    });
+    area.appendChild(grid3);
+
+    // SECOND ROW
+    if (altPicks.length > 0) {
+      const moreBtn = document.createElement('button');
+      moreBtn.className = 'more-btn visible';
+      moreBtn.textContent = '▼ Show 3 More Matches';
+      area.appendChild(moreBtn);
+
+      const grid2 = document.createElement('div');
+      grid2.className = 'second-row';
+
+      altPicks.forEach(({ label, stallion: s }, i) => {
+        const expl = explanations[topPicks.length + i] || '—';
+        const fee = fmtFee(s.stud_fee);
+        const earnings = fmtEarnings(s);
+        const disc = (s.discipline||[]).join(' / ');
+        const conf = s.score>=75?'High Confidence':s.score>=55?'Good Match':'Moderate';
+        const confCls = s.score>=75?'high':s.score>=55?'medium':'low';
+
+        const card2 = document.createElement('div');
+        card2.className = 'match-card';
+        card2.innerHTML = `
+    <div class="card-tier-bar" style="background:#4a3820;color:#d4c9a8;padding:7px 14px 6px;font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:7px;border-bottom:1px solid rgba(15,12,7,0.12);">
+      <div style="width:7px;height:7px;border-radius:50%;background:#d4c9a8;flex-shrink:0;"></div>
+      ${label}
+    </div>
+    <div class="card-body">
+      <div>
+        <div class="score-row">
+          <div class="score-num" style="color:#7a6040;">${s.score}</div>
+          <div class="score-denom">/ 100</div>
+          <div class="confidence-pill ${confCls}">${conf}</div>
+        </div>
+        <div class="score-bar-wrap"><div class="score-bar-fill" style="width:${s.score}%;background:#7a6040;"></div></div>
+      </div>
+      <div>
+        <div style="font-size:0.62rem;font-weight:700;color:#0f0c07;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;">${s.tier==='premium'?'The Greats':s.tier==='mid'?'Main Roster':'Value / Jr'}</div>
+        <div class="stallion-name">${s.name}</div>
+        <div class="stallion-disc">${disc}</div>
+      </div>
+      <div class="stat-row">
+        ${earnings ? `<div class="stat-item"><strong>${earnings}</strong></div>` : ''}
+        ${s.performance_summary ? `<div class="stat-item">${s.performance_summary}</div>` : ''}
+      </div>
+      <div class="explanation">${expl}</div>
+    </div>
+    <div class="card-fee">
+      <span class="fee-label">2026 Stud Fee</span>
+      <span class="fee-amount ${fee.cls}">${fee.text}</span>
+    </div>`;
+        grid2.appendChild(card2);
+      });
+      area.appendChild(grid2);
+
+      moreBtn.onclick = () => {
+        const open = grid2.classList.contains('visible');
+        grid2.classList.toggle('visible');
+        moreBtn.textContent = open ? '▼ Show 3 More Matches' : '▲ Hide Additional Matches';
+      };
+    }
 
     document.getElementById('results-header').textContent =
       `Top Matches — ${mareDisc.charAt(0).toUpperCase()+mareDisc.slice(1)} Mare`;
     section.style.display = 'block';
-
+    area.style.display = 'block';
   } catch (err) {
     errBar.textContent = '⚠ ' + (err.message || 'Error running match. Try again.');
     errBar.style.display = 'block';
