@@ -84,11 +84,11 @@ function renderGrid(filter) {
     a.className = 'stallion-card ' + s.tier;
     a.innerHTML = `
       <div class="sc-body">
-        <div class="sc-tier ${s.tier}">${tierLabel}</div>
+        <div style="font-size:0.65rem;font-weight:700;color:#0f0c07;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">${tierLabel}</div>
         <div class="sc-name">${s.name}</div>
         <div class="sc-disc">${disc}</div>
         ${earnings ? `<div class="sc-stats">${earnings}</div>` : ''}
-        <div class="sc-stats" style="margin-top:6px;font-size:0.68rem;color:rgba(15,12,7,0.45);">${s.performance_summary}</div>
+        ${s.description ? `<div style="font-size:0.72rem;line-height:1.5;color:rgba(15,12,7,0.65);margin-top:8px;">${s.description}</div>` : ''}
       </div>
       <div class="sc-fee">
         <span class="fee-label">2026 Fee</span>
