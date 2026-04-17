@@ -126,6 +126,13 @@
   }
   .tier-label { font-weight: 700 !important; }
   .pts { color: #0f0c07 !important; font-weight: 900 !important; }
+  @media (max-width: 600px) {
+    .step-grid { grid-template-columns: 1fr !important; }
+    .tier-row { flex-direction: column !important; }
+    .tier-card { min-width: unset !important; }
+    .score-table { font-size: 0.78rem; }
+    .score-table th, .score-table td { padding: 8px 10px; }
+  }
 </style>
 </head>
 <body>
