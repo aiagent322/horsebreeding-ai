@@ -161,7 +161,7 @@ h3 {
   justify-content: space-between;
   align-items: center;
 }
-.sc-fee .fee-label { font-size: 0.55rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(242,234,216,0.4); font-family: monospace; }
+.sc-fee .fee-label { font-size: 0.55rem; letter-spacing: 2px; text-transform: uppercase; color: #ffffff; font-weight: 700; font-family: monospace; }
 .sc-fee .free { color: #7fc87a; }
 
 /* STALLION PROFILE */
