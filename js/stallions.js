@@ -376,7 +376,7 @@ const STALLIONS = [
     traits: ["athleticism","softness","cow sense","handle"],
     sire: "Smart Chic Olena",
     dam: "Grays Starlight mare",
-    description: "Smart Chic Olena son with Grays Starlight athleticism. Chic Dreamin offers FREE breeding for the entire 2026 season — an extraordinary opportunity to access elite reining and cow horse bloodlines at zero stud fee. Enrolled in the NRHA Sire and Dam program.",
+    description: "Smart Chic Olena son with Grays Starlight athleticism. Chic Dreamin is a Smart Chic Olena son with natural cow sense and handle for reining and cow horse production at $2,000 for 2026.",
     breeding_note: "Standing at Silver Spurs Equine. $500 booking fee, balance due on confirmed pregnancy."
   },
   {
@@ -395,7 +395,7 @@ const STALLIONS = [
     traits: ["speed","athleticism","versatility","stop"],
     sire: "Colonels Smoking Gun",
     dam: "Grays Starlight mare",
-    description: "Colonels Smoking Gun son with Grays Starlight athleticism. Electric Wind offers FREE breeding for the entire 2026 season. A versatile producer for reining and ranch horse programs, carrying Gunner's proven athleticism and trainability at no cost to the breeder.",
+    description: "Colonels Smoking Gun son with Grays Starlight athleticism. Electric Wind is a versatile producer for reining and ranch horse programs at $1,000 for 2026.",
     breeding_note: "Standing at Silver Spurs Equine. $500 booking fee, balance due on confirmed pregnancy."
   },
   {
