@@ -784,7 +784,7 @@ ${matches.map((m,i)=>`${i+1}. ${m.name} (${m.tier} tier, score ${m.score}): bloo
 
 Return ONLY a JSON array of 3 strings, one per stallion, in order. No other text.`;
 
-  const resp = await fetch("https://api.anthropic.com/v1/messages", {
+  const resp = await fetch("https://stallion-matchmaker-proxy.bridleandbit.workers.dev", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
