@@ -2,6 +2,7 @@ const STALLIONS = [
   {
     name: "A Sparkling Vintage",
     slug: "a-sparkling-vintage",
+    source_url: "https://www.silverspursequine.com/a-sparkling-vintage",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-a-sparkling-vintage/public",
     tier: "premium",
     discipline: ["reining","reined cow horse"],
@@ -20,6 +21,7 @@ const STALLIONS = [
   {
     name: "Big Chex To Cash",
     slug: "big-chex-to-cash",
+    source_url: "https://www.silverspursequine.com/big-chex-to-cash-1",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-big-chex-to-cash/public",
     tier: "premium",
     discipline: ["reining"],
@@ -38,6 +40,7 @@ const STALLIONS = [
   {
     name: "Boomernic",
     slug: "boomernic",
+    source_url: "https://www.silverspursequine.com/boomernic-1",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-boomernic/public",
     tier: "premium",
     discipline: ["reining","reined cow horse"],
@@ -56,6 +59,7 @@ const STALLIONS = [
   {
     name: "Conquistador Whiz",
     slug: "conquistador-whiz",
+    source_url: "https://www.silverspursequine.com/conquistador-whiz-1",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-conquistador-whiz/public",
     tier: "premium",
     discipline: ["reining"],
@@ -74,6 +78,7 @@ const STALLIONS = [
   {
     name: "Spooks Gotta Gun",
     slug: "spooks-gotta-gun",
+    source_url: "https://www.silverspursequine.com/spooks-gotta-gun",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-spooks-gotta-gun/public",
     tier: "premium",
     discipline: ["reining","ranch"],
@@ -92,6 +97,7 @@ const STALLIONS = [
   {
     name: "Trashadeous",
     slug: "trashadeous",
+    source_url: "https://www.silverspursequine.com/trashadeous",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-trashadeous/public",
     tier: "premium",
     discipline: ["reining"],
@@ -110,6 +116,7 @@ const STALLIONS = [
   {
     name: "Wimpys Little Step",
     slug: "wimpys-little-step",
+    source_url: "https://www.silverspursequine.com/wimpys-little-step",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-wimpys-little-step/public",
     tier: "premium",
     discipline: ["reining"],
@@ -128,6 +135,7 @@ const STALLIONS = [
   {
     name: "HF Mobster",
     slug: "hf-mobster",
+    source_url: "https://www.silverspursequine.com/hf-mobster",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-hf-mobster/public",
     tier: "mid",
     discipline: ["reining"],
@@ -146,6 +154,7 @@ const STALLIONS = [
   {
     name: "Shiners Voodoo Dr",
     slug: "shiners-voodoo-dr",
+    source_url: "https://www.silverspursequine.com/shiners-voodoo-dr",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-shiners-voodoo-dr/public",
     tier: "mid",
     discipline: ["reining","reined cow horse"],
@@ -164,6 +173,7 @@ const STALLIONS = [
   {
     name: "Tinker With Guns",
     slug: "tinker-with-guns",
+    source_url: "https://www.silverspursequine.com/tinker-with-guns",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-tinker-with-guns/public",
     tier: "mid",
     discipline: ["reining"],
@@ -182,6 +192,7 @@ const STALLIONS = [
   {
     name: "Wimpyneedsacocktail",
     slug: "wimpyneedsacocktail",
+    source_url: "https://www.silverspursequine.com/wimpyneedsacocktail",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-wimpyneedsacocktail/public",
     tier: "mid",
     discipline: ["reining"],
@@ -200,6 +211,7 @@ const STALLIONS = [
   {
     name: "Platinum Vintage",
     slug: "platinum-vintage",
+    source_url: "https://www.silverspursequine.com/platinum-vintage",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-platinum-vintage/public",
     tier: "mid",
     discipline: ["reining"],
@@ -218,6 +230,7 @@ const STALLIONS = [
   {
     name: "Xtra New Pal Voodoo",
     slug: "xtra-new-pal-voodoo",
+    source_url: "https://www.silverspursequine.com/xtranewpalvoodoo",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-xtra-new-pal-voodoo/public",
     tier: "mid",
     discipline: ["reining","reined cow horse"],
@@ -236,6 +249,7 @@ const STALLIONS = [
   {
     name: "Ifwhizswereguns",
     slug: "ifwhizswereguns",
+    source_url: "https://www.silverspursequine.com/ifwhizswereguns",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-ifwhizswereguns/public",
     tier: "mid",
     discipline: ["reining"],
@@ -254,6 +268,7 @@ const STALLIONS = [
   {
     name: "Custom Cash Advance",
     slug: "custom-cash-advance",
+    source_url: "https://www.silverspursequine.com/custom-cash-advance-1",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-custom-cash-advance/public",
     tier: "mid",
     discipline: ["reining"],
@@ -272,6 +287,7 @@ const STALLIONS = [
   {
     name: "Smart Shiners Spook",
     slug: "smart-shiners-spook",
+    source_url: "https://www.silverspursequine.com/smart-shiners-spook",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-smart-shiners-spook/public",
     tier: "mid",
     discipline: ["reining","reined cow horse"],
@@ -290,6 +306,7 @@ const STALLIONS = [
   {
     name: "Nic It In The Bud",
     slug: "nic-it-in-the-bud",
+    source_url: "https://www.silverspursequine.com/nic-it-in-the-bud-1",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-nic-it-in-the-bud/public",
     tier: "mid",
     discipline: ["reining","reined cow horse"],
@@ -308,6 +325,7 @@ const STALLIONS = [
   {
     name: "Einsteins Revolution",
     slug: "einsteins-revolution",
+    source_url: "https://www.silverspursequine.com/einsteins-revolution",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-einsteins-revolution/public",
     tier: "mid",
     discipline: ["reining"],
@@ -326,6 +344,7 @@ const STALLIONS = [
   {
     name: "Mister Montana Nic",
     slug: "mister-montana-nic",
+    source_url: "https://www.silverspursequine.com/mister-montana-nic-1",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-mister-montana-nic/public",
     tier: "mid",
     discipline: ["reining","reined cow horse"],
@@ -344,6 +363,7 @@ const STALLIONS = [
   {
     name: "Chic Dreamin",
     slug: "chic-dreamin",
+    source_url: "https://www.silverspursequine.com/chicdreamin",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-chic-dreamin/public",
     tier: "value",
     discipline: ["reining","reined cow horse"],
@@ -362,6 +382,7 @@ const STALLIONS = [
   {
     name: "Electric Wind",
     slug: "electric-wind",
+    source_url: "https://www.silverspursequine.com/electricwind",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-electric-wind/public",
     tier: "value",
     discipline: ["reining","ranch"],
@@ -380,6 +401,7 @@ const STALLIONS = [
   {
     name: "Pale Face Dunnit",
     slug: "pale-face-dunnit",
+    source_url: "https://www.silverspursequine.com/pale-face-dunnit",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-pale-face-dunnit/public",
     tier: "value",
     discipline: ["reining","ranch"],
@@ -398,6 +420,7 @@ const STALLIONS = [
   {
     name: "Catatomic",
     slug: "catatomic",
+    source_url: "https://www.silverspursequine.com/catatomic-1",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-catatomic/public",
     tier: "value",
     discipline: ["reining","reined cow horse"],
@@ -416,6 +439,7 @@ const STALLIONS = [
   {
     name: "My Customized Whiz",
     slug: "my-customized-whiz",
+    source_url: "https://www.silverspursequine.com/mycustomizedwhiz",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-my-customized-whiz/public",
     tier: "value",
     discipline: ["reining"],
@@ -434,6 +458,7 @@ const STALLIONS = [
   {
     name: "Docs Soula",
     slug: "docs-soula",
+    source_url: "https://www.silverspursequine.com/docs-soula-1",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-docs-soula/public",
     tier: "value",
     discipline: ["reined cow horse","cutting"],
