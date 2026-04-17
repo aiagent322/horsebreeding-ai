@@ -18,6 +18,7 @@ body {
   min-height: 100vh;
   font-size: 15px;
   overflow-x: hidden;
+  line-height: 1.5;
 }
 
 /* NAV */
@@ -103,11 +104,11 @@ h3 {
 
 /* SECTION LABEL */
 .section-label {
-  font-size: 0.58rem;
-  letter-spacing: 3px;
+  font-size: 0.72rem;
+  letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--gold);
-  font-weight: 500;
+  color: #0f0c07;
+  font-weight: 700;
   border-bottom: var(--rule);
   padding-bottom: 8px;
   margin-bottom: 20px;
@@ -136,15 +137,16 @@ h3 {
 .stallion-card.value { border-top-color: #7a6040; }
 .sc-body { padding: 14px 16px; flex: 1; }
 .sc-tier {
-  font-size: 0.55rem;
-  letter-spacing: 2px;
+  font-size: 0.72rem;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: var(--mist);
+  color: #0f0c07;
+  font-weight: 700;
   margin-bottom: 5px;
 }
-.sc-tier.gold  { color: var(--gold); }
-.sc-tier.mid   { color: var(--sage); }
-.sc-tier.value { color: #7a6040; }
+.sc-tier.gold  { color: #6b3d14; font-weight: 900; }
+.sc-tier.mid   { color: #3d5c3a; font-weight: 900; }
+.sc-tier.value { color: #4a3820; font-weight: 900; }
 .sc-name {
   font-family: 'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
   font-size: clamp(0.95rem, 3vw, 1.05rem);
@@ -165,7 +167,7 @@ h3 {
   justify-content: space-between;
   align-items: center;
 }
-.sc-fee .fee-label { font-size: 0.55rem; letter-spacing: 2px; text-transform: uppercase; color: #ffffff; font-weight: 700; font-family: monospace; }
+.sc-fee .fee-label { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: #ffffff; font-weight: 700; font-family: monospace; }
 .sc-fee .free { color: #7fc87a; }
 
 /* STALLION PROFILE */
@@ -176,6 +178,7 @@ h3 {
   align-items: start;
 }
 @media (max-width: 720px) { .profile-grid { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { .action-bar { flex-direction: column; } .btn-order, .btn-info { width: 100%; justify-content: center; text-align: center; } }
 
 .profile-main {}
 .profile-sidebar {}
@@ -186,7 +189,7 @@ h3 {
   padding: 18px;
   margin-bottom: 16px;
 }
-.stat-block h3 { font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.stat-block h3 { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: #0f0c07; font-weight: 700; margin-bottom: 12px; }
 .stat-row { display: flex; justify-content: space-between; align-items: baseline; padding: 5px 0; border-bottom: var(--rule); font-size: 0.78rem; }
 .stat-row:last-child { border-bottom: none; }
 .stat-row .label { color: rgba(15,12,7,0.55); }
@@ -273,7 +276,7 @@ h3 {
 }
 
 /* BREADCRUMB */
-.breadcrumb { font-size: 0.65rem; color: var(--mist); margin-bottom: 20px; letter-spacing: 1px; }
+.breadcrumb { font-size: 0.72rem; font-weight: 700; color: #0f0c07; margin-bottom: 20px; letter-spacing: 1px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .breadcrumb a { color: var(--gold); text-decoration: none; }
 .breadcrumb a:hover { text-decoration: underline; }
 .breadcrumb span { margin: 0 6px; }
@@ -282,11 +285,11 @@ h3 {
 .cta-strip {
   background: var(--ink);
   color: var(--parch);
-  padding: 20px 24px;
+  padding: 20px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
   margin-top: 32px;
   flex-wrap: wrap;
 }
@@ -306,7 +309,7 @@ h3 {
 .cta-btn:hover { background: #6d2810; }
 
 /* FILTER BAR */
-.filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.filter-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
 .filter-btn {
   font-family: monospace;
   font-size: 0.75rem;
