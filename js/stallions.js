@@ -2,7 +2,7 @@ const STALLIONS = [
   {
     name: "A Sparkling Vintage",
     slug: "a-sparkling-vintage",
-    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-a-sparkling-vintage/public",
+    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-a-sparkling-vintage/w=400",
     tier: "premium",
     discipline: ["reining","reined cow horse"],
     stud_fee: 6000,
@@ -20,7 +20,7 @@ const STALLIONS = [
   {
     name: "Big Chex To Cash",
     slug: "big-chex-to-cash",
-    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-big-chex-to-cash/public",
+    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-big-chex-to-cash/w=400",
     tier: "premium",
     discipline: ["reining"],
     stud_fee: 750,
@@ -38,7 +38,7 @@ const STALLIONS = [
   {
     name: "Boomernic",
     slug: "boomernic",
-    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-boomernic/public",
+    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-boomernic/w=400",
     tier: "premium",
     discipline: ["reining","reined cow horse"],
     stud_fee: 3500,
@@ -56,7 +56,7 @@ const STALLIONS = [
   {
     name: "Conquistador Whiz",
     slug: "conquistador-whiz",
-    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-conquistador-whiz/public",
+    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-conquistador-whiz/w=400",
     tier: "premium",
     discipline: ["reining"],
     stud_fee: 4000,
@@ -74,7 +74,7 @@ const STALLIONS = [
   {
     name: "Spooks Gotta Gun",
     slug: "spooks-gotta-gun",
-    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-spooks-gotta-gun/public",
+    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-spooks-gotta-gun/w=400",
     tier: "premium",
     discipline: ["reining","ranch"],
     stud_fee: 6500,
@@ -92,7 +92,7 @@ const STALLIONS = [
   {
     name: "Trashadeous",
     slug: "trashadeous",
-    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-trashadeous/public",
+    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-trashadeous/w=400",
     tier: "premium",
     discipline: ["reining"],
     stud_fee: 4000,
@@ -110,7 +110,7 @@ const STALLIONS = [
   {
     name: "Wimpys Little Step",
     slug: "wimpys-little-step",
-    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-wimpys-little-step/public",
+    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-wimpys-little-step/w=400",
     tier: "premium",
     discipline: ["reining"],
     stud_fee: 6500,
@@ -128,7 +128,7 @@ const STALLIONS = [
   {
     name: "HF Mobster",
     slug: "hf-mobster",
-    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-hf-mobster/public",
+    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-hf-mobster/w=400",
     tier: "mid",
     discipline: ["reining"],
     stud_fee: 2500,
@@ -146,7 +146,7 @@ const STALLIONS = [
   {
     name: "Shiners Voodoo Dr",
     slug: "shiners-voodoo-dr",
-    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-shiners-voodoo-dr/public",
+    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-shiners-voodoo-dr/w=400",
     tier: "mid",
     discipline: ["reining","reined cow horse"],
     stud_fee: 6000,
@@ -164,7 +164,7 @@ const STALLIONS = [
   {
     name: "Tinker With Guns",
     slug: "tinker-with-guns",
-    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-tinker-with-guns/public",
+    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-tinker-with-guns/w=400",
     tier: "mid",
     discipline: ["reining"],
     stud_fee: 2000,
@@ -182,7 +182,7 @@ const STALLIONS = [
   {
     name: "Wimpyneedsacocktail",
     slug: "wimpyneedsacocktail",
-    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-wimpyneedsacocktail/public",
+    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-wimpyneedsacocktail/w=400",
     tier: "mid",
     discipline: ["reining"],
     stud_fee: 3500,
@@ -200,7 +200,7 @@ const STALLIONS = [
   {
     name: "Platinum Vintage",
     slug: "platinum-vintage",
-    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-platinum-vintage/public",
+    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-platinum-vintage/w=400",
     tier: "mid",
     discipline: ["reining"],
     stud_fee: 2500,
@@ -218,7 +218,7 @@ const STALLIONS = [
   {
     name: "Xtra New Pal Voodoo",
     slug: "xtra-new-pal-voodoo",
-    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-xtra-new-pal-voodoo/public",
+    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-xtra-new-pal-voodoo/w=400",
     tier: "mid",
     discipline: ["reining","reined cow horse"],
     stud_fee: 3000,
@@ -236,7 +236,7 @@ const STALLIONS = [
   {
     name: "Ifwhizswereguns",
     slug: "ifwhizswereguns",
-    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-ifwhizswereguns/public",
+    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-ifwhizswereguns/w=400",
     tier: "mid",
     discipline: ["reining"],
     stud_fee: 3000,
@@ -254,7 +254,7 @@ const STALLIONS = [
   {
     name: "Custom Cash Advance",
     slug: "custom-cash-advance",
-    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-custom-cash-advance/public",
+    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-custom-cash-advance/w=400",
     tier: "mid",
     discipline: ["reining"],
     stud_fee: 3000,
@@ -272,7 +272,7 @@ const STALLIONS = [
   {
     name: "Smart Shiners Spook",
     slug: "smart-shiners-spook",
-    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-smart-shiners-spook/public",
+    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-smart-shiners-spook/w=400",
     tier: "mid",
     discipline: ["reining","reined cow horse"],
     stud_fee: 3000,
@@ -290,7 +290,7 @@ const STALLIONS = [
   {
     name: "Nic It In The Bud",
     slug: "nic-it-in-the-bud",
-    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-nic-it-in-the-bud/public",
+    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-nic-it-in-the-bud/w=400",
     tier: "mid",
     discipline: ["reining","reined cow horse"],
     stud_fee: 3000,
@@ -308,7 +308,7 @@ const STALLIONS = [
   {
     name: "Einsteins Revolution",
     slug: "einsteins-revolution",
-    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-einsteins-revolution/public",
+    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-einsteins-revolution/w=400",
     tier: "mid",
     discipline: ["reining"],
     stud_fee: 2500,
@@ -326,7 +326,7 @@ const STALLIONS = [
   {
     name: "Mister Montana Nic",
     slug: "mister-montana-nic",
-    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-mister-montana-nic/public",
+    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-mister-montana-nic/w=400",
     tier: "mid",
     discipline: ["reining","reined cow horse"],
     stud_fee: 2500,
@@ -344,7 +344,7 @@ const STALLIONS = [
   {
     name: "Chic Dreamin",
     slug: "chic-dreamin",
-    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-chic-dreamin/public",
+    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-chic-dreamin/w=400",
     tier: "value",
     discipline: ["reining","reined cow horse"],
     stud_fee: 0,
@@ -362,7 +362,7 @@ const STALLIONS = [
   {
     name: "Electric Wind",
     slug: "electric-wind",
-    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-electric-wind/public",
+    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-electric-wind/w=400",
     tier: "value",
     discipline: ["reining","ranch"],
     stud_fee: 0,
@@ -380,7 +380,7 @@ const STALLIONS = [
   {
     name: "Pale Face Dunnit",
     slug: "pale-face-dunnit",
-    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-pale-face-dunnit/public",
+    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-pale-face-dunnit/w=400",
     tier: "value",
     discipline: ["reining","ranch"],
     stud_fee: 2000,
@@ -398,7 +398,7 @@ const STALLIONS = [
   {
     name: "Catatomic",
     slug: "catatomic",
-    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-catatomic/public",
+    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-catatomic/w=400",
     tier: "value",
     discipline: ["reining","reined cow horse"],
     stud_fee: 1500,
@@ -416,7 +416,7 @@ const STALLIONS = [
   {
     name: "My Customized Whiz",
     slug: "my-customized-whiz",
-    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-my-customized-whiz/public",
+    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-my-customized-whiz/w=400",
     tier: "value",
     discipline: ["reining"],
     stud_fee: 1500,
@@ -434,7 +434,7 @@ const STALLIONS = [
   {
     name: "Docs Soula",
     slug: "docs-soula",
-    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-docs-soula/public",
+    photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-docs-soula/w=400",
     tier: "value",
     discipline: ["reined cow horse","cutting"],
     stud_fee: 1500,
