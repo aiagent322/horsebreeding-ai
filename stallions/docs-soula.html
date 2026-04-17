@@ -4,9 +4,64 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Docs Soula | 2026 Stallion Profile | HorseBreeding.ai</title>
-<meta name="description" content="Docs Soula — reined cow horse / cutting stallion standing at Silver Spurs Equine. Junior stallion · Doc Bar / Smart Chic Olena · Cow horse and cutting. 2026 stud fee: $1,500. Full pedigree, traits, offspring stats.">
+<meta name="description" content="Docs Soula — reined cow horse / cutting stallion at Silver Spurs Equine. Junior stallion · Doc Bar / Smart Chic Olena · Cow horse and cutting. 2026 stud fee: $1,500.">
 <link rel="canonical" href="https://horsebreeding-ai.pages.dev/stallions/docs-soula.html">
 <link rel="stylesheet" href="../css/style.css">
+<style>
+  .action-bar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 20px 0 28px;
+  }
+  .btn-order {
+    background: var(--rust);
+    color: var(--parch);
+    text-decoration: none;
+    font-family: 'Palatino Linotype',Palatino,Georgia,serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 12px 22px;
+    letter-spacing: 0.5px;
+    transition: background 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-order:hover { background: #6d2810; }
+  .btn-info {
+    background: transparent;
+    color: var(--ink);
+    text-decoration: none;
+    font-family: 'Menlo','Courier New',monospace;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    border: 1px solid rgba(15,12,7,0.3);
+    transition: border-color 0.15s, color 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-info:hover { border-color: var(--gold); color: var(--gold); }
+  .source-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--mist);
+    text-decoration: none;
+    padding: 12px 0;
+    transition: color 0.15s;
+  }
+  .source-link:hover { color: var(--gold); }
+  .source-link svg { opacity: 0.5; }
+</style>
 </head>
 <body>
 
@@ -33,6 +88,20 @@
     <p class="hero-sub">reined cow horse / cutting · Junior stallion · Doc Bar / Smart Chic Olena · Cow horse and cutting</p>
   </div>
 
+  <!-- ACTION BAR -->
+  <div class="action-bar">
+    <a href="#lead-form-section" class="btn-order" onclick="document.getElementById('lead-form-section').scrollIntoView({behavior:'smooth'});return false;">
+      &#9654; Order Breeding Contract
+    </a>
+    <a href="https://www.silverspursequine.com/docs-soula-1" target="_blank" rel="noopener" class="btn-info">
+      More Info on Silver Spurs ↗
+    </a>
+    <a href="https://www.silverspursequine.com/docs-soula-1" target="_blank" rel="noopener" class="source-link">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 6.5V10.5H1.5V2H5.5" stroke="currentColor" stroke-width="1.2"/><path d="M7.5 1.5H10.5V4.5" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 6.5L10.5 1.5" stroke="currentColor" stroke-width="1.2"/></svg>
+      View on silverspursequine.com
+    </a>
+  </div>
+
   <div class="profile-grid">
     <div class="profile-main">
 
@@ -44,6 +113,9 @@
       <div class="stat-block">
         <h3>About Docs Soula</h3>
         <p style="font-size:0.82rem;line-height:1.7;color:rgba(15,12,7,0.75);">Junior stallion with deep cow horse and cutting lineage. Doc Bar foundation crossed with Smart Chic Olena handle. Ideal for cow horse and cutting programs.</p>
+        <div style="margin-top:12px;">
+          <a href="https://www.silverspursequine.com/docs-soula-1" target="_blank" rel="noopener" style="font-size:0.65rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);text-decoration:none;">Full profile on silverspursequine.com ↗</a>
+        </div>
       </div>
 
       <div class="stat-block">
@@ -77,7 +149,8 @@
       <div class="stat-block">
         <h3>2026 Breeding Fee</h3>
         <div style="font-family:'Palatino Linotype',Palatino,Georgia,serif;font-size:2.2rem;font-weight:700;color:var(--gold);margin:8px 0;">$1,500</div>
-        <div style="font-size:0.72rem;color:rgba(15,12,7,0.55);line-height:1.5;">Junior stallion. Standing at Silver Spurs Equine.</div>
+        <div style="font-size:0.72rem;color:rgba(15,12,7,0.55);line-height:1.5;margin-bottom:14px;">Junior stallion. Standing at Silver Spurs Equine.</div>
+        <a href="#lead-form-section" class="btn-order" style="width:100%;justify-content:center;text-decoration:none;" onclick="document.getElementById('lead-form-section').scrollIntoView({behavior:'smooth'});return false;">Order Breeding Contract</a>
       </div>
 
       <div class="stat-block">
@@ -85,49 +158,68 @@
         <div class="stat-row"><span class="label">Discipline</span><span class="val">reined cow horse / cutting</span></div><div class="stat-row"><span class="label">Tier</span><span class="val">Value / Jr</span></div>
       </div>
 
-      <div class="form-card">
-        <h3>Request Breeding Info</h3>
-        <form id="lead-form" onsubmit="submitForm(event)">
-          <div class="form-group">
-            <label>Your Name</label>
-            <input type="text" id="f-name" placeholder="Full name" required>
-          </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input type="email" id="f-email" placeholder="you@example.com" required>
-          </div>
-          <div class="form-group">
-            <label>Phone</label>
-            <input type="tel" id="f-phone" placeholder="(480) 000-0000">
-          </div>
-          <div class="form-group">
-            <label>Mare Discipline</label>
-            <select id="f-disc">
-              <option value="">— Select —</option>
-              <option>Reining</option>
-              <option>Reined Cow Horse</option>
-              <option>Cutting</option>
-              <option>Ranch</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Notes</label>
-            <textarea id="f-notes" placeholder="Mare details, questions, breeding method preference..."></textarea>
-          </div>
-          <button type="submit" class="submit-btn">Submit Inquiry</button>
-        </form>
-        <div class="form-success" id="form-success">
-          ✓ Inquiry received. We'll be in touch within 24 hours.
-        </div>
+      <div class="stat-block" style="border-top:2px solid var(--gold);">
+        <h3 style="margin-bottom:10px;">Official Silver Spurs Page</h3>
+        <p style="font-size:0.72rem;color:rgba(15,12,7,0.6);line-height:1.5;margin-bottom:12px;">View video, additional photos, pedigree details, and breeding contracts directly on Silver Spurs Equine.</p>
+        <a href="https://www.silverspursequine.com/docs-soula-1" target="_blank" rel="noopener" class="btn-info" style="width:100%;justify-content:center;text-decoration:none;">More Info ↗</a>
       </div>
 
+    </div>
+  </div>
+
+  <!-- LEAD FORM -->
+  <div id="lead-form-section" style="max-width:560px;margin:40px 0;">
+    <div class="section-label">Order Breeding Contract</div>
+    <div class="form-card">
+      <h3>Request a 2026 Breeding Contract for Docs Soula</h3>
+      <form id="lead-form" onsubmit="submitForm(event)">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" id="f-name" placeholder="Full name" required>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="f-email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" id="f-phone" placeholder="(480) 000-0000">
+        </div>
+        <div class="form-group">
+          <label>Mare Discipline</label>
+          <select id="f-disc">
+            <option value="">— Select —</option>
+            <option>Reining</option>
+            <option>Reined Cow Horse</option>
+            <option>Cutting</option>
+            <option>Ranch</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Breeding Method</label>
+          <select id="f-method">
+            <option value="">— Select —</option>
+            <option>Cooled Semen</option>
+            <option>Frozen Semen</option>
+            <option>ICSI</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Notes</label>
+          <textarea id="f-notes" placeholder="Mare details, questions, timing..."></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Submit Breeding Inquiry</button>
+      </form>
+      <div class="form-success" id="form-success">
+        ✓ Inquiry received. We will be in touch within 24 hours.
+      </div>
     </div>
   </div>
 
   <div class="cta-strip">
     <div>
       <strong>Find the right match for your mare</strong>
-      <p>Use our AI matchmaker to score all 26 stallions against your mare's discipline, bloodlines, and traits.</p>
+      <p>Score all 26 stallions against your mare's discipline, bloodlines, and traits in seconds.</p>
     </div>
     <a href="../" class="cta-btn">Run the Matchmaker →</a>
   </div>
@@ -148,10 +240,11 @@ function submitForm(e) {
     email: document.getElementById('f-email').value,
     phone: document.getElementById('f-phone').value,
     discipline: document.getElementById('f-disc').value,
+    method: document.getElementById('f-method').value,
     notes: document.getElementById('f-notes').value,
     ts: new Date().toISOString()
   };
-  console.log('Lead:', JSON.stringify(data));
+  console.log('Lead captured:', JSON.stringify(data));
   document.getElementById('lead-form').style.display = 'none';
   document.getElementById('form-success').style.display = 'block';
 }
