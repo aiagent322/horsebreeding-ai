@@ -59,7 +59,7 @@
     font-size: 0.6rem;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(242,234,216,0.45);
+    color: rgba(242,234,216,0.85); font-weight: 700;
   }
   .header-badge {
     margin-left: auto;
@@ -96,6 +96,9 @@
   }
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   @media (max-width: 560px) { .form-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .form-card { padding: 16px; } }
+  @media (max-width: 560px) { .page { padding: 16px 14px 60px; } }
+  @media (max-width: 560px) { .card-body { padding: 14px 12px; } }
   .form-group { display: flex; flex-direction: column; gap: 5px; }
   .form-group.full { grid-column: 1 / -1; }
   .form-label {
@@ -111,8 +114,8 @@
     border-radius: 0;
     color: var(--ink);
     font-family: 'Menlo', 'Courier New', Courier, monospace;
-    font-size: 0.82rem;
-    padding: 9px 11px;
+    font-size: 1rem;
+    padding: 11px 13px;
     outline: none;
     width: 100%;
     transition: border-color 0.15s;
@@ -128,10 +131,10 @@
   .trait-chips { display: flex; flex-wrap: wrap; gap: 6px; }
   .trait-chip {
     font-family: 'Menlo', 'Courier New', Courier, monospace;
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     letter-spacing: 1px;
     text-transform: uppercase;
-    padding: 5px 10px;
+    padding: 10px 14px;
     border: 1px solid rgba(15,12,7,0.25);
     background: var(--parch);
     cursor: pointer;
@@ -149,10 +152,10 @@
     color: var(--parch);
     border: none;
     font-family: 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
-    font-size: 1.15rem;
-    font-weight: 600;
+    font-size: 1.25rem;
+    font-weight: 700;
     letter-spacing: 2px;
-    padding: 15px 24px;
+    padding: 18px 24px;
     cursor: pointer;
     transition: background 0.15s, transform 0.08s;
     position: relative;
@@ -188,7 +191,7 @@
     font-weight: 600;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--mist);
+    color: #0f0c07;
     margin-bottom: 14px;
     padding-bottom: 8px;
     border-bottom: var(--rule);
@@ -239,7 +242,7 @@
   .score-num.premium { color: var(--gold); }
   .score-num.mid     { color: var(--sage); }
   .score-num.value   { color: #7a6040; }
-  .score-denom { font-size: 0.62rem; color: var(--mist); margin-bottom: 6px; letter-spacing: 1px; }
+  .score-denom { font-size: 0.65rem; color: #0f0c07; font-weight: 700; margin-bottom: 6px; letter-spacing: 1px; }
   .confidence-pill {
     margin-left: auto;
     font-size: 0.55rem;
@@ -250,9 +253,9 @@
     align-self: flex-end;
     margin-bottom: 6px;
   }
-  .confidence-pill.high   { color: var(--sage); }
-  .confidence-pill.medium { color: var(--gold); }
-  .confidence-pill.low    { color: var(--mist); }
+  .confidence-pill.high   { color: #3d5c3a; font-weight: 700; }
+  .confidence-pill.medium { color: #6b3d14; font-weight: 700; }
+  .confidence-pill.low    { color: #4a3820; font-weight: 700; }
 
   .score-bar-wrap { height: 3px; background: rgba(15,12,7,0.1); margin-top: -8px; }
   .score-bar-fill { height: 100%; transition: width 0.6s ease; }
@@ -266,13 +269,13 @@
     font-weight: 700;
     line-height: 1.2;
   }
-  .stallion-disc { font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: var(--mist); margin-top: 2px; }
+  .stallion-disc { font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: #0f0c07; font-weight: 700; margin-top: 2px; }
 
   .stat-row { display: flex; flex-direction: column; gap: 3px; }
-  .stat-item { font-size: 0.68rem; color: rgba(15,12,7,0.6); display: flex; gap: 6px; }
+  .stat-item { font-size: 0.75rem; color: #0f0c07; font-weight: 700; display: flex; gap: 6px; }
   .stat-item strong { color: var(--ink); }
 
-  .explanation { font-size: 0.75rem; line-height: 1.55; font-style: italic; color: rgba(15,12,7,0.7); border-left: 2px solid var(--mist); padding-left: 10px; }
+  .explanation { font-size: 0.82rem; line-height: 1.6; font-style: italic; color: #0f0c07; font-weight: 700; border-left: 3px solid var(--gold); padding-left: 12px; }
 
   .card-fee {
     background: var(--ink);
@@ -283,7 +286,7 @@
     align-items: center;
     border-top: 1px solid rgba(15,12,7,0.2);
   }
-  .fee-label { font-size: 0.55rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.45; }
+  .fee-label { font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: #ffffff; font-weight: 700; }
   .fee-amount {
     font-family: 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
     font-size: 1.3rem;
