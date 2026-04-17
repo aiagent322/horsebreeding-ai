@@ -14,7 +14,7 @@ const STALLIONS = [
     traits: ["stop","athleticism","handle","softness","scope"],
     sire: "Shining Spark",
     dam: "Vintage Badger by Peppy San Badger",
-    description: "The only sire in NRHA history to produce two Triple Crown Champions. A Sparkling Vintage stands retired at Silver Spurs Arizona, available via ICSI only. Sire of A Vintage Smoke ($600K), Not Ruf At All ($456K), and Platinum Vintage ($390K).",
+    description: "The only sire in NRHA history to produce two Triple Crown Champions. A Sparkling Vintage is an NRHA 4 Million Dollar Sire with offspring earnings exceeding $4.6M. Available via ICSI only. Sire of A Vintage Smoke ($600K) and Not Ruf At All ($456K).",
     breeding_note: "ICSI only. Pay breeding fee only when you have a live foal."
   },
   {
@@ -32,7 +32,7 @@ const STALLIONS = [
     traits: ["stop","athleticism","speed","softness","handle"],
     sire: "Nu Chex To Cash",
     dam: "Snip O Gun by One Gun",
-    description: "2002 Palomino AQHA/APHA double-registered stallion. 2005 NRHA Open Futurity Reserve Champion. NRHA Million Dollar Sire with offspring earnings exceeding $1.37M. Sire of 473 AQHA foals, 163 money-earners.",
+    description: "NRHA Million Dollar Sire and 2005 Open Futurity Reserve Champion. Big Chex To Cash has produced 163 money-earners from 473 AQHA foals with offspring earnings over $1.37M. Available via ICSI only using frozen semen from this deceased champion.",
     breeding_note: "ICSI only. Deceased — breeding via frozen ICSI semen only."
   },
   {
@@ -50,7 +50,7 @@ const STALLIONS = [
     traits: ["cow sense","athleticism","handle","rate","stop"],
     sire: "Reminic",
     dam: "Colonel Freckles mare",
-    description: "The Greats tier stallion combining elite Reminic and Colonel Freckles bloodlines for reining and cow horse production.",
+    description: "Elite reining and reined cow horse sire combining Reminic athleticism with Colonel Freckles cow sense. Boomernic stands in The Greats tier and consistently produces horses with natural cattle instinct, solid stops, and the trainability demanded in today's competition pen.",
     breeding_note: "Standing at Silver Spurs Equine."
   },
   {
@@ -68,7 +68,7 @@ const STALLIONS = [
     traits: ["stop","speed","athleticism","power","scope"],
     sire: "Topsail Whiz",
     dam: "Colonel Freckles mare",
-    description: "The Greats tier Whiz/Gunner cross. Topsail Whiz son combining speed, stop, and scope for elite reining production.",
+    description: "A Topsail Whiz son standing in The Greats tier. Conquistador Whiz crosses Whiz speed and scope with Colonel Freckles handle, producing powerful reining prospects with scopey stops and the athleticism to compete at the highest levels of the NRHA.",
     breeding_note: "Standing at Silver Spurs Equine."
   },
   {
@@ -86,7 +86,7 @@ const STALLIONS = [
     traits: ["stop","athleticism","cow sense","versatility","speed","scope"],
     sire: "Grays Starlight",
     dam: "Katie Gun by One Gun",
-    description: "2002 Bay Overo AQHA/APHA stallion. NRHA Triple Crown Champion Sire. First foal crop produced the 2010 NRHA Futurity Open Champion. Also sires Ranch ($202K+), Working Cow ($108K+), and Barrel ($22K+) horses.",
+    description: "NRHA Triple Crown Champion Sire with offspring earnings over $4.1M. Spooks Gotta Gun's first foal crop produced the 2010 NRHA Futurity Champion. Also sires Ranch ($202K+) and Working Cow ($108K+) horses. Available via frozen semen and ICSI.",
     breeding_note: "Available frozen semen and ICSI. Pay balance after confirmed pregnancy."
   },
   {
@@ -104,7 +104,7 @@ const STALLIONS = [
     traits: ["stop","speed","power","scope","athleticism"],
     sire: "Topsail Whiz",
     dam: "Smart Chic Olena mare",
-    description: "The Greats tier. Combines Topsail Whiz power and Smart Chic Olena handle for elite reining production.",
+    description: "The Greats tier reining sire combining Topsail Whiz power with Smart Chic Olena handle. Trashadeous produces horses with elite stop mechanics, natural scope, and the speed demanded in modern reining competition. A proven cross for high-level reining programs.",
     breeding_note: "Standing at Silver Spurs Equine."
   },
   {
@@ -122,7 +122,7 @@ const STALLIONS = [
     traits: ["stop","athleticism","handle","softness","scope","speed","power"],
     sire: "Nu Chex To Cash",
     dam: "Leolita Step",
-    description: "1999 Palomino stallion. 2011 NRHA Hall of Fame inductee. Won the 2002 NRHA Futurity with the highest composite score in NRHA history. The $15M sire — 50% of his 1,988 foals are money earners with average earnings over $11,000.",
+    description: "NRHA Hall of Fame. 2002 NRHA Futurity Open Champion with the highest composite score in history. Wimpys Little Step is a $15M sire — 50% of his 1,988 foals are money earners. Available via ICSI only at Silver Spurs Oklahoma.",
     breeding_note: "ICSI only. Retired at Silver Spurs Oklahoma. Pay balance only when live foal on ground."
   },
   {
@@ -140,7 +140,7 @@ const STALLIONS = [
     traits: ["stop","athleticism","handle","scope","power","speed"],
     sire: "Colonels Smoking Gun (Gunner)",
     dam: "Dun Its Black Gold",
-    description: "2008 Buckskin AQHA/APHA stallion. 2013 NRHA Open Derby Champion. 2014 World Equestrian Games Team Member. NRHA Million Dollar Sire with offspring earnings $1.7M+. Fee reduced to $2,500 for 2026.",
+    description: "2013 NRHA Open Derby Champion and 2014 World Equestrian Games Team member. HF Mobster is an NRHA Million Dollar Sire with offspring earnings over $1.7M. Fee reduced to $2,500 for 2026. Standing at Silver Spurs Arizona.",
     breeding_note: "Standing at Silver Spurs Arizona. Pay balance after confirmed pregnancy."
   },
   {
@@ -158,7 +158,7 @@ const STALLIONS = [
     traits: ["stop","athleticism","cow sense","softness","scope","handle"],
     sire: "Shining Spark",
     dam: "Voodoo Chic by Smart Chic Olena",
-    description: "2007 AQHA Palomino stallion. Dual-discipline powerhouse — NRHA $7 Million Sire and NRCHA $1 Million Sire. Total offspring earnings $8M+. Produces elite reining and reined cow horse horses.",
+    description: "NRHA $7 Million Sire and NRCHA $1 Million Sire with combined offspring earnings exceeding $8M. Shiners Voodoo Dr is the premier dual-discipline producer in the Silver Spurs program, consistently delivering elite reining and reined cow horse offspring.",
     breeding_note: "Standing at Silver Spurs Arizona. Pay balance after confirmed pregnancy."
   },
   {
@@ -176,7 +176,7 @@ const STALLIONS = [
     traits: ["stop","speed","athleticism","power","scope","handle"],
     sire: "Colonels Smoking Gun (Gunner)",
     dam: "Tinker Nic by Reminic",
-    description: "2006 Sorrel AQHA/APHA stallion. 2011 NRHA Open Derby Champion. 2012 NRBC Open Derby Reserve Champion. NRHA Million Dollar Sire. Offspring earnings $1.52M+. Standing in Oklahoma.",
+    description: "2011 NRHA Open Derby Champion and NRHA Million Dollar Sire. Tinker With Guns has produced offspring earnings of $1.52M including top performer Tinker With Dreams at $432K. Outstanding value at $2,000 standing in Oklahoma.",
     breeding_note: "Standing at Silver Spurs Oklahoma. Pay balance after confirmed pregnancy."
   },
   {
@@ -194,7 +194,7 @@ const STALLIONS = [
     traits: ["stop","athleticism","scope","speed","handle","softness"],
     sire: "Wimpys Little Step",
     dam: "Nu Chex To Cash mare",
-    description: "Son of Wimpys Little Step. NRBC Open Derby Champion. AQHA Reserve World Champion Senior and Junior Reining Horse. LTE $281,804.",
+    description: "Son of Wimpys Little Step and NRBC Open Derby Champion. Wimpyneedsacocktail earned $281,804 LTE including AQHA Reserve World Champion Senior and Junior Reining titles. Carries the Wimpy handle and athleticism into a new generation of reining horses.",
     breeding_note: "Standing at Silver Spurs Equine."
   },
   {
@@ -212,7 +212,7 @@ const STALLIONS = [
     traits: ["stop","athleticism","scope","softness","handle"],
     sire: "A Sparkling Vintage",
     dam: "Shining Spark mare",
-    description: "2015 NRHA Open Derby Champion. Son of A Sparkling Vintage. LTE $390,828. Silver Spurs homebred — now standing as a sire.",
+    description: "2015 NRHA Open Derby Champion and Silver Spurs homebred son of A Sparkling Vintage. Platinum Vintage earned $390,828 LTE and now passes elite Shining Spark and Peppy San Badger bloodlines to the next generation at an accessible $2,500 fee.",
     breeding_note: "Standing at Silver Spurs Arizona."
   },
   {
@@ -230,7 +230,7 @@ const STALLIONS = [
     traits: ["stop","cow sense","athleticism","softness","scope"],
     sire: "Shiners Voodoo Dr",
     dam: "Wimpys New Pal by Wimpys Little Step",
-    description: "Son of Shiners Voodoo Dr out of a Wimpys Little Step mare. Dual NRHA and NRCHA earner — $109,894 including $28,000 SSBF.",
+    description: "Son of Shiners Voodoo Dr out of a Wimpys Little Step mare. Xtra New Pal Voodoo is a dual NRHA and NRCHA earner with $109,894 in total earnings including $28,000 SSBF. A proven dual-discipline sire at $3,000.",
     breeding_note: "Standing at Silver Spurs Equine."
   },
   {
@@ -248,7 +248,7 @@ const STALLIONS = [
     traits: ["stop","speed","athleticism","scope","power"],
     sire: "Spooks Gotta Gun",
     dam: "Topsail Whiz mare",
-    description: "Son of Spooks Gotta Gun out of a Topsail Whiz mare. High Roller Reining Open Classic Futurity Champion. NRBC Reining Derby Open Top Ten. LTE $118,578.",
+    description: "Son of Spooks Gotta Gun out of a Topsail Whiz mare. Ifwhizswereguns earned $118,578 LTE including the High Roller Reining Open Classic Futurity Championship and NRBC Top Ten finish. Combines Gun athleticism with Whiz precision.",
     breeding_note: "Standing at Silver Spurs Equine."
   },
   {
@@ -266,7 +266,7 @@ const STALLIONS = [
     traits: ["stop","athleticism","handle","scope","softness"],
     sire: "Nu Chex To Cash",
     dam: "Colonels Smoking Gun mare",
-    description: "Nu Chex To Cash / Colonels Smoking Gun cross. Reining specialist combining two of the most influential sire lines in the industry.",
+    description: "Nu Chex To Cash crossed on Colonels Smoking Gun — two of the most influential reining sire lines in history. Custom Cash Advance combines inherited handle, stop, and scope to produce horses bred for the demands of high-level reining competition.",
     breeding_note: "Standing at Silver Spurs Equine."
   },
   {
@@ -284,7 +284,7 @@ const STALLIONS = [
     traits: ["stop","athleticism","cow sense","handle","scope"],
     sire: "Spooks Gotta Gun",
     dam: "Shining Spark mare",
-    description: "Spooks Gotta Gun x Shining Spark dual-discipline cross. Bred for both reining and reined cow horse production.",
+    description: "Spooks Gotta Gun crossed on Shining Spark — a proven dual-discipline combination. Smart Shiners Spook is enrolled in both NRHA and NRCHA sire programs, producing horses with natural cow sense, solid stops, and the scope needed across both disciplines.",
     breeding_note: "Standing at Silver Spurs Equine."
   },
   {
@@ -302,7 +302,7 @@ const STALLIONS = [
     traits: ["cow sense","athleticism","stop","handle","rate"],
     sire: "Reminic",
     dam: "Smart Chic Olena mare",
-    description: "Reminic son with cow horse aptitude from Smart Chic Olena dam line. Produces horses with natural cattle instinct and solid reining foundation.",
+    description: "Reminic son out of a Smart Chic Olena mare. Nic It In The Bud combines Reminic's proven cow horse athleticism with Smart Chic Olena handle, producing horses with natural cattle instinct and a solid reining foundation at $3,000.",
     breeding_note: "Standing at Silver Spurs Equine."
   },
   {
@@ -320,7 +320,7 @@ const STALLIONS = [
     traits: ["stop","athleticism","softness","scope"],
     sire: "Topsail Whiz",
     dam: "Smart Chic Olena mare",
-    description: "Topsail Whiz son out of a Smart Chic Olena mare. Combines Whiz athleticism with Olena softness for a trainable, scopey reining prospect.",
+    description: "Topsail Whiz son out of a Smart Chic Olena mare. Einsteins Revolution pairs Whiz athleticism and scope with Olena softness and trainability, producing a balanced reining prospect. An efficient cross for breeders seeking competitive horses at a value fee.",
     breeding_note: "Standing at Silver Spurs Equine."
   },
   {
@@ -338,7 +338,7 @@ const STALLIONS = [
     traits: ["cow sense","athleticism","handle","rate","stop"],
     sire: "Reminic",
     dam: "Colonel Freckles mare",
-    description: "Reminic x Colonel Freckles cross. Strong cow horse aptitude with reining foundation. Versatile producer for dual-discipline programs.",
+    description: "Reminic crossed on Colonel Freckles — a proven reining and cow horse combination. Mister Montana Nic produces horses with strong cattle instinct, reliable rate, and the athleticism demanded across both disciplines. A versatile sire for dual-discipline breeding programs.",
     breeding_note: "Standing at Silver Spurs Equine."
   },
   {
@@ -356,7 +356,7 @@ const STALLIONS = [
     traits: ["athleticism","softness","cow sense","handle"],
     sire: "Smart Chic Olena",
     dam: "Grays Starlight mare",
-    description: "Free breeding for the entire 2026 season. Smart Chic Olena son with natural cow sense and handle. Outstanding opportunity to access elite bloodlines at zero stud fee.",
+    description: "Smart Chic Olena son with Grays Starlight athleticism. Chic Dreamin offers FREE breeding for the entire 2026 season — an extraordinary opportunity to access elite reining and cow horse bloodlines at zero stud fee. Enrolled in the NRHA Sire and Dam program.",
     breeding_note: "FREE breeding 2026. Available cooled or ICSI."
   },
   {
@@ -374,7 +374,7 @@ const STALLIONS = [
     traits: ["speed","athleticism","versatility","stop"],
     sire: "Colonels Smoking Gun",
     dam: "Grays Starlight mare",
-    description: "Free breeding for the entire 2026 season. Gunner son with Grays Starlight athleticism. Versatile producer for reining and ranch horse programs.",
+    description: "Colonels Smoking Gun son with Grays Starlight athleticism. Electric Wind offers FREE breeding for the entire 2026 season. A versatile producer for reining and ranch horse programs, carrying Gunner's proven athleticism and trainability at no cost to the breeder.",
     breeding_note: "FREE breeding 2026. Available cooled or ICSI."
   },
   {
@@ -392,7 +392,7 @@ const STALLIONS = [
     traits: ["athleticism","versatility","softness","stop","handle"],
     sire: "Hollywood Dun It",
     dam: "Smart Chic Olena mare",
-    description: "Hollywood Dun It son with Smart Chic Olena dam. Fee reduced from $3,750 to $2,000 for the entire 2026 breeding season. Versatile reining and ranch horse producer.",
+    description: "Hollywood Dun It son out of a Smart Chic Olena mare. Pale Face Dunnit fee has been reduced from $3,750 to $2,000 for all of 2026. A versatile producer for reining and ranch horse programs with proven Hollywood Dun It athleticism.",
     breeding_note: "Reduced to $2,000 for all of 2026."
   },
   {
@@ -410,7 +410,7 @@ const STALLIONS = [
     traits: ["cow sense","athleticism","quick feet","stop"],
     sire: "Colonels Smoking Gun",
     dam: "High Brow Cat mare",
-    description: "Junior stallion. High Brow Cat cutting bloodlines crossed into Colonels Smoking Gun reining. Natural cow sense meets reining athleticism.",
+    description: "High Brow Cat cutting bloodlines crossed into Colonels Smoking Gun reining. Catatomic is a junior stallion combining natural cow sense with reining athleticism — an emerging cross for breeders seeking cattle instinct and performance ability at a $1,500 entry fee.",
     breeding_note: "Junior stallion. Standing at Silver Spurs Equine."
   },
   {
@@ -428,7 +428,7 @@ const STALLIONS = [
     traits: ["stop","speed","power","athleticism","scope"],
     sire: "Topsail Whiz",
     dam: "Smart Chic Olena / Gunner mare",
-    description: "Junior stallion combining three elite reining sire lines: Topsail Whiz, Smart Chic Olena, and Colonels Smoking Gun. Outstanding reining bloodline combination at junior pricing.",
+    description: "Junior stallion combining three elite reining sire lines: Topsail Whiz, Smart Chic Olena, and Colonels Smoking Gun. My Customized Whiz represents an outstanding bloodline combination at junior stallion pricing — ideal for breeders seeking proven reining genetics at $1,500.",
     breeding_note: "Junior stallion. Standing at Silver Spurs Equine."
   },
   {
@@ -446,7 +446,7 @@ const STALLIONS = [
     traits: ["cow sense","athleticism","rate","turn","quick feet"],
     sire: "Doc Bar",
     dam: "Smart Chic Olena mare",
-    description: "Junior stallion with deep cow horse and cutting lineage. Doc Bar foundation crossed with Smart Chic Olena handle. Ideal for cow horse and cutting programs seeking proven cattle bloodlines.",
+    description: "Junior stallion with deep cow horse and cutting lineage. Doc Bar foundation crossed with Smart Chic Olena handle produces horses with natural cattle instinct and quick feet. Docs Soula is enrolled in the NRCHA Sire and Dam program at $1,500.",
     breeding_note: "Junior stallion. Standing at Silver Spurs Equine."
   },
 ];
