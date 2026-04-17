@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How It Works | HorseBreeding.ai — Stallion Matchmaker</title>
+<meta name="description" content="How HorseBreeding.ai scores and ranks stallions for your mare. Learn how our AI-powered matchmaker uses discipline, bloodlines, and traits to find your best breeding match.">
+<link rel="canonical" href="https://horsebreeding-ai.pages.dev/how-it-works.html">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .step-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin: 28px 0;
+  }
+  .step-card {
+    background: var(--parch2);
+    border: 1px solid rgba(15,12,7,0.15);
+    border-top: 3px solid var(--gold);
+    padding: 22px;
+  }
+  .step-num {
+    font-family: 'Palatino Linotype',Palatino,Georgia,serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 10px;
+    opacity: 0.4;
+  }
+  .step-title {
+    font-family: 'Palatino Linotype',Palatino,Georgia,serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .step-body {
+    font-size: 0.78rem;
+    line-height: 1.7;
+    color: rgba(15,12,7,0.65);
+  }
+  .score-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.8rem;
+  }
+  .score-table th {
+    background: var(--ink);
+    color: var(--gold2);
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .score-table td {
+    padding: 10px 14px;
+    border-bottom: var(--rule);
+    vertical-align: top;
+  }
+  .score-table tr:last-child td { border-bottom: none; }
+  .score-table tr:nth-child(even) td { background: var(--parch2); }
+  .pts {
+    font-family: 'Palatino Linotype',Palatino,Georgia,serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+  .tier-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+  }
+  .tier-card {
+    flex: 1;
+    min-width: 200px;
+    padding: 16px;
+    border: 1px solid rgba(15,12,7,0.15);
+  }
+  .tier-card.premium { border-top: 3px solid var(--gold); background: var(--parch2); }
+  .tier-card.mid     { border-top: 3px solid var(--sage); background: var(--parch2); }
+  .tier-card.value   { border-top: 3px solid #7a6040;     background: var(--parch2); }
+  .tier-label {
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .tier-label.premium { color: var(--gold); }
+  .tier-label.mid     { color: var(--sage); }
+  .tier-label.value   { color: #7a6040; }
+  .tier-name {
+    font-family: 'Palatino Linotype',Palatino,Georgia,serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .tier-desc { font-size: 0.72rem; line-height: 1.6; color: rgba(15,12,7,0.6); }
+  .faq-item {
+    border-bottom: var(--rule);
+    padding: 18px 0;
+  }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q {
+    font-family: 'Palatino Linotype',Palatino,Georgia,serif;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .faq-a { font-size: 0.78rem; line-height: 1.7; color: rgba(15,12,7,0.65); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">HorseBreeding.ai</a>
+    <div class="nav-links">
+      <a href="/">Matchmaker</a>
+      <a href="/stallions/">Stallions</a>
+      <a href="/how-it-works.html" class="active">How It Works</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="hero">
+    <div class="hero-eyebrow">HorseBreeding.ai · Silver Spurs Equine · 2026</div>
+    <h1 class="hero-title">How the Matchmaker Works</h1>
+    <p class="hero-sub">Enter your mare's discipline, bloodlines, and desired traits. Our scoring engine evaluates all 26 Silver Spurs stallions and returns the best match from each price tier — in under 2 seconds.</p>
+  </div>
+
+  <!-- STEPS -->
+  <div class="section-label">The Process</div>
+  <div class="step-grid">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <div class="step-title">Enter Your Mare's Profile</div>
+      <div class="step-body">Select your mare's primary discipline — reining, reined cow horse, cutting, or ranch. Add her sire and key bloodlines, then select the traits you want to improve or complement in her foal.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <div class="step-title">We Score Every Stallion</div>
+      <div class="step-body">The matchmaker scores all 26 stallions against your mare using a deterministic 100-point algorithm. Every stallion gets a score based on discipline alignment, bloodline compatibility, and trait overlap.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <div class="step-title">AI Writes Your Explanation</div>
+      <div class="step-body">Claude AI reads your mare's profile and the top-scoring stallions, then writes a one-sentence explanation specific to your mare — not a generic description. It tells you exactly why this cross works.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">04</div>
+      <div class="step-title">You Get 3 Tiered Results</div>
+      <div class="step-body">Results are grouped by tier — Premium, Best Value, and Budget — so you can make a decision based on both match quality and budget. Each result shows the score, fee, offspring stats, and confidence level.</div>
+    </div>
+  </div>
+
+  <!-- SCORING -->
+  <div class="section-label" style="margin-top:36px;">Scoring Breakdown — 100 Points Total</div>
+  <div class="stat-block">
+    <table class="score-table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Points</th>
+          <th>How It's Calculated</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Discipline Match</strong></td>
+          <td><span class="pts">40 pts</span></td>
+          <td>Exact match only. If the stallion's listed disciplines include your mare's discipline, 40 points are awarded. No partial credit — discipline alignment is the most important factor.</td>
+        </tr>
+        <tr>
+          <td><strong>Bloodline Compatibility</strong></td>
+          <td><span class="pts">30 pts</span></td>
+          <td>We check each stallion's bloodlines against your mare's bloodlines using a proven compatibility map of reining and cow horse sire lines. Complementary crosses earn points. Repeated bloodlines (line breeding risk) lose points. No bloodlines entered = neutral 15 points.</td>
+        </tr>
+        <tr>
+          <td><strong>Trait Match</strong></td>
+          <td><span class="pts">30 pts</span></td>
+          <td>We compare the traits you selected for your mare against each stallion's known traits. The more overlap, the higher the score. Scored proportionally — 3 of 3 traits matched = full 30 points.</td>
+        </tr>
+        <tr>
+          <td><strong>Tier Bonus</strong></td>
+          <td><span class="pts">+10 pts</span></td>
+          <td>The Greats tier stallions receive a bonus for proven elite production records. Main Roster stallions receive +5. Junior stallions receive no bonus.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- TIERS -->
+  <div class="section-label" style="margin-top:36px;">Stallion Tiers</div>
+  <div class="tier-row">
+    <div class="tier-card premium">
+      <div class="tier-label premium">★ The Greats</div>
+      <div class="tier-name">Premium Match</div>
+      <div class="tier-desc">The 7 elite proven sires — A Sparkling Vintage, Big Chex To Cash, Boomernic, Conquistador Whiz, Spooks Gotta Gun, Trashadeous, and Wimpys Little Step. Multi-million dollar offspring producers. Highest stud fees, highest ceiling.</div>
+    </div>
+    <div class="tier-card mid">
+      <div class="tier-label mid">Main Roster</div>
+      <div class="tier-name">Best Value Match</div>
+      <div class="tier-desc">12 proven performers including Derby Champions HF Mobster, Tinker With Guns, and Platinum Vintage. Million Dollar Sires at accessible fees. The recommended tier for most breeders.</div>
+    </div>
+    <div class="tier-card value">
+      <div class="tier-label value">Value / Jr</div>
+      <div class="tier-name">Budget Match</div>
+      <div class="tier-desc">6 value and junior stallions including two FREE 2026 breedings — Chic Dreamin and Electric Wind. Junior stallions carry elite bloodlines at the lowest entry price point. Ideal for non-pro breeders.</div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="section-label" style="margin-top:36px;">Frequently Asked Questions</div>
+  <div class="stat-block">
+    <div class="faq-item">
+      <div class="faq-q">Do I need to enter bloodlines to get a result?</div>
+      <div class="faq-a">No. Bloodlines are optional. If left blank, the bloodline category defaults to a neutral 15 points for all stallions. Entering bloodlines improves accuracy by rewarding complementary crosses and flagging repeated lines.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What if my mare's discipline isn't listed?</div>
+      <div class="faq-a">Select the closest discipline. Reined cow horse is the best choice for horses that compete in both reining and cow work. Ranch covers versatility, trail, and non-competitive horses.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Are the fees current?</div>
+      <div class="faq-a">All fees reflect Silver Spurs Equine's published 2026 breeding season pricing, including the mid-season reductions on HF Mobster, Pale Face Dunnit, and Platinum Vintage, and the free breedings on Chic Dreamin and Electric Wind.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How do I order a breeding contract?</div>
+      <div class="faq-a">Click any stallion result to go to his profile page, then use the "Order Breeding Contract" form. You can also visit the Silver Spurs Equine website directly via the "More Info" button on each profile.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is this tool affiliated with Silver Spurs Equine?</div>
+      <div class="faq-a">HorseBreeding.ai is an independent tool built using publicly available Silver Spurs Equine stallion data. All breeding inquiries and contracts are handled directly by Silver Spurs Equine in Scottsdale, AZ and Purcell, OK.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What is ICSI breeding?</div>
+      <div class="faq-a">Intracytoplasmic Sperm Injection (ICSI) is an advanced reproductive technique that allows breeding to retired or deceased stallions using frozen semen. Several Silver Spurs stallions — including Wimpys Little Step, A Sparkling Vintage, and Big Chex To Cash — are available via ICSI only. Silver Spurs' 2026 program lets you pay the breeding fee only after a live foal is on the ground.</div>
+    </div>
+  </div>
+
+  <div class="cta-strip">
+    <div>
+      <strong>Ready to find your match?</strong>
+      <p>Enter your mare's profile and get scored results in under 2 seconds.</p>
+    </div>
+    <a href="/" class="cta-btn">Run the Matchmaker →</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>HorseBreeding.ai · Powered by Silver Spurs Equine data · 2026 Breeding Season</p>
+  <p style="margin-top:6px;"><a href="https://www.silverspursequine.com" target="_blank">silverspursequine.com</a> · Scottsdale AZ 480.563.1966 · Purcell OK 405.600.1990</p>
+</footer>
+
+</body>
+</html>
