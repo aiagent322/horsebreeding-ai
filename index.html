@@ -776,19 +776,22 @@ function fmtEarnings(s, disc) {
 
 // ── CLAUDE API EXPLANATION ───────────────────────────────────────────────────
 async function getExplanation(mare, matches) {
-  const SYSTEM = "You are an elite equine breeding analyst specializing in Western performance horses. Your job is to justify stallion recommendations with clear, confident, and commercially persuasive reasoning. You do NOT speculate, you do NOT hedge, and you do NOT diagnose. You explain WHY the match works. Return ONLY a JSON array of exactly 3 strings. Each string is one paragraph of 120-160 words with no bullet points, no line breaks, no disclaimers, no uncertainty language. Tone: confident, expert, decisive. Stallion name must be used at least once in the paragraph. Each paragraph must follow this structure: (1) direct statement of fit, (2) key weaknesses in the mare this stallion corrects, (3) stallion strengths and offspring record, (4) discipline alignment, (5) value statement tied to the tier. When describing traits, connect them explicitly to expected improvement in the mare (cause to effect). Logic priorities: correction of weaknesses over amplification of strengths; proven offspring over theoretical genetics; discipline alignment over general ability; all reasoning must align directly with the provided Key Matching Variables — do not introduce new factors. No text outside the JSON array.";
-
+  const PROXY = "https://stallion-matchmaker-proxy.bridleandbit.workers.dev";
   const tierMap = {premium:"Gold", mid:"Silver", value:"Bronze"};
-  const USER = "Mare Profile:\n" +
+
+  // ── STEP 1: Scoring Extraction Engine ─────────────────────────────────────
+  const EXTRACTOR_SYSTEM = "You are a scoring extraction engine. Your job is to identify and output the exact reasons a stallion was selected for a mare based ONLY on the provided inputs. You do NOT generate new reasoning. You do NOT interpret beyond what is given. You extract and structure what already exists. STRICT RULES: Do NOT invent reasons. Do NOT generalize beyond inputs. Do NOT add outside knowledge. Only use relationships clearly supported by the data. Keep language tight and factual. No fluff, no storytelling. OUTPUT FORMAT: Return ONLY a JSON array of exactly 3 objects, one per stallion, in order. Each object: {stallion: string, tier: string, total_score: number, key_variables: [string, string, string]} where each key_variable is a direct cause of the match, maximum 12 words, no duplicate ideas, prefer correction logic (mare weakness to stallion strength). Return ONLY the JSON array. No commentary.";
+
+  const extractorUser = "Mare Profile:\n" +
     "- Discipline: " + mare.disc + "\n" +
     "- Breed: " + (mare.breed||"AQHA") + "\n" +
     "- Age: " + (mare.age||"unknown") + "\n" +
     "- Lifetime Earnings: " + (mare.earnings||"unknown") + "\n" +
-    "- Show Record: " + (mare.record||"none provided") + "\n" +
+    "- Show Record: " + (mare.record||"none") + "\n" +
     "- Offspring Record: " + (mare.offspring||"no foals yet") + "\n" +
     "- Breeding Goal: " + (mare.goal||"not specified") + "\n" +
     "- Bloodlines: " + (mare.blood||"unknown") + "\n" +
-    "- Desired Traits: " + (mare.traits||"none specified") + "\n" +
+    "- Desired Traits: " + (mare.traits||"none") + "\n" +
     "- Notes: " + (mare.notes||"none") + "\n\n" +
     "Stallion Matches:\n" +
     matches.map((m,i) => {
@@ -803,25 +806,81 @@ async function getExplanation(mare, matches) {
         "   - Bloodlines: "+(m.bloodlines||[]).join(", ")+"\n" +
         "   - Stud Fee: "+fee;
     }).join("\n\n") +
+    "\n\nExtract the top 3 key matching variables per stallion. Return ONLY a JSON array of 3 objects.";
+
+  let keyVariables = matches.map(m => ({
+    stallion: m.name,
+    tier: tierMap[m.tier]||m.tier,
+    total_score: m.score,
+    key_variables: ["Discipline alignment with mare", "Complementary bloodline cross", "Trait overlap with breeding goal"]
+  }));
+
+  try {
+    const r1 = await fetch(PROXY, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 600,
+        system: EXTRACTOR_SYSTEM,
+        messages: [{ role: "user", content: extractorUser }]
+      })
+    });
+    const d1 = await r1.json();
+    const raw1 = d1.content?.[0]?.text || "[]";
+    const clean1 = raw1.replace(/```json|```/g,"").trim();
+    keyVariables = JSON.parse(clean1);
+  } catch(e) { console.warn("Extractor fallback:", e); }
+
+  // ── STEP 2: Elite Breeding Analyst ────────────────────────────────────────
+  const ANALYST_SYSTEM = "You are an elite equine breeding analyst specializing in Western performance horses. Your job is to justify stallion recommendations with clear, confident, and commercially persuasive reasoning. You do NOT speculate, you do NOT hedge, and you do NOT diagnose. You explain WHY the match works. Stallion name must be used at least once in the paragraph. Tone: confident, expert, decisive. Each paragraph must follow this structure: (1) direct statement of fit, (2) key weaknesses in the mare this stallion corrects, (3) stallion strengths and offspring record, (4) discipline alignment, (5) value statement tied to the tier. When describing traits, connect them explicitly to expected improvement in the mare (cause to effect). Logic priorities: correction of weaknesses over amplification of strengths; proven offspring over theoretical genetics; discipline alignment over general ability; all reasoning must align directly with the provided Key Matching Variables — do not introduce new factors. Output rules: no bullet points, no line breaks, no disclaimers, no uncertainty language, no guarantees, no diagnosis language. Return ONLY a JSON array of exactly 3 strings, each 120-160 words. No text outside the JSON array.";
+
+  const analystUser = "Mare Profile:\n" +
+    "- Discipline: " + mare.disc + "\n" +
+    "- Breed: " + (mare.breed||"AQHA") + "\n" +
+    "- Age: " + (mare.age||"unknown") + "\n" +
+    "- Lifetime Earnings: " + (mare.earnings||"unknown") + "\n" +
+    "- Show Record: " + (mare.record||"none") + "\n" +
+    "- Offspring Record: " + (mare.offspring||"no foals yet") + "\n" +
+    "- Breeding Goal: " + (mare.goal||"not specified") + "\n" +
+    "- Bloodlines: " + (mare.blood||"unknown") + "\n" +
+    "- Desired Traits: " + (mare.traits||"none") + "\n" +
+    "- Notes: " + (mare.notes||"none") + "\n\n" +
+    "Stallion Matches with Key Matching Variables:\n" +
+    matches.map((m,i) => {
+      const kv = keyVariables[i] || {};
+      const tl = tierMap[m.tier]||m.tier;
+      const fee = m.stud_fee===0?"FREE 2026":"$"+m.stud_fee.toLocaleString();
+      const off = m.offspring_earnings>0?"$"+m.offspring_earnings.toLocaleString():"N/A";
+      const vars = (kv.key_variables||[]).join("; ");
+      return (i+1)+". "+m.name+" ("+tl+" tier, score "+m.score+"/100)\n" +
+        "   - Key Matching Variables: "+vars+"\n" +
+        "   - Discipline: "+(m.discipline||[]).join(", ")+"\n" +
+        "   - Show Record: "+m.performance_summary+"\n" +
+        "   - Offspring Earnings: "+off+"\n" +
+        "   - Known Traits: "+(m.traits||[]).join(", ")+"\n" +
+        "   - Bloodlines: "+(m.bloodlines||[]).join(", ")+"\n" +
+        "   - Stud Fee: "+fee;
+    }).join("\n\n") +
     "\n\nWrite one paragraph per stallion. Return ONLY a JSON array of 3 strings.";
 
-  const resp = await fetch("https://stallion-matchmaker-proxy.bridleandbit.workers.dev", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 900,
-      system: SYSTEM,
-      messages: [{ role: "user", content: USER }]
-    })
-  });
-  const data = await resp.json();
-  const raw = data.content?.[0]?.text || "[]";
   try {
-    const clean = raw.replace(/```json|```/g,"").trim();
-    return JSON.parse(clean);
-  } catch {
-    return matches.map(() => "This stallion represents a strong, discipline-aligned match that directly addresses the mare's profile and breeding goals.");
+    const r2 = await fetch(PROXY, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 900,
+        system: ANALYST_SYSTEM,
+        messages: [{ role: "user", content: analystUser }]
+      })
+    });
+    const d2 = await r2.json();
+    const raw2 = d2.content?.[0]?.text || "[]";
+    const clean2 = raw2.replace(/```json|```/g,"").trim();
+    return JSON.parse(clean2);
+  } catch(e) {
+    return matches.map(m => m.name + " represents a strong, discipline-aligned match that directly addresses this mare's profile and breeding goals.");
   }
 }
 
