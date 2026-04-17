@@ -330,8 +330,79 @@
       </div>
 
       <div class="form-group">
+        <label class="form-label">Mare Breed</label>
+        <select id="mare-breed">
+          <option value="">— Select —</option>
+          <option value="AQHA">AQHA</option>
+          <option value="APHA">APHA</option>
+          <option value="AQHA/APHA">AQHA / APHA Double Registered</option>
+          <option value="Appendix">Appendix</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Mare Age</label>
+        <select id="mare-age">
+          <option value="">— Select —</option>
+          <option value="3">3 years</option>
+          <option value="4">4 years</option>
+          <option value="5">5 years</option>
+          <option value="6">6 years</option>
+          <option value="7">7 years</option>
+          <option value="8">8 years</option>
+          <option value="9">9 years</option>
+          <option value="10">10 years</option>
+          <option value="11-14">11–14 years</option>
+          <option value="15+">15+ years</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Mare Lifetime Earnings</label>
+        <select id="mare-earnings">
+          <option value="">— Select —</option>
+          <option value="non-earner">Non-earner</option>
+          <option value="under $10K">Under $10,000</option>
+          <option value="$10K-$50K">$10,000 – $50,000</option>
+          <option value="$50K-$100K">$50,000 – $100,000</option>
+          <option value="$100K-$250K">$100,000 – $250,000</option>
+          <option value="$250K+">$250,000+</option>
+        </select>
+      </div>
+
+      <div class="form-group">
         <label class="form-label">Mare Sire / Key Bloodlines</label>
         <input type="text" id="mare-blood" placeholder="e.g. Shining Spark, Nu Chex To Cash">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Show Record / Titles (optional)</label>
+        <input type="text" id="mare-record" placeholder="e.g. NRHA Futurity finalist, Congress champion">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Offspring Record (optional)</label>
+        <select id="mare-offspring">
+          <option value="">— Select —</option>
+          <option value="no foals">No foals yet</option>
+          <option value="1-2 foals, no earners">1–2 foals, no earners yet</option>
+          <option value="proven producer, earners under $50K">Proven producer — earners under $50K</option>
+          <option value="proven producer, earners $50K-$250K">Proven producer — earners $50K–$250K</option>
+          <option value="proven producer, earners $250K+">Proven producer — earners $250K+</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Breeding Goal</label>
+        <select id="mare-goal">
+          <option value="">— Select —</option>
+          <option value="competition horse for sale">Competition horse for sale</option>
+          <option value="keep and show">Keep and show</option>
+          <option value="non-pro or amateur mount">Non-pro or amateur mount</option>
+          <option value="ranch or versatility horse">Ranch or versatility horse</option>
+          <option value="resale as weanling or yearling">Resale as weanling or yearling</option>
+        </select>
       </div>
 
       <div class="form-group full">
@@ -341,7 +412,7 @@
 
       <div class="form-group full">
         <label class="form-label">Additional Notes (optional)</label>
-        <textarea id="mare-notes" placeholder="e.g. mare is small-framed, needs size; prefers cow horse outcross"></textarea>
+        <textarea id="mare-notes" placeholder="e.g. mare is small-framed, needs size; prefer outcross; interested in ICSI"></textarea>
       </div>
 
     </div>
@@ -705,7 +776,7 @@ function fmtEarnings(s, disc) {
 
 // ── CLAUDE API EXPLANATION ───────────────────────────────────────────────────
 async function getExplanation(mare, matches) {
-  const prompt = `You are a horse breeding advisor. A breeder has a ${mare.disc} mare with bloodlines: ${mare.blood||'unknown'}. Desired traits: ${mare.traits||'none specified'}.
+  const prompt = `You are a horse breeding advisor. A breeder has a ${mare.age||'unknown age'} ${mare.breed||'AQHA'} ${mare.disc} mare. Bloodlines: ${mare.blood||'unknown'}. Lifetime earnings: ${mare.earnings||'unknown'}. Show record: ${mare.record||'none provided'}. Offspring: ${mare.offspring||'unknown'}. Breeding goal: ${mare.goal||'not specified'}. Desired traits: ${mare.traits||'none specified'}.
 
 Here are 3 stallion matches. Write exactly one sentence of explanation for each (why it's the right fit for THIS mare). Be specific — mention bloodlines or traits. Be direct, no fluff.
 
@@ -811,7 +882,18 @@ async function runMatch() {
     if (!picks.length) throw new Error('No matches found.');
 
     // Get AI explanations
-    const mare = { disc: mareDisc, blood: mareBloodRaw, traits: [...selectedTraits].join(', '), notes: mareNotes };
+    const mare = {
+    disc:      mareDisc,
+    breed:     document.getElementById('mare-breed').value,
+    age:       document.getElementById('mare-age').value,
+    earnings:  document.getElementById('mare-earnings').value,
+    record:    document.getElementById('mare-record').value,
+    offspring: document.getElementById('mare-offspring').value,
+    goal:      document.getElementById('mare-goal').value,
+    blood:     mareBloodRaw,
+    traits:    [...selectedTraits].join(', '),
+    notes:     mareNotes
+  };
     const explanations = await getExplanation(mare, picks);
 
     // Render
