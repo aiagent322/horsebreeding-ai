@@ -79,9 +79,9 @@ function renderGrid(filter) {
     const earnings = s.offspring_earnings > 0 ? '$' + (s.offspring_earnings/1000000).toFixed(1) + 'M offspring' : (s.lifetime_earnings > 0 ? 'LTE $' + s.lifetime_earnings.toLocaleString() : '');
     const disc = (s.discipline||[]).join(' / ');
 
-    const a = document.createElement('a');
-    a.href = './' + s.slug + '.html';
+    const a = document.createElement('div');
     a.className = 'stallion-card ' + s.tier;
+    a.style.cursor = 'default';
     a.innerHTML = `
       <div class="sc-body">
         <div style="font-size:0.65rem;font-weight:700;color:#0f0c07;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;font-weight:900;">${tierLabel}</div>
@@ -94,7 +94,10 @@ function renderGrid(filter) {
         <span class="fee-label">2026 Fee</span>
         <span>${fee}</span>
       </div>
-      ${s.source_url ? `<a href="${s.source_url}" target="_blank" rel="noopener" style="display:block;background:#6b3d14;color:#fff;font-family:monospace;font-size:0.62rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-align:center;padding:8px;text-decoration:none;">View on Silver Spurs ↗</a>` : ''}`;
+      <div style="display:flex;gap:6px;padding:8px 10px;border-top:1px solid rgba(15,12,7,0.12);">
+        <a href="./${s.slug}.html" style="flex:1;display:block;background:#0f0c07;color:#e8dfc8;font-family:monospace;font-size:0.6rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-align:center;padding:8px 4px;text-decoration:none;">Full Profile →</a>
+        ${s.source_url ? `<a href="${s.source_url}" target="_blank" rel="noopener" style="flex:1;display:block;background:#6b3d14;color:#fff;font-family:monospace;font-size:0.6rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-align:center;padding:8px 4px;text-decoration:none;">Book at Station ↗</a>` : ''}
+      </div>`;
     grid.appendChild(a);
   });
 }
