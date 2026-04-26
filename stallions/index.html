@@ -95,7 +95,7 @@ function renderGrid(filter) {
         <span>${fee}</span>
       </div>
       <div style="display:flex;gap:6px;padding:8px 10px;border-top:1px solid rgba(15,12,7,0.12);">
-        <a href="./${s.slug}.html" style="flex:1;display:block;background:#0f0c07;color:#e8dfc8;font-family:monospace;font-size:0.6rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-align:center;padding:8px 4px;text-decoration:none;">Full Profile →</a>
+        <a href="./${s.slug}" style="flex:1;display:block;background:#0f0c07;color:#e8dfc8;font-family:monospace;font-size:0.6rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-align:center;padding:8px 4px;text-decoration:none;">Full Profile →</a>
         ${s.source_url ? `<a href="${s.source_url}" target="_blank" rel="noopener" style="flex:1;display:block;background:#6b3d14;color:#fff;font-family:monospace;font-size:0.6rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-align:center;padding:8px 4px;text-decoration:none;">Book at Station ↗</a>` : ''}
       </div>`;
     grid.appendChild(a);
