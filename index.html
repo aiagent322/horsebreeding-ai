@@ -2,355 +2,288 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HorseBreeding.ai</title>
-
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>HorseBreeding.ai — AI Stallion Matchmaker for Western Performance</title>
+<meta name="description" content="AI-powered stallion matchmaker for reining, reined cow horse, cutting, and ranch disciplines. Get ranked recommendations from 28 top Silver Spurs Equine stallions.">
+<link rel="canonical" href="https://horsebreeding.ai/">
+<meta property="og:title" content="HorseBreeding.ai — AI Stallion Matchmaker">
+<meta property="og:description" content="Enter your mare profile and get AI-ranked stallion matches in seconds. Powered by Silver Spurs Equine.">
+<meta name="theme-color" content="#0b3c5d">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --ink:    #0f0c07;
-    --parch:  #f2ead8;
-    --parch2: #e8dfc8;
-    --gold:   #b8892a;
-    --gold2:  #d4a83c;
-    --rust:   #8b3318;
-    --sage:   #3d5c3a;
-    --mist:   #c8bfa8;
-    --rule:   1px solid rgba(15,12,7,0.18);
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primary:#0b3c5d;
+  --primary-light:#144e78;
+  --secondary:#1d6fa5;
+  --accent:#2a8fd4;
+  --gold:#b8860b;
+  --gold-light:#d4a017;
+  --bg:#ffffff;
+  --bg-alt:#f4f6f8;
+  --bg-warm:#faf9f7;
+  --text:#1f2933;
+  --text-mid:#4a5568;
+  --text-light:#6b7280;
+  --border:#e5e7eb;
+  --border-light:#f0f1f3;
+  --success:#047857;
+  --danger:#b91c1c;
+  --shadow-sm:0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md:0 4px 6px rgba(0,0,0,0.07);
+  --shadow-lg:0 10px 15px rgba(0,0,0,0.1);
+  --radius:6px;
+  --max-w:1100px;
+  --transition:0.2s ease;
+}
+html{-webkit-text-size-adjust:100%}
+@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;font-size:15px;line-height:1.6;overscroll-behavior-y:none;-webkit-font-smoothing:antialiased;touch-action:manipulation}
+a{color:var(--secondary);text-decoration:none}
+a:hover{color:var(--primary);text-decoration:underline}
+img{max-width:100%;height:auto;display:block}
+:focus-visible{outline:2px solid var(--secondary);outline-offset:2px;border-radius:3px}
 
-  body {
-    background: var(--parch);
-    color: var(--ink);
-    font-family: 'Menlo', 'Courier New', Courier, monospace;
-    min-height: 100vh;
-    overflow-x: hidden;
-    background-image:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  }
+/* HEADER */
+.site-header{background:var(--primary);position:sticky;top:0;z-index:200;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
+.header-top{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;max-width:var(--max-w);margin:0 auto}
+.site-logo{font-size:1.05rem;font-weight:800;color:#fff;text-decoration:none;letter-spacing:-0.3px}
+.site-logo span{color:#7ec8f0}
+.header-right{display:flex;align-items:center;gap:10px}
+.bb-logo-link{display:none;align-items:center;line-height:0}
+.nav-toggle{background:none;border:1px solid rgba(255,255,255,0.3);border-radius:4px;cursor:pointer;color:#fff;min-height:44px;min-width:44px;display:flex;align-items:center;justify-content:center;touch-action:manipulation}
+.nav-toggle svg{width:20px;height:20px;stroke:#fff;display:block}
+.main-nav{display:none;background:var(--primary-light);border-top:1px solid rgba(255,255,255,0.1)}
+.main-nav.open{display:block}
+.main-nav a{display:flex;align-items:center;padding:11px 16px;color:rgba(255,255,255,0.9);font-size:0.88rem;font-weight:500;border-bottom:1px solid rgba(255,255,255,0.07);min-height:44px;text-decoration:none;transition:background var(--transition)}
+.main-nav a:hover{background:rgba(255,255,255,0.08);text-decoration:none}
+.main-nav a.active{color:#7ec8f0;font-weight:700}
+@media(min-width:600px){.header-top{padding:10px 24px}.bb-logo-link{display:flex}}
+@media(min-width:900px){
+  .main-nav{display:flex!important;background:none;border-top:none;padding:0;max-width:var(--max-w);margin:0 auto}
+  .main-nav a{padding:8px 12px;border-bottom:none;font-size:0.85rem;min-height:unset}
+  .nav-toggle{display:none}
+}
 
-  /* ── HEADER ── */
-  header {
-    background: var(--ink);
-    color: var(--parch);
-    padding: 20px 24px 16px;
-    border-bottom: 3px solid var(--gold);
-    position: relative;
-    overflow: hidden;
-  }
-  header::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(184,137,42,0.04) 60px, rgba(184,137,42,0.04) 61px);
-    pointer-events: none;
-  }
-  .header-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
-  .brand { display: flex; flex-direction: column; gap: 3px; }
-  .brand-name {
-    font-family: 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
-    font-size: clamp(1.6rem, 5vw, 2.2rem);
-    font-weight: 700;
-    color: var(--gold2);
-    letter-spacing: -0.5px;
-    line-height: 1;
-  }
-  .brand-sub {
-    font-size: 0.6rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: rgba(242,234,216,0.85); font-weight: 700;
-  }
-  .header-badge {
-    margin-left: auto;
-    background: rgba(184,137,42,0.15);
-    border: 1px solid var(--gold);
-    color: var(--gold2);
-    font-size: 0.72rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 4px 10px;
-  }
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--primary) 0%,var(--secondary) 100%);padding:32px 16px 28px;text-align:center}
+.hero-inner{max-width:680px;margin:0 auto}
+.hero h1{font-size:clamp(1.4rem,4vw,2.2rem);font-weight:800;color:#fff;line-height:1.25;margin-bottom:10px;overflow-wrap:break-word;text-wrap:balance}
+.hero-sub{font-size:0.9rem;color:rgba(255,255,255,0.85);margin:0 auto 18px;line-height:1.5;overflow-wrap:break-word;max-width:540px}
+.hero-btns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.hero-btn{display:inline-flex;align-items:center;gap:5px;padding:10px 16px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:var(--radius);color:#fff;font-size:0.8rem;font-weight:600;transition:background var(--transition);min-height:44px;text-decoration:none;touch-action:manipulation}
+.hero-btn:hover{background:rgba(255,255,255,0.25);text-decoration:none;color:#fff}
+.hero-btn.gold{background:var(--gold);border-color:var(--gold)}
+.hero-btn.gold:hover{background:var(--gold-light)}
+@media(min-width:600px){.hero{padding:44px 24px 36px}.hero-btn{font-size:0.85rem;padding:11px 18px}}
 
-  /* ── LAYOUT ── */
-  .page { max-width: 900px; margin: 0 auto; padding: 28px 20px 60px; }
+/* STATS BAR */
+.stats-bar{background:var(--primary-light);border-bottom:3px solid var(--gold);padding:14px 16px}
+.stats-inner{max-width:var(--max-w);margin:0 auto;display:flex;justify-content:center;gap:clamp(16px,8vw,48px);flex-wrap:wrap}
+.stat-item{text-align:center}
+.stat-num{font-size:1.3rem;font-weight:800;color:#fff;line-height:1}
+.stat-label{font-size:0.7rem;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+@media(min-width:600px){.stats-bar{padding:16px 24px}.stat-num{font-size:1.6rem}}
 
-  /* ── MARE FORM ── */
-  .form-card {
-    background: var(--parch2);
-    border: 1px solid rgba(15,12,7,0.2);
-    border-top: 3px solid var(--gold);
-    padding: 24px;
-    margin-bottom: 24px;
-  }
-  .form-title {
-    font-family: 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #0f0c07;
-    font-weight: 700;
-    margin-bottom: 18px;
-    padding-bottom: 10px;
-    border-bottom: var(--rule);
-  }
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  @media (max-width: 560px) { .form-grid { grid-template-columns: 1fr; } }
-  @media (max-width: 560px) { .form-card { padding: 16px; } }
-  @media (max-width: 560px) { .page { padding: 16px 14px 60px; } }
-  @media (max-width: 560px) { .card-body { padding: 14px 12px; } }
-  .form-group { display: flex; flex-direction: column; gap: 5px; }
-  .form-group.full { grid-column: 1 / -1; }
-  .form-label {
-    font-size: 0.72rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: #0f0c07;
-    font-weight: 700;
-  }
-  select, input[type="text"], textarea {
-    background: var(--parch);
-    border: 1px solid rgba(15,12,7,0.25);
-    border-radius: 0;
-    color: var(--ink);
-    font-family: 'Menlo', 'Courier New', Courier, monospace;
-    font-size: 1rem;
-    padding: 11px 13px;
-    outline: none;
-    width: 100%;
-    transition: border-color 0.15s;
-    -webkit-appearance: none;
-  }
-  select:focus, input[type="text"]:focus, textarea:focus {
-    border-color: var(--gold);
-    box-shadow: 0 0 0 2px rgba(184,137,42,0.12);
-  }
-  textarea { resize: vertical; min-height: 90px; }
+/* CONTENT */
+.content-wrap{max-width:var(--max-w);margin:0 auto;padding:24px 16px 48px}
+@media(min-width:600px){.content-wrap{padding:32px 24px 56px}}
+.section-title{font-size:1.05rem;font-weight:800;color:var(--primary);margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--border);letter-spacing:-0.2px}
 
-  /* trait chips */
-  .trait-chips { display: flex; flex-wrap: wrap; gap: 6px; }
-  .trait-chip {
-    font-family: 'Menlo', 'Courier New', Courier, monospace;
-    font-size: 0.75rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 10px 14px;
-    border: 1px solid rgba(15,12,7,0.25);
-    background: var(--parch);
-    cursor: pointer;
-    transition: all 0.1s;
-    user-select: none;
-  }
-  .trait-chip.on { background: var(--ink); color: var(--gold2); border-color: var(--ink); }
-  .trait-chip:hover:not(.on) { border-color: var(--gold); color: var(--gold); }
+/* FORM CARD */
+.form-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow-sm);margin-bottom:24px}
+.form-title{font-size:1rem;font-weight:800;color:var(--primary);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--border)}
+.form-grid{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:480px){.form-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:900px){.form-grid{grid-template-columns:repeat(3,1fr)}}
+.form-group{display:flex;flex-direction:column;gap:4px}
+.form-group.full{grid-column:1/-1}
+.form-label{font-size:0.78rem;font-weight:600;color:var(--text-mid);text-transform:uppercase;letter-spacing:0.5px}
+.form-group select,.form-group input,.form-group textarea{
+  width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius);
+  font-size:0.9rem;font-family:inherit;color:var(--text);background:#fff;min-height:44px;
+  transition:border-color var(--transition);-webkit-appearance:none
+}
+.form-group select:focus,.form-group input:focus,.form-group textarea:focus{
+  outline:none;border-color:var(--secondary);box-shadow:0 0 0 3px rgba(29,111,165,0.1)
+}
+.form-group textarea{min-height:80px;resize:vertical;line-height:1.5}
 
-  /* ── RUN BUTTON ── */
-  .run-wrap { margin-top: 20px; }
-  .run-btn {
-    width: 100%;
-    background: var(--rust);
-    color: var(--parch);
-    border: none;
-    font-family: 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
-    font-size: 1.25rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    padding: 18px 24px;
-    min-height: 52px;
-    cursor: pointer;
-    transition: background 0.15s, transform 0.08s;
-    position: relative;
-  }
-  .run-btn:hover { background: #6d2810; }
-  .run-btn:active { transform: scale(0.99); }
-  .run-btn:disabled { background: var(--mist); color: rgba(15,12,7,0.4); cursor: not-allowed; }
-  .spinner {
-    display: inline-block; width: 14px; height: 14px;
-    border: 2px solid rgba(242,234,216,0.3);
-    border-top-color: var(--parch);
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-    vertical-align: middle; margin-right: 8px;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
+/* TRAIT CHIPS */
+.trait-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.trait-chip{
+  padding:8px 14px;border:1px solid var(--border);border-radius:20px;
+  font-size:0.8rem;font-weight:600;color:var(--text-mid);cursor:pointer;
+  transition:var(--transition);min-height:44px;display:inline-flex;align-items:center;
+  background:#fff;touch-action:manipulation
+}
+.trait-chip:hover{border-color:var(--secondary);color:var(--secondary)}
+.trait-chip.selected{background:var(--secondary);color:#fff;border-color:var(--secondary)}
 
-  /* ── ERROR ── */
-  .error-bar {
-    background: #fdf0ee;
-    border-left: 3px solid var(--rust);
-    color: var(--rust);
-    padding: 10px 14px;
-    font-size: 0.78rem;
-    margin-bottom: 16px;
-    display: none;
-  }
+/* RUN BUTTON */
+.run-wrap{margin-top:20px;text-align:center}
+.error-bar{color:var(--danger);font-size:0.85rem;font-weight:600;margin-bottom:8px;min-height:0}
+.run-btn{
+  background:var(--primary);color:#fff;border:none;padding:14px 36px;
+  border-radius:var(--radius);font-size:1rem;font-weight:700;cursor:pointer;
+  transition:background var(--transition),transform var(--transition);
+  min-height:44px;touch-action:manipulation;will-change:transform;font-family:inherit
+}
+.run-btn:hover{background:var(--primary-light);transform:translateY(-1px)}
+.run-btn:active{transform:translateY(0)}
+.run-btn:disabled{background:var(--text-light);cursor:not-allowed;transform:none}
 
-  /* ── RESULTS ── */
-  .results-header {
-    font-family: 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
-    font-size: 0.85rem;
-    font-weight: 900;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #0f0c07;
-    margin-bottom: 14px;
-    padding-bottom: 8px;
-    border-bottom: var(--rule);
-  }
+/* RESULTS HEADER */
+.results-header{font-size:1.1rem;font-weight:800;color:var(--primary);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--border)}
 
-  .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-  @media (max-width: 680px) { .cards-grid { grid-template-columns: 1fr; } }
+/* CARDS GRID */
+.cards-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:8px}
+@media(min-width:560px){.cards-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.cards-grid{grid-template-columns:repeat(3,1fr)}}
 
-  .match-card {
-    border: 1px solid rgba(15,12,7,0.18);
-    display: flex;
-    flex-direction: column;
-    background: var(--parch2);
-    animation: riseIn 0.35s ease both;
-  }
-  .match-card:nth-child(2) { animation-delay: 0.08s; }
-  .match-card:nth-child(3) { animation-delay: 0.16s; }
-  @keyframes riseIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+/* MATCH CARD */
+.match-card{
+  background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;box-shadow:var(--shadow-sm);
+  transition:box-shadow var(--transition),transform var(--transition);will-change:transform;
+  display:flex;flex-direction:column
+}
+.match-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.match-card:active{transform:translateY(0)}
 
-  .card-tier-bar {
-    padding: 7px 14px 6px;
-    font-size: 0.72rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    border-bottom: 1px solid rgba(15,12,7,0.12);
-  }
-  .card-tier-bar.premium { background: var(--ink); color: var(--gold2); }
-  .card-tier-bar.mid     { background: var(--sage); color: #c8e8c4; }
-  .card-tier-bar.value   { background: #4a3820; color: var(--mist); }
-  .tier-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-  .premium .tier-dot { background: var(--gold2); }
-  .mid .tier-dot     { background: #7fc87a; }
-  .value .tier-dot   { background: var(--mist); }
+/* Card rank bar */
+.card-rank-bar{
+  background:var(--primary);padding:8px 14px;
+  display:flex;align-items:center;justify-content:space-between
+}
+.card-rank-label{font-size:0.7rem;font-weight:700;color:rgba(255,255,255,0.75);text-transform:uppercase;letter-spacing:1px}
+.card-tier-pill{
+  font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:10px;
+  text-transform:uppercase;letter-spacing:0.5px;
+  background:rgba(255,255,255,0.15);color:#fff
+}
+.card-tier-pill.premium{background:var(--gold);color:#fff}
+.card-tier-pill.mid{background:rgba(255,255,255,0.2)}
 
-  .card-body { padding: 16px 14px; flex: 1; display: flex; flex-direction: column; gap: 12px; }
+/* Card body */
+.card-body{padding:14px 16px;flex:1;display:flex;flex-direction:column;gap:8px}
+.card-stallion-name{font-size:1rem;font-weight:800;color:var(--primary);overflow-wrap:break-word;line-height:1.2}
+.card-disc{font-size:0.78rem;color:var(--text-mid);font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+.card-score-row{display:flex;align-items:center;gap:8px}
+.card-score{font-size:1.4rem;font-weight:800;color:var(--primary);line-height:1}
+.card-score-denom{font-size:0.75rem;color:var(--text-light);margin-top:4px}
+.card-conf{font-size:0.7rem;font-weight:700;padding:2px 8px;border-radius:10px;background:var(--bg-alt);color:var(--text-mid)}
+.card-conf.high{background:#dcfce7;color:var(--success)}
+.card-conf.med{background:#fef9c3;color:#854d0e}
+.card-score-bar{height:4px;background:var(--border);border-radius:2px;margin:2px 0 4px}
+.card-score-fill{height:100%;border-radius:2px;background:var(--secondary);transition:width 0.5s ease}
+.card-score-fill.premium{background:var(--gold)}
+.card-perf{font-size:0.78rem;color:var(--text-mid);line-height:1.4;overflow-wrap:break-word}
+.card-fee{font-size:0.82rem;font-weight:700;color:var(--gold)}
+.card-traits{display:flex;flex-wrap:wrap;gap:4px}
+.card-trait{font-size:0.7rem;font-weight:600;padding:2px 7px;border-radius:10px;background:var(--bg-alt);color:var(--text-mid);border:1px solid var(--border-light)}
+.card-explanation{font-size:0.82rem;color:var(--text-mid);line-height:1.5;overflow-wrap:break-word}
+.card-programs{font-size:0.76rem;color:var(--text-light);overflow-wrap:break-word}
 
-  .score-row { display: flex; align-items: flex-end; gap: 8px; }
-  .score-num {
-    font-family: 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
-    font-size: clamp(2rem, 6vw, 3rem);
-    font-weight: 700;
-    line-height: 1;
-  }
-  .score-num.premium { color: var(--gold); }
-  .score-num.mid     { color: var(--sage); }
-  .score-num.value   { color: #7a6040; }
-  .score-denom { font-size: 0.65rem; color: #0f0c07; font-weight: 700; margin-bottom: 6px; letter-spacing: 1px; }
-  .confidence-pill {
-    margin-left: auto;
-    font-size: 0.72rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border: 1px solid currentColor;
-    align-self: flex-end;
-    margin-bottom: 6px;
-  }
-  .confidence-pill.high   { color: #3d5c3a; font-weight: 700; }
-  .confidence-pill.medium { color: #6b3d14; font-weight: 700; }
-  .confidence-pill.low    { color: #4a3820; font-weight: 700; }
+/* Card actions */
+.card-actions{display:flex;gap:8px;padding:10px 14px;border-top:1px solid var(--border);flex-wrap:wrap}
+.card-btn{
+  flex:1;display:inline-flex;align-items:center;justify-content:center;
+  padding:9px 12px;border-radius:var(--radius);font-size:0.78rem;font-weight:700;
+  cursor:pointer;transition:var(--transition);min-height:44px;text-decoration:none;
+  touch-action:manipulation;border:1px solid var(--border);background:#fff;color:var(--text);
+  font-family:inherit
+}
+.card-btn:hover{background:var(--bg-alt);text-decoration:none;color:var(--text)}
+.card-btn.primary{background:var(--secondary);color:#fff;border-color:var(--secondary)}
+.card-btn.primary:hover{background:var(--primary);color:#fff}
 
-  .score-bar-wrap { height: 6px; background: rgba(15,12,7,0.15); margin-top: -6px; border-radius: 3px; }
-  .score-bar-fill { height: 100%; transition: width 0.6s ease; }
-  .score-bar-fill.premium { background: var(--gold); }
-  .score-bar-fill.mid     { background: var(--sage); }
-  .score-bar-fill.value   { background: #7a6040; }
+/* More matches */
+.more-wrap{text-align:center;margin:16px 0 28px}
+.more-btn{
+  background:var(--bg-alt);color:var(--primary);border:1px solid var(--border);
+  padding:12px 28px;border-radius:var(--radius);font-size:0.9rem;font-weight:700;
+  cursor:pointer;transition:var(--transition);min-height:44px;
+  touch-action:manipulation;font-family:inherit
+}
+.more-btn:hover{background:var(--border)}
 
-  .stallion-name {
-    font-family: 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
-    font-size: clamp(1rem, 4vw, 1.2rem);
-    font-weight: 700;
-    line-height: 1.2;
-  }
-  .stallion-disc { font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: #0f0c07; font-weight: 700; margin-top: 2px; }
+/* Second row grid */
+.second-row{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:8px}
+@media(min-width:560px){.second-row{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.second-row{grid-template-columns:repeat(3,1fr)}}
 
-  .stat-row { display: flex; flex-direction: column; gap: 6px; }
-  .stat-item { font-size: 0.75rem; color: #0f0c07; font-weight: 700; display: flex; gap: 6px; }
-  .stat-item strong { color: var(--ink); }
+/* Empty state */
+.empty-state{text-align:center;padding:48px 20px;color:var(--text-light)}
+.empty-icon{font-size:3rem;margin-bottom:12px;opacity:0.5}
+.empty-text{font-size:0.9rem;font-weight:500}
 
-  .explanation { font-size: 0.82rem; line-height: 1.6; font-style: italic; color: #0f0c07; font-weight: 700; border-left: 3px solid var(--gold); padding-left: 12px; }
+/* Loading */
+.loading-bar{display:none;text-align:center;padding:32px;color:var(--text-mid);font-size:0.9rem}
+.loading-bar.active{display:block}
+.loading-dots::after{content:'.';animation:dots 1.2s infinite}
+@keyframes dots{0%,25%{content:'.'}50%{content:'..'}75%,100%{content:'...'}}
+@media(prefers-reduced-motion:reduce){.loading-dots::after{animation:none;content:'...'}}
 
-  .card-fee {
-    background: var(--ink);
-    color: var(--parch);
-    padding: 11px 14px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid rgba(15,12,7,0.2);
-  }
-  .fee-label { font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: #ffffff; font-weight: 700; }
-  .fee-amount {
-    font-family: 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: var(--gold2);
-  }
-  .fee-amount.free { color: #7fc87a; }
-
-  /* empty */
-  .empty { text-align: center; padding: clamp(24px, 6vw, 48px) 20px; opacity: 0.3; }
-  .empty-icon { font-size: 3.5rem; margin-bottom: 12px; }
-  .empty-text { font-family: 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif; font-size: 1rem; letter-spacing: 3px; text-transform: uppercase; }
-  /* Second row */
-  .more-btn {
-    width: 100%;
-    background: var(--parch2);
-    color: var(--ink);
-    border: 2px solid var(--ink);
-    font-family: 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    padding: 14px 24px;
-    cursor: pointer;
-    margin-top: 16px;
-    transition: background 0.15s;
-    display: none;
-  }
-  .more-btn:hover { background: var(--tan, #d4a96a); }
-  .more-btn.visible { display: block; }
-  .second-row { display: none; margin-top: 14px; }
-  .second-row.visible { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
-  @media (max-width: 680px) { .second-row.visible { grid-template-columns: 1fr; } }
-  .alt-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #0f0c07; }
-
-  /* Bold black all copy sitewide */
-  body { font-weight: 700; color: #0f0c07; }
-  select, input, textarea, option { font-weight: 700; color: #0f0c07; }
-  .hero-sub, .explanation, .stat-item, .fee-label,
-  .stallion-disc, .score-label, .score-denom,
-  .card-meta, .reason, .stallion-notes { color: #0f0c07 !important; font-weight: 700 !important; }
+/* Footer */
+footer{background:var(--primary);color:rgba(255,255,255,0.6);text-align:center;padding:24px 16px;font-size:0.82rem;margin-top:40px}
+footer a{color:rgba(255,255,255,0.75);text-decoration:none}
+footer a:hover{color:#fff}
 </style>
 </head>
 <body>
 
-<nav style="background:#0f0c07;border-bottom:3px solid #b8892a;padding:0 16px;">
-  <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;flex-wrap:wrap;min-height:54px;gap:0;">
-    <a href="/" style="font-family:Palatino Linotype,Palatino,Georgia,serif;font-size:1.2rem;font-weight:700;color:#d4a83c;text-decoration:none;margin-right:auto;letter-spacing:-0.3px;padding:14px 0;">HorseBreeding.ai</a>
-    <div style="display:flex;flex-wrap:wrap;">
-      <a href="/" style="color:#d4a83c;text-decoration:none;font-size:0.75rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:0 12px;min-height:44px;display:flex;align-items:center;background:rgba(184,137,42,0.1);">Matchmaker</a>
-      <a href="/stallions/" style="color:#f2ead8;text-decoration:none;font-size:0.75rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:0 12px;min-height:44px;display:flex;align-items:center;border-left:1px solid rgba(255,255,255,0.1);">Stallions</a>
-      <a href="/how-it-works.html" style="color:#f2ead8;text-decoration:none;font-size:0.75rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:0 12px;min-height:44px;display:flex;align-items:center;border-left:1px solid rgba(255,255,255,0.1);">How It Works</a>
+<header class="site-header">
+  <div class="header-top">
+    <a href="/" class="site-logo">HorseBreeding<span>.ai</span></a>
+    <div class="header-right">
+      <a href="https://www.bridleandbit.com" target="_blank" rel="noopener noreferrer" class="bb-logo-link">
+        <img src="https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/bb-hp-0/public" alt="Bridle &amp; Bit Magazine" style="height:32px;width:auto;" loading="lazy">
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"
+        onclick="this.setAttribute('aria-expanded',this.getAttribute('aria-expanded')==='true'?'false':'true');document.querySelector('.main-nav').classList.toggle('open')">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
     </div>
   </div>
-</nav>
+  <nav class="main-nav" id="main-nav">
+    <a href="/" class="active">Matchmaker</a>
+    <a href="/stallions/">Stallions</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="https://www.bridleandbit.com" target="_blank" rel="noopener">Bridle &amp; Bit</a>
+  </nav>
+</header>
 
-<div class="page">
+<section class="hero">
+  <div class="hero-inner">
+    <h1>AI Stallion Matchmaker — Western Performance Breeding</h1>
+    <p class="hero-sub">Enter your mare's profile and get AI-ranked recommendations from 28 top Silver Spurs Equine stallions across reining, reined cow horse, cutting, and ranch disciplines.</p>
+    <div class="hero-btns">
+      <a href="#matchmaker" class="hero-btn">&#x1F50D; Find Matches</a>
+      <a href="/stallions/" class="hero-btn">Browse Stallions</a>
+      <a href="/how-it-works.html" class="hero-btn">How It Works</a>
+      <a href="#matchmaker" class="hero-btn gold">&#x2605; Start Free</a>
+    </div>
+  </div>
+</section>
 
-  <!-- MARE FORM -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item"><div class="stat-num">28</div><div class="stat-label">Stallions</div></div>
+    <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">Disciplines</div></div>
+    <div class="stat-item"><div class="stat-num">AI</div><div class="stat-label">Powered</div></div>
+    <div class="stat-item"><div class="stat-num">Free</div><div class="stat-label">To Use</div></div>
+  </div>
+</div>
+
+<div class="content-wrap" id="matchmaker">
+
+  <h2 class="section-title">Mare Profile — Find Your Stallion Match</h2>
+
   <div class="form-card">
-    <div class="form-title">Mare Profile</div>
+    <div class="form-title">Enter Mare Details</div>
     <div class="form-grid">
 
       <div class="form-group">
@@ -417,7 +350,7 @@
       </div>
 
       <div class="form-group">
-        <label class="form-label">Offspring Record (optional)</label>
+        <label class="form-label">Offspring Record</label>
         <select id="mare-offspring">
           <option value="">— Select —</option>
           <option value="no foals">No foals yet</option>
@@ -453,24 +386,38 @@
     </div>
     <div class="run-wrap">
       <div class="error-bar" id="error-bar"></div>
-      <button class="run-btn" id="run-btn" onclick="runMatch()">Find My Top Matches</button>
+      <button class="run-btn" id="run-btn" onclick="runMatch()">Find My Top Stallion Matches</button>
     </div>
   </div>
 
-  <!-- RESULTS -->
-  <div id="results-section" style="display:none;">
-    <div class="results-header" id="results-header">Results</div>
-    <div class="cards-grid" id="cards-grid"></div>
+  <div class="loading-bar" id="loading-bar">
+    <span class="loading-dots">Analyzing mare profile and ranking stallions</span>
   </div>
 
-  <div class="empty" id="empty-state">
+  <div id="results-section" style="display:none;">
+    <div class="results-header" id="results-header"></div>
+    <div class="cards-grid" id="cards-grid"></div>
+    <div class="more-wrap" id="more-wrap" style="display:none;">
+      <button class="more-btn" id="more-btn" onclick="showMoreMatches()">Show 3 More Matches</button>
+    </div>
+    <div id="second-row-container"></div>
+  </div>
+
+  <div class="empty-state" id="empty-state">
     <div class="empty-icon">🐴</div>
-    <div class="empty-text">Enter mare details to find matches</div>
+    <div class="empty-text">Enter your mare's details above to find the perfect stallion match</div>
   </div>
 
 </div>
 
+<footer>
+  <div>HorseBreeding.ai &mdash; A public service from <a href="https://www.bridleandbit.com" target="_blank" rel="noopener">Bridle &amp; Bit Magazine</a></div>
+  <div style="margin-top:6px;font-size:0.75rem;opacity:0.6">AI-generated recommendations — verify with Silver Spurs Equine before breeding decisions</div>
+</footer>
+
+
 <script>
+
 // ── STALLION DATA ─────────────────────────────────────────────────────────────
 const STALLIONS = [
   // PREMIUM (The Greats)
@@ -1016,7 +963,7 @@ async function getExplanation(mare, matches) {
 }
 
 // ── BUILD CARD ───────────────────────────────────────────────────────────────
-function buildCard(s, score, explanation, type) {
+function buildCard(s, score, explanation, type, rank) {
   const conf = confidenceLabel(score);
   const fee = fmtFee(s.stud_fee);
   const earnings = fmtEarnings(s);
@@ -1025,40 +972,28 @@ function buildCard(s, score, explanation, type) {
   const card = document.createElement('div');
   card.className = 'match-card';
   card.innerHTML = `
-    <div class="card-tier-bar ${type}">
-      <div class="tier-dot"></div>
-      ${ type==='premium' ? '★ Premium Match' : type==='mid' ? '✓ Best Value Match' : '$ Budget Match' }
+    <div class="card-rank-bar">
+      <span class="card-rank-label">#${rank} Match &mdash; ${score}/100</span>
+      <span class="card-tier-pill ${type}">${s.tier==='premium'?'The Greats':s.tier==='mid'?'Main Roster':'Value'}</span>
     </div>
     <div class="card-body">
-      <div>
-        <div class="score-row">
-          <div class="score-num ${type}">${score}</div>
-          <div class="score-denom">/ 100</div>
-          <div class="confidence-pill ${conf.cls}">${conf.text}</div>
-        </div>
-        <div class="score-bar-wrap">
-          <div class="score-bar-fill ${type}" style="width:${score}%"></div>
-        </div>
+      <div class="card-stallion-name">${s.name}</div>
+      <div class="card-disc">${disc}</div>
+      <div class="card-score-row">
+        <div class="card-score">${score}</div>
+        <div class="card-score-denom">/ 100</div>
+        <div class="card-conf ${conf.cls}">${conf.text}</div>
       </div>
-      <div>
-        <div style="font-size:0.62rem;font-weight:700;color:#0f0c07;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;">${s.tier==='premium'?'The Greats':s.tier==='mid'?'Main Roster':'Value / Jr'}</div>
-        <div class="stallion-name">${s.name}</div>
-        <div class="stallion-disc">${disc}</div>
-      </div>
-      <div class="stat-row">
-        ${earnings ? `<div class="stat-item"><strong>${earnings}</strong></div>` : ''}
-        ${s.performance_summary ? `<div class="stat-item">${s.performance_summary}</div>` : ''}
-        ${s.enrollments?.length ? `<div class="stat-item"><strong>Programs:</strong> ${s.enrollments.slice(0,2).join(', ')}</div>` : ''}
-      </div>
-      <div class="explanation">${explanation}</div>
+      <div class="card-score-bar"><div class="card-score-fill ${type}" style="width:${score}%"></div></div>
+      ${s.performance_summary ? `<div class="card-perf">${s.performance_summary}</div>` : ''}
+      ${earnings ? `<div class="card-fee">Stud Fee: ${fee.text}</div>` : ''}
+      ${s.traits?.length ? `<div class="card-traits">${s.traits.slice(0,5).map(t=>`<span class="card-trait">${t}</span>`).join('')}</div>` : ''}
+      <div class="card-explanation">${explanation}</div>
+      ${s.enrollments?.length ? `<div class="card-programs">Programs: ${s.enrollments.slice(0,3).join(', ')}</div>` : ''}
     </div>
-    <div class="card-fee">
-      <span class="fee-label">2026 Stud Fee</span>
-      <span class="fee-amount ${fee.cls}">${fee.text}</span>
-    </div>
-    <div style="display:flex;gap:6px;padding:10px 14px;border-top:1px solid rgba(15,12,7,0.12);">
-      ${s.slug ? `<a href="./stallions/${s.slug}" onclick="event.stopPropagation()" style="flex:1;display:block;background:#0f0c07;color:#e8dfc8;font-family:monospace;font-size:0.6rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-align:center;padding:8px 4px;text-decoration:none;">Full Profile →</a>` : ''}
-      ${s.source_url ? `<a href="${s.source_url}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="flex:1;display:block;background:#6b3d14;color:#fff;font-family:monospace;font-size:0.6rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-align:center;padding:8px 4px;text-decoration:none;">Book at Station ↗</a>` : ''}
+    <div class="card-actions">
+      ${s.slug ? `<a href="./stallions/${s.slug}" onclick="event.stopPropagation()" class="card-btn primary">Full Profile →</a>` : ''}
+      ${s.source_url ? `<a href="${s.source_url}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="card-btn">Book at Station ↗</a>` : ''}
     </div>`;
   return card;
 }
@@ -1134,8 +1069,11 @@ async function runMatch() {
     const explanations = await getExplanation(mare, allPicks.map(p => p.stallion));
 
     // Render TOP ROW
-    const area = document.getElementById('results-area');
+    const area = document.getElementById('results-section');
     area.innerHTML = '';
+    area.style.display='block';
+    document.getElementById('empty-state').style.display='none';
+    document.getElementById('loading-bar').classList.remove('active');
 
     const grid3 = document.createElement('div');
     grid3.className = 'three-cards';
@@ -1152,53 +1090,41 @@ async function runMatch() {
       const card = document.createElement('div');
       card.className = 'match-card';
       card.innerHTML = `
-    <div class="card-tier-bar ${tierType}">
-      <div class="tier-dot"></div>
-      ${label}
+    <div class="card-rank-bar">
+      <span class="card-rank-label">#${{i+1}} Match &mdash; ${s.score}/100</span>
+      <span class="card-tier-pill ${s.tier}">${s.tier==='premium'?'The Greats':s.tier==='mid'?'Main Roster':'Value'}</span>
     </div>
     <div class="card-body">
-      <div>
-        <div class="score-row">
-          <div class="score-num ${tierType}">${s.score}</div>
-          <div class="score-denom">/ 100</div>
-          <div class="confidence-pill ${confCls}">${conf}</div>
-        </div>
-        <div class="score-bar-wrap"><div class="score-bar-fill ${tierType}" style="width:${s.score}%"></div></div>
+      <div class="card-stallion-name">${s.name}</div>
+      <div class="card-disc">${disc}</div>
+      <div class="card-score-row">
+        <span class="card-score">${s.score}</span>
+        <span class="card-score-denom">/ 100</span>
+        <span class="card-conf ${confCls}">${conf}</span>
       </div>
-      <div>
-        <div style="font-size:0.62rem;font-weight:700;color:#0f0c07;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;">${s.tier==='premium'?'The Greats':s.tier==='mid'?'Main Roster':'Value / Jr'}</div>
-        <div class="stallion-name">${s.name}</div>
-        <div class="stallion-disc">${disc}</div>
-      </div>
-      <div class="stat-row">
-        ${earnings ? `<div class="stat-item"><strong>${earnings}</strong></div>` : ''}
-        ${s.performance_summary ? `<div class="stat-item">${s.performance_summary}</div>` : ''}
-        ${s.enrollments?.length ? `<div class="stat-item"><strong>Programs:</strong> ${s.enrollments.slice(0,2).join(', ')}</div>` : ''}
-      </div>
-      <div class="explanation">${expl}</div>
+      <div class="card-score-bar"><div class="card-score-fill ${s.tier}" style="width:${s.score}%"></div></div>
+      ${s.performance_summary ? `<div class="card-perf">${s.performance_summary}</div>` : ''}
+      ${earnings ? `<div class="card-fee">Stud Fee: ${fee.text}</div>` : ''}
+      ${s.traits?.length ? `<div class="card-traits">${s.traits.slice(0,5).map(t=>`<span class="card-trait">${t}</span>`).join('')}</div>` : ''}
+      <div class="card-explanation">${expl}</div>
+      ${s.enrollments?.length ? `<div class="card-programs">Programs: ${s.enrollments.slice(0,3).join(', ')}</div>` : ''}
     </div>
-    <div class="card-fee">
-      <span class="fee-label">2026 Stud Fee</span>
-      <span class="fee-amount ${fee.cls}">${fee.text}</span>
-    </div>
-    <div style="display:flex;gap:6px;padding:10px 14px;border-top:1px solid rgba(15,12,7,0.12);">
-      ${s.slug ? `<a href="./stallions/${s.slug}" onclick="event.stopPropagation()" style="flex:1;display:block;background:#0f0c07;color:#e8dfc8;font-family:monospace;font-size:0.6rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-align:center;padding:8px 4px;text-decoration:none;">Full Profile →</a>` : ''}
-      ${s.source_url ? `<a href="${s.source_url}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="flex:1;display:block;background:#6b3d14;color:#fff;font-family:monospace;font-size:0.6rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-align:center;padding:8px 4px;text-decoration:none;">Book at Station ↗</a>` : ''}
-    </div>`;
+    <div class="card-actions">
+      ${s.slug ? `<a href="./stallions/${s.slug}" onclick="event.stopPropagation()" class="card-btn primary">Full Profile →</a>` : ''}
+      ${s.source_url ? `<a href="${s.source_url}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="card-btn">Book at Station ↗</a>` : ''}
+    </div>\n    `;
       grid3.appendChild(card);
     });
     area.appendChild(grid3);
 
     // SECOND ROW
     if (altPicks.length > 0) {
-      const moreBtn = document.createElement('button');
-      moreBtn.className = 'more-btn visible';
-      moreBtn.textContent = '▼ Show 3 More Matches';
-      area.appendChild(moreBtn);
+      const moreBtn = document.getElementById('more-btn');
+      document.getElementById('more-wrap').style.display = 'block';
 
       const grid2 = document.createElement('div');
       grid2.className = 'second-row';
-
+      
       altPicks.forEach(({ label, stallion: s }, i) => {
         const expl = explanations[topPicks.length + i] || '—';
         const fee = fmtFee(s.stud_fee);
@@ -1210,46 +1136,40 @@ async function runMatch() {
         const card2 = document.createElement('div');
         card2.className = 'match-card';
         card2.innerHTML = `
-    <div class="card-tier-bar" style="background:#4a3820;color:#d4c9a8;padding:7px 14px 6px;font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:7px;border-bottom:1px solid rgba(15,12,7,0.12);">
-      <div style="width:7px;height:7px;border-radius:50%;background:#d4c9a8;flex-shrink:0;"></div>
-      ${label}
+    <div class="card-rank-bar">
+      <span class="card-rank-label">#${{topPicks.length+i+1}} Match &mdash; ${s.score}/100</span>
+      <span class="card-tier-pill ${s.tier}">${s.tier==='premium'?'The Greats':s.tier==='mid'?'Main Roster':'Value'}</span>
     </div>
     <div class="card-body">
-      <div>
-        <div class="score-row">
-          <div class="score-num" style="color:#7a6040;">${s.score}</div>
-          <div class="score-denom">/ 100</div>
-          <div class="confidence-pill ${confCls}">${conf}</div>
-        </div>
-        <div class="score-bar-wrap"><div class="score-bar-fill" style="width:${s.score}%;background:#7a6040;"></div></div>
+      <div class="card-stallion-name">${s.name}</div>
+      <div class="card-disc">${disc}</div>
+      <div class="card-score-row">
+        <span class="card-score">${s.score}</span>
+        <span class="card-score-denom">/ 100</span>
+        <span class="card-conf ${confCls}">${conf}</span>
       </div>
-      <div>
-        <div style="font-size:0.62rem;font-weight:700;color:#0f0c07;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;">${s.tier==='premium'?'The Greats':s.tier==='mid'?'Main Roster':'Value / Jr'}</div>
-        <div class="stallion-name">${s.name}</div>
-        <div class="stallion-disc">${disc}</div>
-      </div>
-      <div class="stat-row">
-        ${earnings ? `<div class="stat-item"><strong>${earnings}</strong></div>` : ''}
-        ${s.performance_summary ? `<div class="stat-item">${s.performance_summary}</div>` : ''}
-      </div>
-      <div class="explanation">${expl}</div>
+      <div class="card-score-bar"><div class="card-score-fill ${s.tier}" style="width:${s.score}%"></div></div>
+      ${s.performance_summary ? `<div class="card-perf">${s.performance_summary}</div>` : ''}
+      ${earnings ? `<div class="card-fee">Stud Fee: ${fee.text}</div>` : ''}
+      ${s.traits?.length ? `<div class="card-traits">${s.traits.slice(0,5).map(t=>`<span class="card-trait">${t}</span>`).join('')}</div>` : ''}
+      <div class="card-explanation">${expl}</div>
+      ${s.enrollments?.length ? `<div class="card-programs">Programs: ${s.enrollments.slice(0,3).join(', ')}</div>` : ''}
     </div>
-    <div class="card-fee">
-      <span class="fee-label">2026 Stud Fee</span>
-      <span class="fee-amount ${fee.cls}">${fee.text}</span>
-    </div>
-    <div style="display:flex;gap:6px;padding:10px 14px;border-top:1px solid rgba(15,12,7,0.12);">
-      ${s.slug ? `<a href="./stallions/${s.slug}" onclick="event.stopPropagation()" style="flex:1;display:block;background:#0f0c07;color:#e8dfc8;font-family:monospace;font-size:0.6rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-align:center;padding:8px 4px;text-decoration:none;">Full Profile →</a>` : ''}
-      ${s.source_url ? `<a href="${s.source_url}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="flex:1;display:block;background:#6b3d14;color:#fff;font-family:monospace;font-size:0.6rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-align:center;padding:8px 4px;text-decoration:none;">Book at Station ↗</a>` : ''}
-    </div>`;
+    <div class="card-actions">
+      ${s.slug ? `<a href="./stallions/${s.slug}" onclick="event.stopPropagation()" class="card-btn primary">Full Profile →</a>` : ''}
+      ${s.source_url ? `<a href="${s.source_url}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="card-btn">Book at Station ↗</a>` : ''}
+    </div>\n    `;
         grid2.appendChild(card2);
       });
-      area.appendChild(grid2);
+      document.getElementById('second-row-container').appendChild(grid2);
+      document.getElementById('second-row-container').style.display = 'none';
 
+      moreBtn.textContent = 'Show 3 More Matches';
       moreBtn.onclick = () => {
-        const open = grid2.classList.contains('visible');
-        grid2.classList.toggle('visible');
-        moreBtn.textContent = open ? '▼ Show 3 More Matches' : '▲ Hide Additional Matches';
+        const container = document.getElementById('second-row-container');
+        const isHidden = container.style.display === 'none' || container.style.display === '';
+        container.style.display = isHidden ? 'block' : 'none';
+        moreBtn.textContent = isHidden ? 'Hide Additional Matches ▲' : 'Show 3 More Matches ▼';
       };
     }
 
@@ -1266,6 +1186,7 @@ async function runMatch() {
     btn.innerHTML = 'Find My Top Matches';
   }
 }
+
 </script>
 </body>
 </html>
