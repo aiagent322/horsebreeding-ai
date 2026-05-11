@@ -373,6 +373,19 @@ footer a:hover{color:#fff}
         </select>
       </div>
 
+      <div class="form-group">
+        <label class="form-label">Max Stud Fee (Budget Filter)</label>
+        <select id="budget-filter">
+          <option value="any">No limit</option>
+          <option value="1000">Up to $1,000</option>
+          <option value="2000">Up to $2,000</option>
+          <option value="3000">Up to $3,000</option>
+          <option value="5000">Up to $5,000</option>
+          <option value="7500">Up to $7,500</option>
+          <option value="10000">Up to $10,000</option>
+        </select>
+      </div>
+
       <div class="form-group full">
         <label class="form-label">Desired Traits — select all that apply</label>
         <div class="trait-chips" id="trait-chips"></div>
@@ -2987,18 +3000,50 @@ TRAITS.forEach(t => {
 });
 
 // ── DETERMINISTIC SCORER ─────────────────────────────────────────────────────
-function scoreStallion(s, mareDisc, mBlood, mTraits) {
-  let discPts = 0, bloodPts = 0, traitPts = 0;
+function scoreStallion(s, mareDisc, mBlood, mTraits, mareSire) {
+  let discPts = 0, bloodPts = 0, traitPts = 0, sirePts = 0;
 
-  // Discipline (40)
-  const sDisc = (s.discipline||[]).map(d=>d.toLowerCase());
-  if (mareDisc && sDisc.includes(mareDisc.toLowerCase())) discPts = 40;
+  // ── FIX 1: Discipline scoring using disc_strength (40 pts) ──────────────────
+  // Map user-facing discipline values to disc_strength keys
+  const DISC_KEY_MAP = {
+    'reining':           'reining',
+    'reined cow horse':  'cowHorse',
+    'cutting':           'cutting',
+    'ranch':             'ranchRiding',
+    'barrel racing':     'barrelRacing',
+    'team roping':       'teamRoping',
+  };
+  const dsKey = DISC_KEY_MAP[mareDisc] || null;
+  if (dsKey && s.disc_strength && s.disc_strength[dsKey] != null) {
+    // Scale 0-100 disc_strength score to 0-40 pts
+    discPts = Math.round((s.disc_strength[dsKey] / 100) * 40);
+  } else {
+    // Fallback: binary discipline match = 20 pts, no match = 0
+    const sDisc = (s.discipline||[]).map(d=>d.toLowerCase());
+    if (mareDisc && sDisc.some(d => d === dsKey || d === mareDisc.toLowerCase())) {
+      discPts = 20;
+    }
+  }
 
-  // Bloodline compatibility (30)
+  // ── FIX 2: Sire-line compatibility (10 pts bonus) ────────────────────────────
+  if (mareSire) {
+    const sireNorm = mareSire.trim().toLowerCase();
+    const crosses = (s.proven_crosses || '') + ' ' + (s.bloodlines||[]).join(' ');
+    if (crosses.toLowerCase().includes(sireNorm) && sireNorm.length > 3) {
+      sirePts = 10;
+    }
+    // Also check partial match on first word of sire name
+    const sireFirst = sireNorm.split(' ')[0];
+    if (!sirePts && sireFirst.length > 4 && crosses.toLowerCase().includes(sireFirst)) {
+      sirePts = 5;
+    }
+  }
+
+  // ── Bloodline compatibility (25 pts) ─────────────────────────────────────────
   const sBlood = (s.bloodlines||[]).map(b=>b.toLowerCase());
   let compat = 0, conflict = 0;
   sBlood.forEach(sb => {
-    if (mBlood.includes(sb)) { conflict++; return; }
+    if (mBlood.some(mb => mb && sb.includes(mb))) { conflict++; return; }
     const sbC = COMPAT[sb]||[];
     mBlood.forEach(mb => {
       if (sbC.includes(mb)) compat++;
@@ -3007,16 +3052,16 @@ function scoreStallion(s, mareDisc, mBlood, mTraits) {
     });
   });
   compat = Math.min(compat, sBlood.length + mBlood.length);
-  if (sBlood.length === 0 || mBlood.length === 0) bloodPts = 15;
-  else bloodPts = Math.max(0, Math.min(30, compat * 8 - conflict * 10));
+  if (sBlood.length === 0 || mBlood.length === 0) bloodPts = 12;
+  else bloodPts = Math.max(0, Math.min(25, compat * 7 - conflict * 8));
 
-  // Traits (30)
+  // ── Traits (25 pts) ──────────────────────────────────────────────────────────
   const sTraits = (s.traits||[]).map(t=>t.toLowerCase());
   const overlap = sTraits.filter(t => mTraits.has(t)).length;
-  if (mTraits.size > 0) traitPts = Math.min(30, Math.round((overlap / mTraits.size) * 30));
-  else traitPts = 15; // neutral if no traits selected
+  if (mTraits.size > 0) traitPts = Math.min(25, Math.round((overlap / mTraits.size) * 25));
+  else traitPts = 12; // neutral if no traits selected
 
-  return Math.min(100, discPts + bloodPts + traitPts);
+  return Math.min(100, discPts + sirePts + bloodPts + traitPts);
 }
 
 function confidenceLabel(score) {
@@ -3041,7 +3086,7 @@ async function getExplanation(mare, matches) {
   const tierMap = {premium:"Gold", mid:"Silver", value:"Bronze"};
 
   // ── STEP 1: Scoring Extraction Engine ─────────────────────────────────────
-  const EXTRACTOR_SYSTEM = "You are a scoring extraction engine. Your job is to identify and output the exact reasons a stallion was selected for a mare based ONLY on the provided inputs. You do NOT generate new reasoning. You do NOT interpret beyond what is given. You extract and structure what already exists. STRICT RULES: Do NOT invent reasons. Do NOT generalize beyond inputs. Do NOT add outside knowledge. Only use relationships clearly supported by the data. Keep language tight and factual. No fluff, no storytelling. OUTPUT FORMAT: Return ONLY a JSON array of exactly 3 objects, one per stallion, in order. Each object: {stallion: string, tier: string, total_score: number, key_variables: [string, string, string]} where each key_variable is a direct cause of the match, maximum 12 words, no duplicate ideas, prefer correction logic (mare weakness to stallion strength). Return ONLY the JSON array. No commentary.";
+  const EXTRACTOR_SYSTEM = "You are a scoring extraction engine. Your job is to identify and output the exact reasons a stallion was selected for a mare based ONLY on the provided inputs. When a stallion has a disc_strength score for the mare's discipline, prioritize that in your reasoning. Higher disc_strength means stronger genetic production in that specific discipline. You do NOT generate new reasoning. You do NOT interpret beyond what is given. You extract and structure what already exists. STRICT RULES: Do NOT invent reasons. Do NOT generalize beyond inputs. Do NOT add outside knowledge. Only use relationships clearly supported by the data. Keep language tight and factual. No fluff, no storytelling. OUTPUT FORMAT: Return ONLY a JSON array of exactly 3 objects, one per stallion, in order. Each object: {stallion: string, tier: string, total_score: number, key_variables: [string, string, string]} where each key_variable is a direct cause of the match, maximum 12 words, no duplicate ideas, prefer correction logic (mare weakness to stallion strength). Return ONLY the JSON array. No commentary.";
 
   const extractorUser = "Mare Profile:\n" +
     "- Discipline: " + mare.disc + "\n" +
@@ -3059,8 +3104,10 @@ async function getExplanation(mare, matches) {
       const tl = tierMap[m.tier]||m.tier;
       const fee = m.stud_fee===0?"FREE 2026":"$"+m.stud_fee.toLocaleString();
       const off = m.offspring_earnings>0?"$"+m.offspring_earnings.toLocaleString():"N/A";
+      const dsKey = {'reining':'reining','reined cow horse':'cowHorse','cutting':'cutting','ranch':'ranchRiding'}[mare.disc]||null;
+      const dsScore = dsKey && m.disc_strength ? (m.disc_strength[dsKey]||0) : null;
       return (i+1)+". "+m.name+" ("+tl+" tier, score "+m.score+"/100)\n" +
-        "   - Discipline: "+(m.discipline||[]).join(", ")+"\n" +
+        "   - Discipline: "+(m.discipline||[]).join(", ")+(dsScore?" ["+dsKey+" strength: "+dsScore+"/100]":"")+"\n" +
         "   - Show Record: "+m.performance_summary+"\n" +
         "   - Offspring Earnings: "+off+"\n" +
         "   - Known Traits: "+(m.traits||[]).join(", ")+"\n" +
@@ -3208,7 +3255,18 @@ async function runMatch() {
 
   try {
     // Score all stallions
-    const scored = STALLIONS.map(s => ({ ...s, score: scoreStallion(s, mareDisc, mBlood, selectedTraits) }))
+    // ── FIX 3: Budget filter — exclude stallions above max fee ──────────────────
+    const maxFee = (() => {
+      const v = document.getElementById('budget-filter')?.value;
+      return v && v !== 'any' ? parseInt(v) : null;
+    })();
+
+    // ── FIX 2: Extract mare's sire for compatibility scoring ────────────────────
+    const mareSire = document.getElementById('mare-blood').value.split(',')[0].trim();
+
+    const scored = STALLIONS
+      .filter(s => !maxFee || s.stud_fee === null || s.stud_fee <= maxFee)
+      .map(s => ({ ...s, score: scoreStallion(s, mareDisc, mBlood, selectedTraits, mareSire) }))
                              .sort((a,b) => b.score - a.score);
 
     // TOP ROW — best per tier
