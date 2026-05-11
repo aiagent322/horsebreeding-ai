@@ -235,6 +235,39 @@ footer a:hover{color:#fff}
 .station-chip{background:transparent;border:1.5px solid var(--primary);color:var(--primary);border-radius:20px;padding:5px 14px;font-size:0.78rem;font-weight:700;cursor:pointer;transition:background 0.15s,color 0.15s;touch-action:manipulation;min-height:36px}
 .station-chip.active,.station-chip:hover{background:var(--primary);color:#fff}
 .card-fee.contact{color:var(--gold);font-style:italic}
+
+/* ── Stallion Profile Page ───────────────────────────────── */
+#profile-page{display:none;max-width:860px;margin:0 auto;padding:24px 16px 60px}
+#profile-page.active{display:block}
+.matchmaker-wrap.hidden{display:none}
+.prof-back{display:inline-flex;align-items:center;gap:6px;font-size:0.82rem;font-weight:700;color:var(--primary);text-decoration:none;margin-bottom:20px;padding:6px 0;cursor:pointer}
+.prof-back:hover{opacity:0.7}
+.prof-header{background:var(--primary);border-radius:12px;padding:24px 20px;color:#fff;margin-bottom:20px}
+.prof-name{font-size:1.6rem;font-weight:900;line-height:1.1;margin-bottom:4px}
+.prof-station{font-size:0.82rem;opacity:0.8;margin-bottom:12px}
+.prof-badges{display:flex;flex-wrap:wrap;gap:8px}
+.prof-badge{background:rgba(255,255,255,0.15);border-radius:20px;padding:4px 12px;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px}
+.prof-badge.premium{background:var(--gold);color:#000}
+.prof-badge.mid{background:rgba(255,255,255,0.25)}
+.prof-badge.budget{background:rgba(255,255,255,0.12)}
+.prof-grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:600px){.prof-grid{grid-template-columns:1fr 1fr}}
+.prof-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px}
+.prof-card-title{font-size:0.72rem;font-weight:800;color:var(--text-mid);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:10px}
+.prof-stat{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px solid var(--border)}
+.prof-stat:last-child{border-bottom:none}
+.prof-stat-label{font-size:0.78rem;color:var(--text-mid)}
+.prof-stat-val{font-size:0.88rem;font-weight:700;color:var(--text-dark);text-align:right;max-width:60%}
+.prof-desc{background:#f8f9fa;border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:14px 16px;font-size:0.88rem;line-height:1.6;color:var(--text-dark);margin-bottom:16px}
+.prof-pill-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.prof-pill{background:var(--primary-light);color:#fff;border-radius:14px;padding:3px 11px;font-size:0.72rem;font-weight:600}
+.prof-pill.trait{background:var(--gold);color:#000}
+.prof-disc-bar{margin-bottom:10px}
+.prof-disc-bar-label{display:flex;justify-content:space-between;font-size:0.75rem;margin-bottom:3px}
+.prof-disc-bar-track{background:var(--border);border-radius:4px;height:8px;overflow:hidden}
+.prof-disc-bar-fill{height:100%;border-radius:4px;background:var(--primary);transition:width 0.4s}
+.prof-source-btn{display:inline-block;background:var(--primary);color:#fff;border-radius:8px;padding:10px 20px;font-size:0.85rem;font-weight:700;text-decoration:none;margin-top:16px;touch-action:manipulation}
+.prof-source-btn:hover{opacity:0.85}
 </style>
 </head>
 <body>
@@ -260,10 +293,11 @@ footer a:hover{color:#fff}
   </nav>
 </header>
 
+<div class="matchmaker-wrap" id="matchmaker-wrap">
 <section class="hero">
   <div class="hero-inner">
     <h1>AI Stallion Matchmaker — Western Performance Breeding</h1>
-    <p class="hero-sub">Enter your mare's profile and get AI-ranked recommendations from 28 top Silver Spurs Equine stallions across reining, reined cow horse, cutting, and ranch disciplines.</p>
+    <p class="hero-sub">Enter your mare's profile and get AI-ranked recommendations from 133 stallions across Valley Equine, 6666 Ranch, Oswood, and Silver Spurs — reining, cutting, cow horse, barrel racing, team roping, and ranch.</p>
     <div class="hero-btns">
       <a href="#matchmaker" class="hero-btn">&#x1F50D; Find Matches</a>
       <a href="/stallions/" class="hero-btn">Browse Stallions</a>
@@ -438,6 +472,14 @@ footer a:hover{color:#fff}
 
 </div>
 
+
+<!-- ── Stallion Profile Page ──────────────────────────────────── -->
+<div id="profile-page">
+  <button class="prof-back" onclick="closeProfile()">&#8592; Back to Matchmaker</button>
+  <div id="profile-content"></div>
+</div>
+
+</div><!-- /matchmaker-wrap -->
 <footer>
   <div>HorseBreeding.ai &mdash; A public service from <a href="https://www.bridleandbit.com" target="_blank" rel="noopener">Bridle &amp; Bit Magazine</a></div>
   <div style="margin-top:6px;font-size:0.75rem;opacity:0.6">AI-generated recommendations — verify with Silver Spurs Equine before breeding decisions</div>
@@ -3230,7 +3272,7 @@ function buildCard(s, score, explanation, type, rank) {
       <span class="card-tier-pill ${type}">${s.tier==='premium'?'The Greats':s.tier==='mid'?'Main Roster':'Value'}</span>
     </div>
     <div class="card-body">
-      <div class="card-stallion-name">${s.name}</div>
+      <div class="card-stallion-name"><a href="#" onclick="event.preventDefault();openProfile('${s.slug}')" style="color:inherit;text-decoration:none;">${s.name}</a></div>
       <div class="card-disc">${disc}</div>
       <div class="card-station" style="font-size:0.7rem;color:var(--text-mid);margin-top:1px;">${s.station||''}</div>
       <div class="card-score-row">
@@ -3362,7 +3404,7 @@ async function runMatch() {
       <span class="card-tier-pill ${s.tier}">${s.tier==='premium'?'The Greats':s.tier==='mid'?'Main Roster':'Value'}</span>
     </div>
     <div class="card-body">
-      <div class="card-stallion-name">${s.name}</div>
+      <div class="card-stallion-name"><a href="#" onclick="event.preventDefault();openProfile('${s.slug}')" style="color:inherit;text-decoration:none;">${s.name}</a></div>
       <div class="card-disc">${disc}</div>
       <div class="card-station" style="font-size:0.7rem;color:var(--text-mid);margin-top:1px;">${s.station||''}</div>
       <div class="card-score-row">
@@ -3410,7 +3452,7 @@ async function runMatch() {
       <span class="card-tier-pill ${s.tier}">${s.tier==='premium'?'The Greats':s.tier==='mid'?'Main Roster':'Value'}</span>
     </div>
     <div class="card-body">
-      <div class="card-stallion-name">${s.name}</div>
+      <div class="card-stallion-name"><a href="#" onclick="event.preventDefault();openProfile('${s.slug}')" style="color:inherit;text-decoration:none;">${s.name}</a></div>
       <div class="card-disc">${disc}</div>
       <div class="card-station" style="font-size:0.7rem;color:var(--text-mid);margin-top:1px;">${s.station||''}</div>
       <div class="card-score-row">
@@ -3456,6 +3498,149 @@ async function runMatch() {
     btn.disabled = false;
     btn.innerHTML = 'Find My Top Matches';
   }
+}
+
+
+// ── Stallion Profile Pages ──────────────────────────────────────────────────
+const DISC_LABELS = {
+  reining: 'Reining', cutting: 'Cutting', cowHorse: 'Reined Cow Horse',
+  barrelRacing: 'Barrel Racing', teamRoping: 'Team Roping', ranchRiding: 'Ranch Riding'
+};
+
+function openProfile(slug) {
+  const s = STALLIONS.find(x => x.slug === slug);
+  if (!s) return;
+  document.getElementById('profile-content').innerHTML = renderProfile(s);
+  document.getElementById('profile-page').classList.add('active');
+  document.getElementById('matchmaker-wrap').classList.add('hidden');
+  window.scrollTo(0, 0);
+  history.pushState({ profile: slug }, '', '#/stallion/' + slug);
+}
+
+function closeProfile() {
+  document.getElementById('profile-page').classList.remove('active');
+  document.getElementById('matchmaker-wrap').classList.remove('hidden');
+  history.pushState({}, '', '/');
+  window.scrollTo(0, 0);
+}
+
+window.addEventListener('popstate', function(e) {
+  const hash = window.location.hash;
+  if (hash.startsWith('#/stallion/')) {
+    const slug = hash.replace('#/stallion/', '');
+    const s = STALLIONS.find(x => x.slug === slug);
+    if (s) {
+      document.getElementById('profile-content').innerHTML = renderProfile(s);
+      document.getElementById('profile-page').classList.add('active');
+      document.getElementById('matchmaker-wrap').classList.add('hidden');
+      window.scrollTo(0, 0);
+    }
+  } else {
+    document.getElementById('profile-page').classList.remove('active');
+    document.getElementById('matchmaker-wrap').classList.remove('hidden');
+  }
+});
+
+// Check hash on load (direct link support)
+(function() {
+  const hash = window.location.hash;
+  if (hash.startsWith('#/stallion/')) {
+    const slug = hash.replace('#/stallion/', '');
+    const s = STALLIONS.find(x => x.slug === slug);
+    if (s) {
+      document.addEventListener('DOMContentLoaded', function() {
+        openProfile(slug);
+      });
+    }
+  }
+})();
+
+function renderProfile(s) {
+  const feeText = s.stud_fee ? '$' + s.stud_fee.toLocaleString() : 'Contact ' + (s.station || 'Station');
+  const lte  = s.lifetime_earnings  ? '$' + s.lifetime_earnings.toLocaleString()  : '—';
+  const oe   = s.offspring_earnings ? '$' + (s.offspring_earnings >= 1000000
+      ? (s.offspring_earnings / 1000000).toFixed(1) + 'M+' 
+      : s.offspring_earnings.toLocaleString()) : '—';
+  const tierLabel = { premium: 'Premium', mid: 'Mid-Tier', budget: 'Budget' }[s.tier] || s.tier;
+
+  // Discipline strength bars
+  const discBars = Object.entries(s.disc_strength || {})
+    .sort((a, b) => b[1] - a[1])
+    .map(([key, val]) => `
+      <div class="prof-disc-bar">
+        <div class="prof-disc-bar-label">
+          <span>${DISC_LABELS[key] || key}</span>
+          <span>${val}/100</span>
+        </div>
+        <div class="prof-disc-bar-track">
+          <div class="prof-disc-bar-fill" style="width:${val}%"></div>
+        </div>
+      </div>`).join('');
+
+  // Bloodlines pills
+  const bloodPills = (s.bloodlines || []).map(b =>
+    `<span class="prof-pill">${b}</span>`).join('');
+
+  // Trait pills
+  const traitPills = (s.traits || []).map(t =>
+    `<span class="prof-pill trait">${t}</span>`).join('');
+
+  // Enrollment pills
+  const enrollPills = (s.enrollments || []).map(e =>
+    `<span class="prof-pill">${e}</span>`).join('');
+
+  // Disciplines list
+  const discList = (s.discipline || []).map(d => DISC_LABELS[d] || d).join(', ');
+
+  return `
+    <div class="prof-header">
+      <div class="prof-name">${s.name}</div>
+      <div class="prof-station">${s.station || ''}</div>
+      <div class="prof-badges">
+        <span class="prof-badge ${s.tier}">${tierLabel}</span>
+        ${discList ? `<span class="prof-badge">${discList}</span>` : ''}
+        ${s.stud_fee ? `<span class="prof-badge">2026 Fee: ${feeText}</span>` : `<span class="prof-badge">${feeText}</span>`}
+      </div>
+    </div>
+
+    ${s.description ? `<div class="prof-desc">${s.description}</div>` : ''}
+
+    <div class="prof-grid">
+
+      <div class="prof-card">
+        <div class="prof-card-title">Earnings</div>
+        <div class="prof-stat"><span class="prof-stat-label">Lifetime Earnings</span><span class="prof-stat-val">${lte}</span></div>
+        <div class="prof-stat"><span class="prof-stat-label">Offspring Earnings</span><span class="prof-stat-val">${oe}</span></div>
+        <div class="prof-stat"><span class="prof-stat-label">2026 Stud Fee</span><span class="prof-stat-val">${feeText}</span></div>
+      </div>
+
+      <div class="prof-card">
+        <div class="prof-card-title">Bloodlines</div>
+        <div class="prof-pill-list">${bloodPills || '<span style="font-size:0.8rem;color:var(--text-mid)">—</span>'}</div>
+      </div>
+
+      ${discBars ? `
+      <div class="prof-card" style="grid-column:1/-1">
+        <div class="prof-card-title">Discipline Strength</div>
+        ${discBars}
+      </div>` : ''}
+
+      ${traitPills ? `
+      <div class="prof-card">
+        <div class="prof-card-title">Key Traits</div>
+        <div class="prof-pill-list">${traitPills}</div>
+      </div>` : ''}
+
+      ${enrollPills ? `
+      <div class="prof-card">
+        <div class="prof-card-title">Incentive Programs</div>
+        <div class="prof-pill-list">${enrollPills}</div>
+      </div>` : ''}
+
+    </div>
+
+    ${s.source_url ? `<a href="${s.source_url}" target="_blank" rel="noopener noreferrer" class="prof-source-btn">View Station Profile &#8599;</a>` : ''}
+  `;
 }
 
 </script>
