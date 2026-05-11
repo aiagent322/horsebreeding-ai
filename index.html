@@ -231,6 +231,10 @@ img{max-width:100%;height:auto;display:block}
 footer{background:var(--primary);color:rgba(255,255,255,0.6);text-align:center;padding:24px 16px;font-size:0.82rem;margin-top:40px}
 footer a{color:rgba(255,255,255,0.75);text-decoration:none}
 footer a:hover{color:#fff}
+
+.station-chip{background:transparent;border:1.5px solid var(--primary);color:var(--primary);border-radius:20px;padding:5px 14px;font-size:0.78rem;font-weight:700;cursor:pointer;transition:background 0.15s,color 0.15s;touch-action:manipulation;min-height:36px}
+.station-chip.active,.station-chip:hover{background:var(--primary);color:#fff}
+.card-fee.contact{color:var(--gold);font-style:italic}
 </style>
 </head>
 <body>
@@ -271,10 +275,10 @@ footer a:hover{color:#fff}
 
 <div class="stats-bar">
   <div class="stats-inner">
-    <div class="stat-item"><div class="stat-num">28</div><div class="stat-label">Stallions</div></div>
-    <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">Disciplines</div></div>
+    <div class="stat-item"><div class="stat-num">133</div><div class="stat-label">Stallions</div></div>
+    <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">Stations</div></div>
+    <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">Disciplines</div></div>
     <div class="stat-item"><div class="stat-num">AI</div><div class="stat-label">Powered</div></div>
-    <div class="stat-item"><div class="stat-num">Free</div><div class="stat-label">To Use</div></div>
   </div>
 </div>
 
@@ -284,7 +288,18 @@ footer a:hover{color:#fff}
 
   <div class="form-card">
     <div class="form-title">Enter Mare Details</div>
-    <div class="form-grid">
+    <div class="station-filter-row" style="margin-bottom:16px;">
+        <div style="font-size:0.75rem;font-weight:700;color:var(--text-mid);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">Filter by Station</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <button type="button" class="station-chip active" onclick="setStation(this,'all')">All Stations</button>
+          <button type="button" class="station-chip" onclick="setStation(this,'Valley Equine')">Valley Equine</button>
+          <button type="button" class="station-chip" onclick="setStation(this,'6666 Ranch')">6666 Ranch</button>
+          <button type="button" class="station-chip" onclick="setStation(this,'Oswood Stallion Station')">Oswood</button>
+          <button type="button" class="station-chip" onclick="setStation(this,'Silver Spurs Equine')">Silver Spurs</button>
+        </div>
+      </div>
+
+      <div class="form-grid">
 
       <div class="form-group">
         <label class="form-label">Discipline</label>
@@ -3064,14 +3079,22 @@ function scoreStallion(s, mareDisc, mBlood, mTraits, mareSire) {
   return Math.min(100, discPts + sirePts + bloodPts + traitPts);
 }
 
+let activeStation = 'all';
+function setStation(el, station) {
+  activeStation = station;
+  document.querySelectorAll('.station-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+}
+
 function confidenceLabel(score) {
   if (score >= 75) return { text: 'High Confidence', cls: 'high' };
   if (score >= 55) return { text: 'Good Match', cls: 'medium' };
   return { text: 'Moderate', cls: 'low' };
 }
 
-function fmtFee(fee) {
+function fmtFee(fee, station) {
   if (fee === 0) return { text: 'FREE', cls: 'free' };
+  if (!fee) return { text: 'Contact ' + (station || 'Station'), cls: 'contact' };
   return { text: '$' + fee.toLocaleString(), cls: '' };
 }
 
@@ -3195,7 +3218,7 @@ async function getExplanation(mare, matches) {
 // ── BUILD CARD ───────────────────────────────────────────────────────────────
 function buildCard(s, score, explanation, type, rank) {
   const conf = confidenceLabel(score);
-  const fee = fmtFee(s.stud_fee);
+  const fee = fmtFee(s.stud_fee, s.station);
   const earnings = fmtEarnings(s);
   const disc = (s.discipline||[]).join(' / ');
 
@@ -3209,6 +3232,7 @@ function buildCard(s, score, explanation, type, rank) {
     <div class="card-body">
       <div class="card-stallion-name">${s.name}</div>
       <div class="card-disc">${disc}</div>
+      <div class="card-station" style="font-size:0.7rem;color:var(--text-mid);margin-top:1px;">${s.station||''}</div>
       <div class="card-score-row">
         <div class="card-score">${score}</div>
         <div class="card-score-denom">/ 100</div>
@@ -3217,7 +3241,7 @@ function buildCard(s, score, explanation, type, rank) {
       <div class="card-score-bar"><div class="card-score-fill ${type}" style="width:${score}%"></div></div>
       ${s.performance_summary ? `<div class="card-perf">${s.performance_summary}</div>` : ''}
       ${s.description ? `<div class="card-summary" style="font-size:0.78rem;font-style:italic;color:var(--text-mid);margin-top:2px;">${s.description}</div>` : ''}
-      ${earnings ? `<div class="card-fee">Stud Fee: ${fee.text}</div>` : ''}
+      <div class="card-fee ${fee.cls==="contact"?'contact':''}">Stud Fee: ${fee.text}</div>
       ${s.traits?.length ? `<div class="card-traits">${s.traits.slice(0,5).map(t=>`<span class="card-trait">${t}</span>`).join('')}</div>` : ''}
       <div class="card-explanation">${explanation}</div>
       ${s.enrollments?.length ? `<div class="card-programs">Programs: ${s.enrollments.slice(0,3).join(', ')}</div>` : ''}
@@ -3266,6 +3290,7 @@ async function runMatch() {
 
     const scored = STALLIONS
       .filter(s => !maxFee || s.stud_fee === null || s.stud_fee <= maxFee)
+      .filter(s => activeStation === 'all' || s.station === activeStation)
       .map(s => ({ ...s, score: scoreStallion(s, mareDisc, mBlood, selectedTraits, mareSire) }))
                              .sort((a,b) => b.score - a.score);
 
@@ -3322,7 +3347,7 @@ async function runMatch() {
 
     topPicks.forEach(({ type, label, stallion: s }, i) => {
       const expl = explanations[i] || '—';
-      const fee = fmtFee(s.stud_fee);
+      const fee = fmtFee(s.stud_fee, s.station);
       const earnings = fmtEarnings(s);
       const disc = (s.discipline||[]).join(' / ');
       const conf = s.score>=75?'High Confidence':s.score>=55?'Good Match':'Moderate';
@@ -3339,6 +3364,7 @@ async function runMatch() {
     <div class="card-body">
       <div class="card-stallion-name">${s.name}</div>
       <div class="card-disc">${disc}</div>
+      <div class="card-station" style="font-size:0.7rem;color:var(--text-mid);margin-top:1px;">${s.station||''}</div>
       <div class="card-score-row">
         <span class="card-score">${s.score}</span>
         <span class="card-score-denom">/ 100</span>
@@ -3347,7 +3373,7 @@ async function runMatch() {
       <div class="card-score-bar"><div class="card-score-fill ${s.tier}" style="width:${s.score}%"></div></div>
       ${s.performance_summary ? `<div class="card-perf">${s.performance_summary}</div>` : ''}
       ${s.description ? `<div class="card-summary" style="font-size:0.78rem;font-style:italic;color:var(--text-mid);margin-top:2px;">${s.description}</div>` : ''}
-      ${earnings ? `<div class="card-fee">Stud Fee: ${fee.text}</div>` : ''}
+      <div class="card-fee ${fee.cls==="contact"?'contact':''}">Stud Fee: ${fee.text}</div>
       ${s.traits?.length ? `<div class="card-traits">${s.traits.slice(0,5).map(t=>`<span class="card-trait">${t}</span>`).join('')}</div>` : ''}
       <div class="card-explanation">${expl}</div>
       ${s.enrollments?.length ? `<div class="card-programs">Programs: ${s.enrollments.slice(0,3).join(', ')}</div>` : ''}
@@ -3370,7 +3396,7 @@ async function runMatch() {
       
       altPicks.forEach(({ label, stallion: s }, i) => {
         const expl = explanations[topPicks.length + i] || '—';
-        const fee = fmtFee(s.stud_fee);
+        const fee = fmtFee(s.stud_fee, s.station);
         const earnings = fmtEarnings(s);
         const disc = (s.discipline||[]).join(' / ');
         const conf = s.score>=75?'High Confidence':s.score>=55?'Good Match':'Moderate';
@@ -3386,6 +3412,7 @@ async function runMatch() {
     <div class="card-body">
       <div class="card-stallion-name">${s.name}</div>
       <div class="card-disc">${disc}</div>
+      <div class="card-station" style="font-size:0.7rem;color:var(--text-mid);margin-top:1px;">${s.station||''}</div>
       <div class="card-score-row">
         <span class="card-score">${s.score}</span>
         <span class="card-score-denom">/ 100</span>
@@ -3394,7 +3421,7 @@ async function runMatch() {
       <div class="card-score-bar"><div class="card-score-fill ${s.tier}" style="width:${s.score}%"></div></div>
       ${s.performance_summary ? `<div class="card-perf">${s.performance_summary}</div>` : ''}
       ${s.description ? `<div class="card-summary" style="font-size:0.78rem;font-style:italic;color:var(--text-mid);margin-top:2px;">${s.description}</div>` : ''}
-      ${earnings ? `<div class="card-fee">Stud Fee: ${fee.text}</div>` : ''}
+      <div class="card-fee ${fee.cls==="contact"?'contact':''}">Stud Fee: ${fee.text}</div>
       ${s.traits?.length ? `<div class="card-traits">${s.traits.slice(0,5).map(t=>`<span class="card-trait">${t}</span>`).join('')}</div>` : ''}
       <div class="card-explanation">${expl}</div>
       ${s.enrollments?.length ? `<div class="card-programs">Programs: ${s.enrollments.slice(0,3).join(', ')}</div>` : ''}
