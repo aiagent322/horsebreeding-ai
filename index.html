@@ -3206,7 +3206,7 @@ async function getExplanation(mare, matches) {
   } catch(e) { console.warn("Extractor fallback:", e); }
 
   // ── STEP 2: Elite Breeding Analyst ────────────────────────────────────────
-  const ANALYST_SYSTEM = "You are an elite equine breeding analyst specializing in Western performance horses. Your job is to convert structured scoring factors into a clear, confident, and commercially persuasive explanation of why a stallion is a strong match for a mare. CRITICAL CONSTRAINT: You MUST ONLY use the provided key_variables. You are not allowed to introduce new reasoning, traits, or assumptions. Every claim must trace back to a key_variable. Do NOT introduce new traits, performance claims, or pedigree insights. Do NOT expand beyond what is explicitly supported. Rephrase and connect variables — do not invent. Output rules: no bullet points, no line breaks, no fluff, no disclaimers, no uncertainty language (may/might/could), no guarantees, no diagnosis language. Stallion name must be used at least once. Tone: confident, expert, decisive. Structure per paragraph: (1) open with direct statement of strong fit, (2) address mare weaknesses using key_variables with cause-to-effect language, (3) reinforce with stallion strengths from key_variables, (4) reference discipline alignment only if present in key_variables, (5) close with tier-based positioning — Bronze: value and upside; Silver: balance and efficiency; Gold: proven reliability and elite performance. Style: convert short factors into natural language, combine related variables into fluid sentences, keep it grounded and believable to experienced horsemen. Return ONLY a JSON array of exactly 3 strings, each 120-160 words. No text outside the JSON array.";
+  const ANALYST_SYSTEM = "You are an elite equine breeding analyst specializing in Western performance horses. Your job is to produce clear, confident, commercially persuasive explanations of why each stallion is a strong match for a specific mare. SCORING CONTEXT: Each stallion was ranked using four factors — (1) disc_strength: a 0-100 score measuring how strongly the stallion produces in the mare's specific discipline (the primary driver — a stallion with disc_strength 90+ in the mare's discipline is a fundamentally better match than one at 50 even if other scores are similar); (2) sire-line compatibility: bonus points when the mare's sire appears in the stallion's proven crosses, indicating documented nick success; (3) bloodline compatibility: cross-analysis of bloodline clusters for genetic diversity and proven performance nicks; (4) trait overlap: alignment between stallion's known traits and desired traits. CRITICAL CONSTRAINT: You MUST ONLY use the provided key_variables and stallion data. Do NOT introduce new reasoning or assumptions. Every claim must trace back to the data given. Do NOT invent traits, performance claims, or pedigree insights not in the inputs. Output rules: no bullet points, no line breaks, no fluff, no disclaimers, no uncertainty language (may/might/could), no guarantees. Stallion name must be used at least once. Tone: confident, expert, decisive. Structure per paragraph: (1) open with direct statement of fit grounded in disc_strength or sire-line match if present; (2) address mare weaknesses using key_variables with cause-to-effect language; (3) reinforce with stallion strengths; (4) reference discipline alignment and disc_strength score if provided; (5) close with tier-based positioning — Budget: value and upside; Mid: balance and efficiency; Premium: proven reliability and elite performance. Style: convert short factors into natural language, combine related variables into fluid sentences, keep it grounded and believable to experienced horsemen. Return ONLY a JSON array of exactly 3 strings, each 120-160 words. No text outside the JSON array.";
 
   const analystUser = "Mare Profile:\n" +
     "- Discipline: " + mare.disc + "\n" +
@@ -3223,16 +3223,26 @@ async function getExplanation(mare, matches) {
     matches.map((m,i) => {
       const kv = keyVariables[i] || {};
       const tl = tierMap[m.tier]||m.tier;
-      const fee = m.stud_fee===0?"FREE 2026":"$"+m.stud_fee.toLocaleString();
+      const fee = m.stud_fee ? "$"+m.stud_fee.toLocaleString() : "Contact "+( m.station||"Station");
       const off = m.offspring_earnings>0?"$"+m.offspring_earnings.toLocaleString():"N/A";
       const vars = (kv.key_variables||[]).join("; ");
+      // Discipline strength for mare's discipline
+      const DISC_KEY_MAP = {"reining":"reining","reined cow horse":"cowHorse","cutting":"cutting","ranch":"ranchRiding","barrel racing":"barrelRacing","team roping":"teamRoping"};
+      const dsKey = DISC_KEY_MAP[mare.disc]||null;
+      const dsScore = dsKey && m.disc_strength ? (m.disc_strength[dsKey]||null) : null;
+      // Sire-line match detection
+      const mareSireFirst = (mare.blood||"").split(",")[0].trim().toLowerCase();
+      const crossesText = (m.bloodlines||[]).join(" ").toLowerCase();
+      const sireMatch = mareSireFirst.length > 3 && crossesText.includes(mareSireFirst);
       return (i+1)+". "+m.name+" ("+tl+" tier, score "+m.score+"/100)\n" +
         "   - Key Matching Variables: "+vars+"\n" +
-        "   - Discipline: "+(m.discipline||[]).join(", ")+"\n" +
+        "   - Discipline: "+(m.discipline||[]).join(", ")+(dsScore?" [disc_strength "+dsKey+": "+dsScore+"/100]":"")+"\n" +
+        (sireMatch ? "   - Sire-Line Match: mare sire '"+mareSireFirst+"' found in stallion proven crosses — documented nick\n" : "") +
         "   - Show Record: "+m.performance_summary+"\n" +
         "   - Offspring Earnings: "+off+"\n" +
         "   - Known Traits: "+(m.traits||[]).join(", ")+"\n" +
         "   - Bloodlines: "+(m.bloodlines||[]).join(", ")+"\n" +
+        "   - Station: "+(m.station||"")+"\n" +
         "   - Stud Fee: "+fee;
     }).join("\n\n") +
     "\n\nWrite one paragraph per stallion. Return ONLY a JSON array of " + matches.length + " strings, one per stallion in order.";
