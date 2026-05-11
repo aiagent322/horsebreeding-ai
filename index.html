@@ -268,6 +268,17 @@ footer a:hover{color:#fff}
 .prof-disc-bar-fill{height:100%;border-radius:4px;background:var(--primary);transition:width 0.4s}
 .prof-source-btn{display:inline-block;background:var(--primary);color:#fff;border-radius:8px;padding:10px 20px;font-size:0.85rem;font-weight:700;text-decoration:none;margin-top:16px;touch-action:manipulation}
 .prof-source-btn:hover{opacity:0.85}
+
+.prof-similar{margin-top:28px}
+.prof-similar-title{font-size:0.78rem;font-weight:800;color:var(--text-mid);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:12px}
+.prof-similar-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:600px){.prof-similar-grid{grid-template-columns:repeat(4,1fr)}}
+.prof-sim-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px;cursor:pointer;transition:border-color 0.15s,box-shadow 0.15s;text-decoration:none;display:block;touch-action:manipulation}
+.prof-sim-card:hover{border-color:var(--primary);box-shadow:0 2px 8px rgba(11,60,93,0.1)}
+.prof-sim-name{font-size:0.82rem;font-weight:800;color:var(--primary);line-height:1.2;margin-bottom:3px}
+.prof-sim-station{font-size:0.7rem;color:var(--text-mid);margin-bottom:4px}
+.prof-sim-disc{font-size:0.7rem;color:var(--text-mid);font-style:italic}
+.prof-sim-fee{font-size:0.75rem;font-weight:700;color:var(--gold);margin-top:4px}
 </style>
 </head>
 <body>
@@ -3704,6 +3715,54 @@ window.addEventListener('popstate', function(e) {
   }
 })();
 
+
+// ── Similar Stallions ────────────────────────────────────────────────────────
+function getSimilarStallions(s, n) {
+  n = n || 4;
+  const scored = STALLIONS
+    .filter(x => x.slug !== s.slug)
+    .map(x => {
+      let score = 0;
+
+      // Shared disciplines (strongest signal)
+      const sDisciplines = new Set(s.discipline || []);
+      const xDisciplines = (x.discipline || []);
+      const sharedDisc = xDisciplines.filter(d => sDisciplines.has(d)).length;
+      score += sharedDisc * 4;
+
+      // Same bloodline cluster (genetics_sire match in bloodlines)
+      const sSire = (s.bloodlines || [])[0] || '';
+      const xSire = (x.bloodlines || [])[0] || '';
+      if (sSire && xSire && sSire === xSire) score += 5;
+
+      // Shared proven crosses
+      const sCrosses = new Set((s.proven_crosses || []).map(c => c.toLowerCase()));
+      const xCrosses = (x.proven_crosses || []).map(c => c.toLowerCase());
+      const sharedCrosses = xCrosses.filter(c => sCrosses.has(c)).length;
+      score += sharedCrosses * 3;
+
+      // Same tier
+      if (x.tier === s.tier) score += 2;
+
+      // Similar disc_strength profile — compare top discipline
+      if (s.disc_strength && x.disc_strength) {
+        const sTop = Object.entries(s.disc_strength).sort((a,b) => b[1]-a[1])[0];
+        const xTop = Object.entries(x.disc_strength).sort((a,b) => b[1]-a[1])[0];
+        if (sTop && xTop && sTop[0] === xTop[0]) score += 3;
+      }
+
+      // Slight station preference (breeders often use same station)
+      if (x.station === s.station) score += 1;
+
+      return { stallion: x, score };
+    })
+    .filter(x => x.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, n);
+
+  return scored.map(x => x.stallion);
+}
+
 function renderProfile(s) {
   const feeText = s.stud_fee ? '$' + s.stud_fee.toLocaleString() : 'Contact ' + (s.station || 'Station');
   const lte  = s.lifetime_earnings  ? '$' + s.lifetime_earnings.toLocaleString()  : '—';
@@ -3789,6 +3848,25 @@ function renderProfile(s) {
     </div>
 
     ${s.source_url ? `<a href="${s.source_url}" target="_blank" rel="noopener noreferrer" class="prof-source-btn">View Station Profile &#8599;</a>` : ''}
+
+    ${(() => {
+      const similar = getSimilarStallions(s, 4);
+      if (!similar.length) return '';
+      const cards = similar.map(sim => {
+        const simFee = sim.stud_fee ? '$' + sim.stud_fee.toLocaleString() : 'Contact Station';
+        const simDisc = (sim.discipline || []).map(d => DISC_LABELS[d]||d).join(', ');
+        return '<a class="prof-sim-card" href="#" onclick="event.preventDefault();openProfile(\'' + sim.slug + '\')">'
+          + '<div class="prof-sim-name">' + sim.name + '</div>'
+          + '<div class="prof-sim-station">' + (sim.station||'') + '</div>'
+          + '<div class="prof-sim-disc">' + simDisc + '</div>'
+          + '<div class="prof-sim-fee">' + simFee + '</div>'
+          + '</a>';
+      }).join('');
+      return '<div class="prof-similar">'
+        + '<div class="prof-similar-title">Similar Stallions</div>'
+        + '<div class="prof-similar-grid">' + cards + '</div>'
+        + '</div>';
+    })()}
   `;
 }
 
