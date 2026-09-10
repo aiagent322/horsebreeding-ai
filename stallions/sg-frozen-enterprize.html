@@ -371,21 +371,45 @@
 </footer>
 
 <script>
-function submitForm(e) {
+async function submitForm(e) {
   e.preventDefault();
-  const data = {
-    stallion: "SG Frozen Enterprize",
-    name: document.getElementById('f-name').value,
-    email: document.getElementById('f-email').value,
-    phone: document.getElementById('f-phone').value,
-    discipline: document.getElementById('f-disc').value,
-    method: document.getElementById('f-method').value,
-    notes: document.getElementById('f-notes').value,
-    ts: new Date().toISOString()
+  const form = document.getElementById('lead-form');
+  const btn = form.querySelector('button[type="submit"]');
+  const val = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
+  const stallion = "SG Frozen Enterprize";
+  const lines = ['Breeding inquiry: ' + stallion, 'Page: ' + location.href];
+  if (val('f-disc')) lines.push('Mare discipline: ' + val('f-disc'));
+  if (val('f-method')) lines.push('Breeding method: ' + val('f-method'));
+  if (val('f-notes')) lines.push('', 'Notes:', val('f-notes'));
+  const payload = {
+    name: val('f-name'),
+    email: val('f-email'),
+    phone: val('f-phone'),
+    subject: 'Mare Owner Questions',
+    message: lines.join('\n'),
+    source_site: 'HorseBreeding.ai'
   };
-  console.log('Lead captured:', JSON.stringify(data));
-  document.getElementById('lead-form').style.display = 'none';
-  document.getElementById('form-success').style.display = 'block';
+  const label = btn.textContent;
+  btn.disabled = true; btn.textContent = 'Sending…';
+  let err = document.getElementById('form-error');
+  if (err) err.remove();
+  try {
+    const res = await fetch('https://contact-form.bridleandbit.workers.dev', {
+      method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error || 'failed');
+    form.style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  } catch (x) {
+    err = document.createElement('div');
+    err.id = 'form-error';
+    err.style.cssText = 'margin-top:12px;color:#b00020;font-size:0.85rem;';
+    err.textContent = 'Something went wrong. Please try again or email bridleandbit@aol.com directly.';
+    form.appendChild(err);
+  } finally {
+    btn.disabled = false; btn.textContent = label;
+  }
 }
 </script>
 </body>
