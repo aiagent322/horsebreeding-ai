@@ -38,6 +38,3 @@
 /js/stallions.js
   ! Cache-Control
   Cache-Control: public, max-age=300, s-maxage=300, must-revalidate
-
-https://horsebreeding-ai.pages.dev/*
-  X-Robots-Tag: noindex, nofollow
