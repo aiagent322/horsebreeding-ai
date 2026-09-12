@@ -361,6 +361,24 @@ const STALLIONS = [
     breeding_note: "Standing at Silver Spurs Equine."
   },
   {
+    name: "SG Frozen Enterprize",
+    slug: "sg-frozen-enterprize",
+    source_url: "https://www.silverspursequine.com/sg-frozen-enterprize",
+    tier: "mid",
+    discipline: ["reining"],
+    stud_fee: 5500,
+    lifetime_earnings: 274083,
+    offspring_earnings: 5478000,
+    performance_summary: "2015 NRBC Level 4 Open Champion \u00b7 NRHA 5 Million Dollar Sire \u00b7 8 championship titles USA & Europe",
+    enrollments: ["Silver Spurs Breeders Futurity", "Xtra Silver Spurs Breeders Futurity", "NRHA enrolled"],
+    bloodlines: ["Frozen Sailor", "SJ Enterprise", "RS Rose SJ"],
+    traits: [],
+    sire: "Frozen Sailor",
+    dam: "RS Rose SJ by SJ Enterprise",
+    description: "Known as \"Iceman.\" 2009 red dun stallion, LTE $274,083, with 8 championship titles across the United States and Europe including the 2015 NRBC Level 4 Open Championship and the 2014 AQHA World Championship in Junior Reining. NRHA 5 Million Dollar Sire with offspring earnings over $5.47M.",
+    breeding_note: "Standing at Silver Spurs Equine, Purcell OK. Booking fee $1,000, balance due on confirmed pregnancy."
+  },
+  {
     name: "Chic Dreamin",
     slug: "chic-dreamin",
     source_url: "https://www.silverspursequine.com/chicdreamin",
