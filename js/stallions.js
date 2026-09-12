@@ -2,6 +2,7 @@ const STALLIONS = [
   {
     name: "A Sparkling Vintage",
     slug: "a-sparkling-vintage",
+    station: "Silver Spurs Equine",
     source_url: "https://www.silverspursequine.com/a-sparkling-vintage",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-a-sparkling-vintage/public",
     tier: "premium",
@@ -21,6 +22,7 @@ const STALLIONS = [
   {
     name: "Big Chex To Cash",
     slug: "big-chex-to-cash",
+    station: "Silver Spurs Equine",
     source_url: "https://www.silverspursequine.com/big-chex-to-cash-1",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-big-chex-to-cash/public",
     tier: "premium",
@@ -40,6 +42,7 @@ const STALLIONS = [
   {
     name: "Boomernic",
     slug: "boomernic",
+    station: "Silver Spurs Equine",
     source_url: "https://www.silverspursequine.com/boomernic-1",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-boomernic/public",
     tier: "premium",
@@ -59,6 +62,7 @@ const STALLIONS = [
   {
     name: "Conquistador Whiz",
     slug: "conquistador-whiz",
+    station: "Silver Spurs Equine",
     source_url: "https://www.silverspursequine.com/conquistador-whiz-1",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-conquistador-whiz/public",
     tier: "premium",
@@ -78,6 +82,7 @@ const STALLIONS = [
   {
     name: "Spooks Gotta Gun",
     slug: "spooks-gotta-gun",
+    station: "Silver Spurs Equine",
     source_url: "https://www.silverspursequine.com/spooks-gotta-gun",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-spooks-gotta-gun/public",
     tier: "premium",
@@ -97,6 +102,7 @@ const STALLIONS = [
   {
     name: "Trashadeous",
     slug: "trashadeous",
+    station: "Silver Spurs Equine",
     source_url: "https://www.silverspursequine.com/trashadeous",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-trashadeous/public",
     tier: "premium",
@@ -116,6 +122,7 @@ const STALLIONS = [
   {
     name: "Wimpys Little Step",
     slug: "wimpys-little-step",
+    station: "Silver Spurs Equine",
     source_url: "https://www.silverspursequine.com/wimpys-little-step",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-wimpys-little-step/public",
     tier: "premium",
@@ -135,6 +142,7 @@ const STALLIONS = [
   {
     name: "HF Mobster",
     slug: "hf-mobster",
+    station: "Silver Spurs Equine",
     source_url: "https://www.silverspursequine.com/hf-mobster",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-hf-mobster/public",
     tier: "mid",
@@ -154,6 +162,7 @@ const STALLIONS = [
   {
     name: "Shiners Voodoo Dr",
     slug: "shiners-voodoo-dr",
+    station: "Silver Spurs Equine",
     source_url: "https://www.silverspursequine.com/shiners-voodoo-dr",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-shiners-voodoo-dr/public",
     tier: "mid",
@@ -173,6 +182,7 @@ const STALLIONS = [
   {
     name: "Tinker With Guns",
     slug: "tinker-with-guns",
+    station: "Silver Spurs Equine",
     source_url: "https://www.silverspursequine.com/tinker-with-guns",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-tinker-with-guns/public",
     tier: "mid",
@@ -192,6 +202,7 @@ const STALLIONS = [
   {
     name: "Wimpyneedsacocktail",
     slug: "wimpyneedsacocktail",
+    station: "Silver Spurs Equine",
     source_url: "https://www.silverspursequine.com/wimpyneedsacocktail",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-wimpyneedsacocktail/public",
     tier: "mid",
@@ -211,6 +222,7 @@ const STALLIONS = [
   {
     name: "Platinum Vintage",
     slug: "platinum-vintage",
+    station: "Silver Spurs Equine",
     source_url: "https://www.silverspursequine.com/platinum-vintage",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-platinum-vintage/public",
     tier: "mid",
@@ -230,6 +242,7 @@ const STALLIONS = [
   {
     name: "Xtra New Pal Voodoo",
     slug: "xtra-new-pal-voodoo",
+    station: "Silver Spurs Equine",
     source_url: "https://www.silverspursequine.com/xtranewpalvoodoo",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-xtra-new-pal-voodoo/public",
     tier: "mid",
@@ -249,6 +262,7 @@ const STALLIONS = [
   {
     name: "Ifwhizswereguns",
     slug: "ifwhizswereguns",
+    station: "Silver Spurs Equine",
     source_url: "https://www.silverspursequine.com/ifwhizswereguns",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-ifwhizswereguns/public",
     tier: "mid",
@@ -268,6 +282,7 @@ const STALLIONS = [
   {
     name: "Custom Cash Advance",
     slug: "custom-cash-advance",
+    station: "Silver Spurs Equine",
     source_url: "https://www.silverspursequine.com/custom-cash-advance-1",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-custom-cash-advance/public",
     tier: "mid",
@@ -287,6 +302,7 @@ const STALLIONS = [
   {
     name: "Smart Shiners Spook",
     slug: "smart-shiners-spook",
+    station: "Silver Spurs Equine",
     source_url: "https://www.silverspursequine.com/smart-shiners-spook",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-smart-shiners-spook/public",
     tier: "mid",
@@ -306,6 +322,7 @@ const STALLIONS = [
   {
     name: "Nic It In The Bud",
     slug: "nic-it-in-the-bud",
+    station: "Silver Spurs Equine",
     source_url: "https://www.silverspursequine.com/nic-it-in-the-bud-1",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-nic-it-in-the-bud/public",
     tier: "mid",
@@ -325,6 +342,7 @@ const STALLIONS = [
   {
     name: "Einsteins Revolution",
     slug: "einsteins-revolution",
+    station: "Silver Spurs Equine",
     source_url: "https://www.silverspursequine.com/einsteins-revolution",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-einsteins-revolution/public",
     tier: "mid",
@@ -344,6 +362,7 @@ const STALLIONS = [
   {
     name: "Mister Montana Nic",
     slug: "mister-montana-nic",
+    station: "Silver Spurs Equine",
     source_url: "https://www.silverspursequine.com/mister-montana-nic-1",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-mister-montana-nic/public",
     tier: "mid",
@@ -363,6 +382,7 @@ const STALLIONS = [
   {
     name: "SG Frozen Enterprize",
     slug: "sg-frozen-enterprize",
+    station: "Silver Spurs Equine",
     source_url: "https://www.silverspursequine.com/sg-frozen-enterprize",
     tier: "mid",
     discipline: ["reining"],
@@ -381,6 +401,7 @@ const STALLIONS = [
   {
     name: "Chic Dreamin",
     slug: "chic-dreamin",
+    station: "Silver Spurs Equine",
     source_url: "https://www.silverspursequine.com/chicdreamin",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-chic-dreamin/public",
     tier: "value",
@@ -400,6 +421,7 @@ const STALLIONS = [
   {
     name: "Electric Wind",
     slug: "electric-wind",
+    station: "Silver Spurs Equine",
     source_url: "https://www.silverspursequine.com/electricwind",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-electric-wind/public",
     tier: "value",
@@ -419,6 +441,7 @@ const STALLIONS = [
   {
     name: "Pale Face Dunnit",
     slug: "pale-face-dunnit",
+    station: "Silver Spurs Equine",
     source_url: "https://www.silverspursequine.com/pale-face-dunnit",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-pale-face-dunnit/public",
     tier: "value",
@@ -438,6 +461,7 @@ const STALLIONS = [
   {
     name: "Catatomic",
     slug: "catatomic",
+    station: "Silver Spurs Equine",
     source_url: "https://www.silverspursequine.com/catatomic-1",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-catatomic/public",
     tier: "value",
@@ -457,6 +481,7 @@ const STALLIONS = [
   {
     name: "My Customized Whiz",
     slug: "my-customized-whiz",
+    station: "Silver Spurs Equine",
     source_url: "https://www.silverspursequine.com/mycustomizedwhiz",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-my-customized-whiz/public",
     tier: "value",
@@ -476,6 +501,7 @@ const STALLIONS = [
   {
     name: "Docs Soula",
     slug: "docs-soula",
+    station: "Silver Spurs Equine",
     source_url: "https://www.silverspursequine.com/docs-soula-1",
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-docs-soula/public",
     tier: "value",
