@@ -517,7 +517,7 @@ const STALLIONS = [
     dam: "Smart Chic Olena mare",
     description: "Junior stallion with deep cow horse and cutting lineage. Doc Bar foundation crossed with Smart Chic Olena handle produces horses with natural cattle instinct and quick feet. Docs Soula is enrolled in the NRCHA Sire and Dam program at $1,500.",
     breeding_note: "Junior stallion. Standing at Silver Spurs Equine."
-  },,
+  },
   {
     name: "Boemil Twin Robotop",
     slug: "boemil-twin-robotop",
@@ -676,6 +676,26 @@ const STALLIONS = [
     dam: "Dun It A Lil Ruf",
     description: "2012 AQHA sorrel stallion known as “The Rock,” by Magnum Chic Dream out of Dun It A Lil Ruf. AQHA World Champion in Senior Reining with lifetime earnings of $123,000+ and offspring earnings over $357,000. 5-panel N/N, IMM N/N, 14.1 hands.",
     breeding_note: "Standing at Silver Spurs Equine, Scottsdale AZ. Booking fee $750, balance due on confirmed pregnancy.",
+    profile: false
+  },
+  {
+    name: "What It Takes",
+    slug: "what-it-takes",
+    station: "Silver Spurs Equine",
+    source_url: "https://www.silverspursequine.com/what-it-takes",
+    tier: "mid",
+    discipline: ["reining"],
+    stud_fee: 1000,
+    lifetime_earnings: 0,
+    offspring_earnings: 116000,
+    performance_summary: "2009 & 2007 US National Arabian Reining Horse Champion \u00b7 2007 & 2006 Scottsdale Arabian Show Reining Champion \u00b7 2006 Youth National Championship Reining Champion \u00b7 AQHA offspring earnings $116,000+",
+    enrollments: [],
+    bloodlines: ["Ga N Khredible", "Sonoma Sensation", "Khemosabi"],
+    traits: [],
+    sire: "Ga N Khredible",
+    dam: "Sonoma Sensation",
+    description: "2001 Arabian reining stallion by Ga N Khredible out of Sonoma Sensation, tracing to Khemosabi. Multiple US National Arabian Reining Horse Champion, in 2009 and 2007, with Scottsdale Arabian Show and Region 7 championships and a 2005 Arabian Horse Futurity title. Silver Spurs credits him as sire of several top-five purebred and Half-Arabian reining champions, with AQHA offspring earnings over $116,000.",
+    breeding_note: "Standing at Silver Spurs Equine, Scottsdale AZ. Fee reduced to $1,000. Booking fee $519.",
     profile: false
   }
 ];
