@@ -3304,7 +3304,7 @@ function fmtEarnings(s, disc) {
 // ── CLAUDE API EXPLANATION ───────────────────────────────────────────────────
 async function getExplanation(mare, matches) {
   const PROXY = "https://stallion-matchmaker-proxy.bridleandbit.workers.dev";
-  const tierMap = {premium:"Gold", mid:"Silver", value:"Bronze"};
+  const tierMap = {premium:"Gold", mid:"Silver", budget:"Bronze", value:"Bronze"};
 
   // ── STEP 1: Scoring Extraction Engine ─────────────────────────────────────
   const EXTRACTOR_SYSTEM = "You are a scoring extraction engine. Your job is to identify and output the exact reasons a stallion was selected for a mare based ONLY on the provided inputs. When a stallion has a disc_strength score for the mare's discipline, prioritize that in your reasoning. Higher disc_strength means stronger genetic production in that specific discipline. You do NOT generate new reasoning. You do NOT interpret beyond what is given. You extract and structure what already exists. STRICT RULES: Do NOT invent reasons. Do NOT generalize beyond inputs. Do NOT add outside knowledge. Only use relationships clearly supported by the data. Keep language tight and factual. No fluff, no storytelling. OUTPUT FORMAT: Return ONLY a JSON array of exactly 3 objects, one per stallion, in order. Each object: {stallion: string, tier: string, total_score: number, key_variables: [string, string, string]} where each key_variable is a direct cause of the match, maximum 12 words, no duplicate ideas, prefer correction logic (mare weakness to stallion strength). Return ONLY the JSON array. No commentary.";
@@ -3506,7 +3506,7 @@ async function runMatch() {
     // TOP ROW — best per tier
     const premium = scored.filter(s=>s.tier==='premium')[0];
     const mid     = scored.filter(s=>s.tier==='mid')[0];
-    const value   = scored.filter(s=>s.tier==='value')[0];
+    const value   = scored.filter(s=>s.tier==='budget'||s.tier==='value')[0];
     const topPicks = [
       { type:'premium', label:'Premium Match',    stallion: premium },
       { type:'mid',     label:'Best Value Match', stallion: mid },
@@ -3567,7 +3567,7 @@ async function runMatch() {
       card.className = 'match-card';
       card.innerHTML = `
     <div class="card-rank-bar">
-      <span class="card-rank-label">#${{i+1}} Match &mdash; ${s.score}/100</span>
+      <span class="card-rank-label">#${i+1} Match &mdash; ${s.score}/100</span>
       <span class="card-tier-pill ${s.tier}">${s.tier==='premium'?'The Greats':s.tier==='mid'?'Main Roster':'Value'}</span>
     </div>
     <div class="card-body">
@@ -3615,7 +3615,7 @@ async function runMatch() {
         card2.className = 'match-card';
         card2.innerHTML = `
     <div class="card-rank-bar">
-      <span class="card-rank-label">#${{topPicks.length+i+1}} Match &mdash; ${s.score}/100</span>
+      <span class="card-rank-label">#${topPicks.length+i+1} Match &mdash; ${s.score}/100</span>
       <span class="card-tier-pill ${s.tier}">${s.tier==='premium'?'The Greats':s.tier==='mid'?'Main Roster':'Value'}</span>
     </div>
     <div class="card-body">
