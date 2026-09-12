@@ -576,7 +576,6 @@ const STALLIONS = [
     dam: "Princess In Diamonds",
     description: "2005 AQHA bay stallion by Custom Crome out of Princess In Diamonds. NRHA Million Dollar Sire with offspring earnings over $1,345,000 and lifetime earnings of $146,650+. 2009 NRBC Open Classic Champion. 5-panel N/N, IMM N/N, 14.3 hands.",
     breeding_note: "ICSI breeding only. Standing at Silver Spurs Equine, Scottsdale AZ. Million Dollar Challenge season price, reduced from $1,500. Booking fee $250, balance due on a foal on the ground.",
-    profile: false
   },
   {
     name: "Da Care Bear",
