@@ -598,8 +598,11 @@ function scoreStallion(s, mareDisc, mBlood, mTraits, mareSire) {
   // ── Traits (25 pts) ──────────────────────────────────────────────────────────
   const sTraits = (s.traits||[]).map(t=>t.toLowerCase());
   const overlap = sTraits.filter(t => mTraits.has(t)).length;
-  if (mTraits.size > 0) traitPts = Math.min(25, Math.round((overlap / mTraits.size) * 25));
-  else traitPts = 12; // neutral if no traits selected
+  // Mirrors the bloodline block above: when either side has no data the result is
+  // unknown, not a mismatch, so award the same neutral 12 rather than 0. Scoring a
+  // stallion 0 for absent data would rank documented non-matches above unknowns.
+  if (sTraits.length === 0 || mTraits.size === 0) traitPts = 12;
+  else traitPts = Math.min(25, Math.round((overlap / mTraits.size) * 25));
 
   return Math.min(100, discPts + sirePts + bloodPts + traitPts);
 }
