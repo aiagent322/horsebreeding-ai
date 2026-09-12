@@ -17,7 +17,7 @@ const STALLIONS = [
     sire: "Shining Spark",
     dam: "Vintage Badger by Peppy San Badger",
     description: "The only sire in NRHA history to produce two Triple Crown Champions. A Sparkling Vintage is an NRHA 4 Million Dollar Sire with offspring earnings exceeding $4.6M. Available via ICSI only. Sire of A Vintage Smoke ($600K) and Not Ruf At All ($456K).",
-    breeding_note: "ICSI only. Pay breeding fee only when you have a live foal."
+    breeding_note: "ICSI breeding only; normal $10,000 fee reduced to absorb ICSI costs. Breeding fee due only on a live foal on the ground."
   },
   {
     name: "Big Chex To Cash",
@@ -37,7 +37,7 @@ const STALLIONS = [
     sire: "Nu Chex To Cash",
     dam: "Snip O Gun by One Gun",
     description: "NRHA Million Dollar Sire and 2005 Open Futurity Reserve Champion. Big Chex To Cash has produced 163 money-earners from 473 AQHA foals with offspring earnings over $1.37M. Available via ICSI only using frozen semen from this deceased champion.",
-    breeding_note: "ICSI only. Deceased — breeding via frozen ICSI semen only."
+    breeding_note: "ICSI breeding. Million Dollar Challenge price, 50% off the standard fee. Pay $200, balance after a live foal."
   },
   {
     name: "Boomernic",
@@ -57,7 +57,7 @@ const STALLIONS = [
     sire: "Reminic",
     dam: "Colonel Freckles mare",
     description: "Elite reining and reined cow horse sire combining Reminic athleticism with Colonel Freckles cow sense. Boomernic stands in The Greats tier and consistently produces horses with natural cattle instinct, solid stops, and the trainability demanded in today's competition pen.",
-    breeding_note: "Standing at Silver Spurs Equine."
+    breeding_note: "Frozen semen only. Million Dollar Challenge season price, reduced from $5,000. Pay $500 now, balance on confirmed pregnancy."
   },
   {
     name: "Conquistador Whiz",
@@ -67,7 +67,7 @@ const STALLIONS = [
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-conquistador-whiz/public",
     tier: "premium",
     discipline: ["reining"],
-    stud_fee: 3000,
+    stud_fee: 1000,
     lifetime_earnings: 0,
     offspring_earnings: 0,
     performance_summary: "Topsail Whiz son · Elite reining sire · The Greats",
@@ -77,7 +77,7 @@ const STALLIONS = [
     sire: "Topsail Whiz",
     dam: "Colonel Freckles mare",
     description: "A Topsail Whiz son standing in The Greats tier. Conquistador Whiz crosses Whiz speed and scope with Colonel Freckles handle, producing powerful reining prospects with scopey stops and the athleticism to compete at the highest levels of the NRHA.",
-    breeding_note: "Standing at Silver Spurs Equine."
+    breeding_note: "Million Dollar Challenge season price, reduced from $3,000. Includes frozen semen fee. Pay $500 now, balance on confirmed pregnancy."
   },
   {
     name: "Spooks Gotta Gun",
@@ -97,7 +97,7 @@ const STALLIONS = [
     sire: "Grays Starlight",
     dam: "Katie Gun by One Gun",
     description: "NRHA Triple Crown Champion Sire with offspring earnings over $4.1M. Spooks Gotta Gun's first foal crop produced the 2010 NRHA Futurity Champion. Also sires Ranch ($202K+) and Working Cow ($108K+) horses. Available via frozen semen and ICSI.",
-    breeding_note: "Available frozen semen and ICSI. Pay balance after confirmed pregnancy."
+    breeding_note: "Fee shown is the ICSI breeding fee; frozen semen is $7,000. ICSI fee $1,000 now, balance due after a live foal is born."
   },
   {
     name: "Trashadeous",
@@ -107,7 +107,7 @@ const STALLIONS = [
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-trashadeous/public",
     tier: "premium",
     discipline: ["reining"],
-    stud_fee: 3000,
+    stud_fee: 1000,
     lifetime_earnings: 0,
     offspring_earnings: 0,
     performance_summary: "The Greats · Top reining sire · Topsail Whiz son",
@@ -117,7 +117,7 @@ const STALLIONS = [
     sire: "Topsail Whiz",
     dam: "Smart Chic Olena mare",
     description: "The Greats tier reining sire combining Topsail Whiz power with Smart Chic Olena handle. Trashadeous produces horses with elite stop mechanics, natural scope, and the speed demanded in modern reining competition. A proven cross for high-level reining programs.",
-    breeding_note: "Standing at Silver Spurs Equine."
+    breeding_note: "Million Dollar Challenge season price, reduced from $3,000. Includes frozen semen fee. Pay $500 now, balance on confirmed pregnancy."
   },
   {
     name: "Wimpys Little Step",
@@ -137,7 +137,7 @@ const STALLIONS = [
     sire: "Nu Chex To Cash",
     dam: "Leolita Step",
     description: "NRHA Hall of Fame. 2002 NRHA Futurity Open Champion with the highest composite score in history. Wimpys Little Step is a $15M sire — 50% of his 1,988 foals are money earners. Available via ICSI only at Silver Spurs Oklahoma.",
-    breeding_note: "ICSI only. Retired at Silver Spurs Oklahoma. Pay balance only when live foal on ground."
+    breeding_note: "ICSI breeding only; normal $10,000 fee reduced to absorb ICSI costs. ICSI fee $1,000 now, balance on a live foal on the ground."
   },
   {
     name: "HF Mobster",
@@ -157,7 +157,7 @@ const STALLIONS = [
     sire: "Colonels Smoking Gun (Gunner)",
     dam: "Dun Its Black Gold",
     description: "2013 NRHA Open Derby Champion and 2014 World Equestrian Games Team member. HF Mobster is an NRHA Million Dollar Sire with offspring earnings over $1.7M. Fee reduced to $2,500 for 2026. Standing at Silver Spurs Arizona.",
-    breeding_note: "Standing at Silver Spurs Arizona. Pay balance after confirmed pregnancy."
+    breeding_note: "Million Dollar Challenge season price. Booking fee $750, balance on confirmed pregnancy."
   },
   {
     name: "Shiners Voodoo Dr",
@@ -287,7 +287,7 @@ const STALLIONS = [
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-custom-cash-advance/public",
     tier: "mid",
     discipline: ["reining"],
-    stud_fee: 3000,
+    stud_fee: 750,
     lifetime_earnings: 0,
     offspring_earnings: 0,
     performance_summary: "Nu Chex To Cash son · Gunner cross · Reining specialist",
@@ -297,7 +297,7 @@ const STALLIONS = [
     sire: "Nu Chex To Cash",
     dam: "Colonels Smoking Gun mare",
     description: "Nu Chex To Cash crossed on Colonels Smoking Gun — two of the most influential reining sire lines in history. Custom Cash Advance combines inherited handle, stop, and scope to produce horses bred for the demands of high-level reining competition.",
-    breeding_note: "Standing at Silver Spurs Equine."
+    breeding_note: "Million Dollar Challenge season price, reduced from $1,500. Booking fee $250, balance due on a foal on the ground."
   },
   {
     name: "Smart Shiners Spook",
@@ -317,7 +317,7 @@ const STALLIONS = [
     sire: "Spooks Gotta Gun",
     dam: "Shining Spark mare",
     description: "Spooks Gotta Gun crossed on Shining Spark — a proven dual-discipline combination. Smart Shiners Spook is enrolled in both NRHA and NRCHA sire programs, producing horses with natural cow sense, solid stops, and the scope needed across both disciplines.",
-    breeding_note: "Standing at Silver Spurs Equine."
+    breeding_note: "ICSI breeding. Million Dollar Challenge season price, reduced from $1,000. Pay $200 ICSI fee now, balance on a live foal."
   },
   {
     name: "Nic It In The Bud",
@@ -337,7 +337,7 @@ const STALLIONS = [
     sire: "Reminic",
     dam: "Smart Chic Olena mare",
     description: "Reminic son out of a Smart Chic Olena mare. Nic It In The Bud combines Reminic's proven cow horse athleticism with Smart Chic Olena handle, producing horses with natural cattle instinct and a solid reining foundation at $3,000.",
-    breeding_note: "Standing at Silver Spurs Equine."
+    breeding_note: "Frozen semen fee $3,500, includes the frozen semen fee. Booking fee $1,000, balance on confirmed pregnancy."
   },
   {
     name: "Einsteins Revolution",
@@ -347,7 +347,7 @@ const STALLIONS = [
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-einsteins-revolution/public",
     tier: "mid",
     discipline: ["reining"],
-    stud_fee: 2500,
+    stud_fee: 3000,
     lifetime_earnings: 0,
     offspring_earnings: 0,
     performance_summary: "Topsail Whiz / Smart Chic Olena cross",
@@ -357,7 +357,7 @@ const STALLIONS = [
     sire: "Topsail Whiz",
     dam: "Smart Chic Olena mare",
     description: "Topsail Whiz son out of a Smart Chic Olena mare. Einsteins Revolution pairs Whiz athleticism and scope with Olena softness and trainability, producing a balanced reining prospect. An efficient cross for breeders seeking competitive horses at a value fee.",
-    breeding_note: "Standing at Silver Spurs Equine."
+    breeding_note: "Deceased — frozen and ICSI breeding only. Frozen semen fee $3,000, includes the frozen semen fee. Booking fee $1,000, balance on confirmed pregnancy."
   },
   {
     name: "Mister Montana Nic",
@@ -367,7 +367,7 @@ const STALLIONS = [
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-mister-montana-nic/public",
     tier: "mid",
     discipline: ["reining","reined cow horse"],
-    stud_fee: 2500,
+    stud_fee: 500,
     lifetime_earnings: 0,
     offspring_earnings: 0,
     performance_summary: "Reminic son · Reining and cow horse",
@@ -377,7 +377,7 @@ const STALLIONS = [
     sire: "Reminic",
     dam: "Colonel Freckles mare",
     description: "Reminic crossed on Colonel Freckles — a proven reining and cow horse combination. Mister Montana Nic produces horses with strong cattle instinct, reliable rate, and the athleticism demanded across both disciplines. A versatile sire for dual-discipline breeding programs.",
-    breeding_note: "Standing at Silver Spurs Equine."
+    breeding_note: "Booking fee $200, balance due on confirmed pregnancy."
   },
   {
     name: "SG Frozen Enterprize",
@@ -416,7 +416,7 @@ const STALLIONS = [
     sire: "Smart Chic Olena",
     dam: "Grays Starlight mare",
     description: "Smart Chic Olena son with Grays Starlight athleticism. Chic Dreamin is a Smart Chic Olena son with natural cow sense and handle for reining and cow horse production at $2,000 for 2026.",
-    breeding_note: "Standing at Silver Spurs Equine. $500 booking fee, balance due on confirmed pregnancy."
+    breeding_note: "Million Dollar Challenge season price. Booking fee $500, balance on confirmed pregnancy."
   },
   {
     name: "Electric Wind",
@@ -436,7 +436,7 @@ const STALLIONS = [
     sire: "Colonels Smoking Gun",
     dam: "Grays Starlight mare",
     description: "Colonels Smoking Gun son with Grays Starlight athleticism. Electric Wind is a versatile producer for reining and ranch horse programs at $1,000 for 2026.",
-    breeding_note: "Standing at Silver Spurs Equine. $500 booking fee, balance due on confirmed pregnancy."
+    breeding_note: "Million Dollar Challenge season price. Booking fee $500, balance on confirmed pregnancy."
   },
   {
     name: "Pale Face Dunnit",
@@ -466,7 +466,7 @@ const STALLIONS = [
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-catatomic/public",
     tier: "value",
     discipline: ["reining","reined cow horse"],
-    stud_fee: 2000,
+    stud_fee: 300,
     lifetime_earnings: 0,
     offspring_earnings: 0,
     performance_summary: "Junior stallion · High Brow Cat / Gunner cross",
@@ -476,7 +476,7 @@ const STALLIONS = [
     sire: "Colonels Smoking Gun",
     dam: "High Brow Cat mare",
     description: "High Brow Cat cutting bloodlines crossed into Colonels Smoking Gun reining. Catatomic is a junior stallion combining natural cow sense with reining athleticism — an emerging cross for breeders seeking cattle instinct and performance ability at a $1,500 entry fee.",
-    breeding_note: "Junior stallion. Standing at Silver Spurs Equine."
+    breeding_note: "Million Dollar Challenge season price. Purchase a breeding and receive a second breeding to any Silver Spurs junior stallion for $200."
   },
   {
     name: "My Customized Whiz",
@@ -486,7 +486,7 @@ const STALLIONS = [
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-my-customized-whiz/public",
     tier: "value",
     discipline: ["reining"],
-    stud_fee: 500,
+    stud_fee: 300,
     lifetime_earnings: 0,
     offspring_earnings: 0,
     performance_summary: "Junior stallion · Topsail Whiz / Gunner / Smart Chic Olena",
@@ -496,7 +496,7 @@ const STALLIONS = [
     sire: "Topsail Whiz",
     dam: "Smart Chic Olena / Gunner mare",
     description: "Junior stallion combining three elite reining sire lines: Topsail Whiz, Smart Chic Olena, and Colonels Smoking Gun. My Customized Whiz represents an outstanding bloodline combination at junior stallion pricing — ideal for breeders seeking proven reining genetics at $1,500.",
-    breeding_note: "Junior stallion. Standing at Silver Spurs Equine."
+    breeding_note: "Million Dollar Challenge season price. Purchase a breeding and receive a second breeding to any Silver Spurs junior stallion for $200."
   },
   {
     name: "Docs Soula",
@@ -506,7 +506,7 @@ const STALLIONS = [
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-docs-soula/public",
     tier: "value",
     discipline: ["reined cow horse","cutting"],
-    stud_fee: 1500,
+    stud_fee: 300,
     lifetime_earnings: 0,
     offspring_earnings: 0,
     performance_summary: "Junior stallion · Doc Bar / Smart Chic Olena · Cow horse and cutting",
@@ -516,7 +516,7 @@ const STALLIONS = [
     sire: "Doc Bar",
     dam: "Smart Chic Olena mare",
     description: "Junior stallion with deep cow horse and cutting lineage. Doc Bar foundation crossed with Smart Chic Olena handle produces horses with natural cattle instinct and quick feet. Docs Soula is enrolled in the NRCHA Sire and Dam program at $1,500.",
-    breeding_note: "Junior stallion. Standing at Silver Spurs Equine."
+    breeding_note: "Million Dollar Challenge season price. Purchase a breeding and receive a second breeding to any Silver Spurs junior stallion for $200."
   },
   {
     name: "Boemil Twin Robotop",
