@@ -593,7 +593,6 @@ const STALLIONS = [
     dam: "Ms Boon Boom Command by Docs Fritzie Command",
     description: "2007 AQHA bay stallion by NRHA Hall of Fame sire Boomernic, out of Ms Boon Boom Command. Campaigned as a rope horse, earning over $6,200 and 91.5 AQHA points in heading and heeling, and awarded the AQHA Superior Heading Horse title. 5-panel N/N, IMM N/N, 15 hands.",
     breeding_note: "Million Dollar Challenge season price. Purchase a breeding and receive a second breeding to any Silver Spurs junior stallion for $200.",
-    profile: false
   },
   {
     name: "Epic Titan",
