@@ -528,15 +528,14 @@ const STALLIONS = [
     stud_fee: 1500,
     lifetime_earnings: 37489,
     offspring_earnings: 0,
-    performance_summary: "NRHA world's top money-earning Appaloosa · 2015 NRHA Open Class Futurity Champion · 2014 FEI World Equestrian Games, Team Italy",
+    performance_summary: "NRHA world's top money-earning Appaloosa, $37,489 · 2014 FEI World Equestrian Games individual finalist, 6th with Team Italy · 2013 FEI European Young Riders team gold · 2009 & 2010 European Appaloosa Reining Futurity Open Champion",
     enrollments: [],
     bloodlines: ["Topsail Speckles", "Boemil Valentwin"],
     traits: [],
     sire: "Topsail Speckles",
     dam: "Boemil Valentwin",
-    description: "2006 Appaloosa stallion and the NRHA's top money-earning Appaloosa with $37,489 in lifetime earnings. 2015 NRHA Open Class Futurity Champion, with a European record including the 2014 FEI World Equestrian Games as part of Team Italy and multiple Italian NRHA Derby titles.",
+    description: "2006 Appaloosa stallion, foaled in Italy and bred by Emilio Bonoperti, and the NRHA's all-time leading Appaloosa money earner with $37,489 in lifetime earnings, all won at NRHA shows in Europe. The only Appaloosa in the individual reining finals at the 2014 FEI World Equestrian Games, where he was 6th with Team Italy. Team gold at the 2013 FEI European Young Riders Championship, and European Appaloosa Reining Futurity Open Champion in 2009 and 2010.",
     breeding_note: "Frozen semen only. 2026 breeding fee includes a $500 booking fee.",
-    profile: false
   },
   {
     name: "Boom Shernic",
