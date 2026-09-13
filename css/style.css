@@ -186,6 +186,14 @@ h3 {
 .sc-fee .free { color: #7fc87a; }
 
 /* STALLION PROFILE */
+.profile-photo {
+  margin: 0 0 20px;
+  border: 1px solid rgba(15,12,7,0.15);
+  background: var(--parch2);
+  line-height: 0;
+}
+.profile-photo img { width: 100%; height: auto; display: block; }
+
 .profile-grid {
   display: grid;
   grid-template-columns: 1fr 320px;
