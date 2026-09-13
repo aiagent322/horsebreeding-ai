@@ -135,6 +135,21 @@ h3 {
 .stallion-card.gold  { border-top-color: var(--gold); }
 .stallion-card.mid   { border-top-color: var(--sage); }
 .stallion-card.value { border-top-color: #7a6040; }
+.sc-photo {
+  display: block;
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  background: var(--mist);
+  border-bottom: 1px solid rgba(15,12,7,0.15);
+  overflow: hidden;
+}
+.sc-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
 .sc-body { padding: 14px 16px; flex: 1; }
 .sc-tier {
   font-size: 0.72rem;
