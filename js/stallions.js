@@ -673,7 +673,6 @@ const STALLIONS = [
     dam: "Dun It A Lil Ruf",
     description: "2012 AQHA sorrel stallion known as “The Rock,” by Magnum Chic Dream out of Dun It A Lil Ruf. AQHA World Champion in Senior Reining with lifetime earnings of $123,000+ and offspring earnings over $357,000. 5-panel N/N, IMM N/N, 14.1 hands.",
     breeding_note: "Standing at Silver Spurs Equine, Scottsdale AZ. Booking fee $750, balance due on confirmed pregnancy.",
-    profile: false
   },
   {
     name: "What It Takes",
