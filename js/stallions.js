@@ -688,6 +688,5 @@ const STALLIONS = [
     dam: "Sonoma Sensation",
     description: "2001 Arabian reining stallion by Ga N Khredible out of Sonoma Sensation, tracing to Khemosabi. Multiple US National Arabian Reining Horse Champion, in 2009 and 2007, with Scottsdale Arabian Show and Region 7 championships and a 2005 Arabian Horse Futurity title. Silver Spurs credits him as sire of several top-five purebred and Half-Arabian reining champions, with AQHA offspring earnings over $116,000.",
     breeding_note: "Standing at Silver Spurs Equine, Scottsdale AZ. Fee reduced to $1,000. Booking fee $519.",
-    profile: false
   }
 ];
