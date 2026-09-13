@@ -615,7 +615,6 @@ const STALLIONS = [
     dam: "Princess In Diamonds",
     description: "2013 AQHA/APHA sorrel stallion by Colonels Smoking Gun (Gunner) out of Princess In Diamonds. Cactus Classic Champion, NRBC Derby Reserve Champion, and Reining By The Bay Reserve Champion, with lifetime earnings of $82,200+ and offspring earnings over $315,000. 5-panel N/N, IMM N/N, 14.3 hands.",
     breeding_note: "Standing at Silver Spurs Equine. Million Dollar Challenge season price. Booking fee $750, balance due on confirmed pregnancy.",
-    profile: false
   },
   {
     name: "Haboomamatada",
