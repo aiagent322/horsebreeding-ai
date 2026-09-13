@@ -127,7 +127,7 @@ const STALLIONS = [
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-wimpys-little-step/public",
     tier: "premium",
     discipline: ["reining"],
-    stud_fee: 6500,
+    stud_fee: 6000,
     lifetime_earnings: 185757,
     offspring_earnings: 15165000,
     performance_summary: "NRHA Hall of Fame · 2002 NRHA Futurity Open Champion · $15M+ Sire",
@@ -137,7 +137,7 @@ const STALLIONS = [
     sire: "Nu Chex To Cash",
     dam: "Leolita Step",
     description: "NRHA Hall of Fame. 2002 NRHA Futurity Open Champion with the highest composite score in history. Wimpys Little Step is a $15M sire — 50% of his 1,988 foals are money earners. Available via ICSI only at Silver Spurs Oklahoma.",
-    breeding_note: "ICSI breeding only; normal $10,000 fee reduced to absorb ICSI costs. ICSI fee $1,000 now, balance on a live foal on the ground."
+    breeding_note: "NRHA Hall of Fame, $15 Million Dollar Sire. ICSI breedings available. Standing at Silver Spurs Equine, Purcell OK. 2026 standard price $6,000."
   },
   {
     name: "HF Mobster",
@@ -207,7 +207,7 @@ const STALLIONS = [
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-wimpyneedsacocktail/public",
     tier: "mid",
     discipline: ["reining"],
-    stud_fee: 2000,
+    stud_fee: 2750,
     lifetime_earnings: 281804,
     offspring_earnings: 0,
     performance_summary: "NRBC Open Derby Champion · AQHA Reserve World Champion · Son of Wimpys Little Step",
@@ -217,7 +217,7 @@ const STALLIONS = [
     sire: "Wimpys Little Step",
     dam: "Nu Chex To Cash mare",
     description: "Son of Wimpys Little Step and NRBC Open Derby Champion. Wimpyneedsacocktail earned $281,804 LTE including AQHA Reserve World Champion Senior and Junior Reining titles. Carries the Wimpy handle and athleticism into a new generation of reining horses.",
-    breeding_note: "Standing at Silver Spurs Equine."
+    breeding_note: "Standing at Silver Spurs Equine, Purcell OK. 2026 fee includes the $500 booking fee."
   },
   {
     name: "Platinum Vintage",
@@ -347,7 +347,7 @@ const STALLIONS = [
     photo: "https://imagedelivery.net/9VlM7Y9GaQMXOu5Ypg50yA/stallion-einsteins-revolution/public",
     tier: "mid",
     discipline: ["reining"],
-    stud_fee: 3000,
+    stud_fee: 2000,
     lifetime_earnings: 0,
     offspring_earnings: 0,
     performance_summary: "Topsail Whiz / Smart Chic Olena cross",
@@ -357,7 +357,7 @@ const STALLIONS = [
     sire: "Topsail Whiz",
     dam: "Smart Chic Olena mare",
     description: "Topsail Whiz son out of a Smart Chic Olena mare. Einsteins Revolution pairs Whiz athleticism and scope with Olena softness and trainability, producing a balanced reining prospect. An efficient cross for breeders seeking competitive horses at a value fee.",
-    breeding_note: "Deceased — frozen and ICSI breeding only. Frozen semen fee $3,000, includes the frozen semen fee. Booking fee $1,000, balance on confirmed pregnancy."
+    breeding_note: "Deceased — frozen and ICSI breeding only. Standing at Silver Spurs Equine, Purcell OK. 2026 fee includes the $500 booking fee."
   },
   {
     name: "Mister Montana Nic",
@@ -396,7 +396,7 @@ const STALLIONS = [
     sire: "Frozen Sailor",
     dam: "RS Rose SJ by SJ Enterprise",
     description: "Known as \"Iceman.\" 2009 red dun stallion, LTE $274,083, with 8 championship titles across the United States and Europe including the 2015 NRBC Level 4 Open Championship and the 2014 AQHA World Championship in Junior Reining. NRHA 5 Million Dollar Sire with offspring earnings over $5.47M.",
-    breeding_note: "Standing at Silver Spurs Equine, Purcell OK. Booking fee $1,000, balance due on confirmed pregnancy."
+    breeding_note: "Standing at Silver Spurs Equine, Purcell OK. 2026 fee includes the $500 booking fee. Booking $1,000, balance due on confirmed pregnancy."
   },
   {
     name: "Chic Dreamin",
@@ -644,7 +644,7 @@ const STALLIONS = [
     source_url: "https://www.silverspursequine.com/im-a-fancy-pyc",
     tier: "mid",
     discipline: ["racing"],
-    stud_fee: 2500,
+    stud_fee: 3500,
     lifetime_earnings: 454765,
     offspring_earnings: 4203000,
     performance_summary: "AQHA racing sire · SI 92 · 5 wins, $454,765 · 1st Remington Park Oklahoma Bred Futurity (G3) · Offspring earnings $4,203,000+",
@@ -654,8 +654,7 @@ const STALLIONS = [
     sire: "PYC Paint Your Wagon",
     dam: "First Prize Fancy",
     description: "2012 brown stallion by PYC Paint Your Wagon out of First Prize Fancy, speed index 92. Won the Remington Park Oklahoma Bred Futurity (G3) among 5 wins and $454,765 of his own, and ranked as the third highest producing second-year sire in 2019. Offspring earnings exceed $4,203,000. 5-panel N/N, 16.3 hands.",
-    breeding_note: "On-farm breeding only. Standing at Silver Spurs Equine, Purcell OK. Fee includes the booking fee.",
-    profile: false
+    breeding_note: "Standing at Silver Spurs Equine, Purcell OK. On-farm breeding only. 2026 fee includes the $500 booking fee. Special consideration for multiple-mare bookings, stakes winners, and stakes producers.",
   },
   {
     name: "Ruf Lil Magnum",
