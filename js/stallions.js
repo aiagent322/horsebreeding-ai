@@ -555,7 +555,6 @@ const STALLIONS = [
     dam: "She And Chic Dunit",
     description: "2004 AQHA sorrel stallion by Boomernic out of She And Chic Dunit, with lifetime earnings of $278,303 and offspring earnings over $583,000. Silver Spurs presents him as a non-pro's stallion. 5-panel N/N, IMM N/N, 14.3 hands.",
     breeding_note: "Standing at Silver Spurs Equine, Scottsdale AZ. Million Dollar Challenge season price, reduced from $1,000. Booking fee $200, balance due on confirmed pregnancy.",
-    profile: false
   },
   {
     name: "Cromed Out Mercedes",
