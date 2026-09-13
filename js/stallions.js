@@ -621,7 +621,7 @@ const STALLIONS = [
     tier: "value",
     discipline: ["reining", "reined cow horse", "cutting"],
     stud_fee: 300,
-    lifetime_earnings: 0,
+    lifetime_earnings: 1560,
     offspring_earnings: 960,
     performance_summary: "2007 Scottsdale Classic Open Futurity 3rd · Offspring earnings across roping, barrel, and pole bending",
     enrollments: [],
@@ -631,7 +631,6 @@ const STALLIONS = [
     dam: "Fives Little Lena by Smart Little Lena",
     description: "2004 stallion by Boomernic out of Fives Little Lena, a daughter of Smart Little Lena. Third in the 2007 Scottsdale Classic Open Futurity. Silver Spurs positions him as a crossover option for reining or working cow and cutting programs. 5-panel N/N, IMM N/N, 14.2 hands.",
     breeding_note: "Million Dollar Challenge season price. Purchase a breeding and receive a second breeding to any Silver Spurs junior stallion for $200.",
-    profile: false
   },
   {
     name: "Im A Fancy PYC",
