@@ -115,7 +115,8 @@ img{max-width:100%;height:auto;display:block}
 .trait-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
 .trait-chip{
   padding:8px 14px;border:1px solid var(--border);border-radius:20px;
-  font-size:0.8rem;font-weight:600;color:var(--text-mid);cursor:pointer;
+  font-family:inherit;font-size:0.8rem;font-weight:600;line-height:1.2;
+  color:var(--text-mid);cursor:pointer;text-align:center;appearance:none;
   transition:var(--transition);min-height:44px;display:inline-flex;align-items:center;
   background:#fff;touch-action:manipulation
 }
@@ -442,8 +443,8 @@ footer a:hover{color:#fff}
       </div>
 
       <div class="form-group full">
-        <label class="form-label">Desired Traits — select all that apply</label>
-        <div class="trait-chips" id="trait-chips"></div>
+        <label class="form-label" id="trait-chips-label">Desired Traits — select all that apply</label>
+        <div class="trait-chips" id="trait-chips" role="group" aria-labelledby="trait-chips-label"></div>
       </div>
 
       <div class="form-group full">
@@ -530,9 +531,16 @@ let selectedTraits = new Set();
 // Render trait chips
 const chipWrap = document.getElementById('trait-chips');
 TRAITS.forEach(t => {
-  const c = document.createElement('span');
+  const c = document.createElement('button');
+  c.type = 'button';
   c.className = 'trait-chip'; c.textContent = t;
-  c.onclick = () => { selectedTraits.has(t) ? (selectedTraits.delete(t), c.classList.remove('selected')) : (selectedTraits.add(t), c.classList.add('selected')); };
+  c.setAttribute('aria-pressed', 'false');
+  c.onclick = () => {
+    const on = !selectedTraits.has(t);
+    on ? selectedTraits.add(t) : selectedTraits.delete(t);
+    c.classList.toggle('selected', on);
+    c.setAttribute('aria-pressed', String(on));
+  };
   chipWrap.appendChild(c);
 });
 
