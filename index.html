@@ -532,7 +532,7 @@ const chipWrap = document.getElementById('trait-chips');
 TRAITS.forEach(t => {
   const c = document.createElement('span');
   c.className = 'trait-chip'; c.textContent = t;
-  c.onclick = () => { selectedTraits.has(t) ? (selectedTraits.delete(t), c.classList.remove('on')) : (selectedTraits.add(t), c.classList.add('on')); };
+  c.onclick = () => { selectedTraits.has(t) ? (selectedTraits.delete(t), c.classList.remove('selected')) : (selectedTraits.add(t), c.classList.add('selected')); };
   chipWrap.appendChild(c);
 });
 
