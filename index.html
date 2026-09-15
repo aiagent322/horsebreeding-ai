@@ -71,6 +71,8 @@ img{max-width:100%;height:auto;display:block}
 .hero{background:linear-gradient(135deg,var(--primary) 0%,var(--secondary) 100%);padding:32px 16px 28px;text-align:center}
 .hero-inner{max-width:680px;margin:0 auto}
 .hero h1{font-size:clamp(1.4rem,4vw,2.2rem);font-weight:800;color:#fff;line-height:1.25;margin-bottom:10px;overflow-wrap:break-word;text-wrap:balance}
+.hero-line1{display:block}
+.hero-line2{display:block;font-size:0.62em;font-weight:600;color:rgba(255,255,255,0.82);margin-top:4px}
 .hero-sub{font-size:0.9rem;color:rgba(255,255,255,0.85);margin:0 auto 18px;line-height:1.5;overflow-wrap:break-word;max-width:540px}
 .hero-btns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
 .hero-btn{display:inline-flex;align-items:center;gap:5px;padding:10px 16px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:var(--radius);color:#fff;font-size:0.8rem;font-weight:600;transition:background var(--transition);min-height:44px;text-decoration:none;touch-action:manipulation}
@@ -232,6 +234,11 @@ img{max-width:100%;height:auto;display:block}
 footer{background:var(--primary);color:rgba(255,255,255,0.6);text-align:center;padding:24px 16px;font-size:0.82rem;margin-top:40px}
 footer a{color:rgba(255,255,255,0.75);text-decoration:none}
 footer a:hover{color:#fff}
+.footer-brand{font-size:1rem;font-weight:800;color:#fff;letter-spacing:.01em;margin-bottom:4px}
+.footer-powered{color:rgba(255,255,255,0.78);margin-bottom:10px}
+.footer-contact{font-size:0.78rem;line-height:1.7}
+.footer-ai-note{margin:12px auto 0;max-width:640px;font-size:0.78rem;line-height:1.6;color:var(--gold-light);border-top:1px solid rgba(255,255,255,0.15);padding-top:10px}
+.footer-legal{font-size:12px;font-weight:400;color:rgba(255,255,255,.55);letter-spacing:.04em;max-width:800px;margin:10px auto 0;line-height:1.6}
 
 .card-fee.contact{color:var(--gold);font-style:italic}
 
@@ -312,7 +319,7 @@ footer a:hover{color:#fff}
 <div class="matchmaker-wrap" id="matchmaker-wrap">
 <section class="hero">
   <div class="hero-inner">
-    <h1>AI Stallion Matchmaker — Western Performance Breeding</h1>
+    <h1><span class="hero-line1">Silver Spurs Stallion Matchmaker</span><span class="hero-line2">Western Performance Breeding</span></h1>
     <p class="hero-sub">Enter your mare's profile and get AI-ranked recommendations from the 35 Silver Spurs Equine stallions — reining, reined cow horse, cutting, ranch, team roping, and AQHA racing.</p>
     <div class="hero-btns">
       <a href="#matchmaker" class="hero-btn">&#x1F50D; Find Matches</a>
@@ -488,9 +495,14 @@ footer a:hover{color:#fff}
 
 </div><!-- /matchmaker-wrap -->
 <footer>
-  <div>HorseBreeding.ai &mdash; A public service from <a href="https://www.bridleandbit.com" target="_blank" rel="noopener">Bridle &amp; Bit Magazine</a></div>
-  <div style="margin-top:6px;font-size:0.75rem;opacity:0.6">AI-generated recommendations — verify with Silver Spurs Equine before breeding decisions</div>
-  <p style="font-size:12px;font-weight:400;color:rgba(255,255,255,.55);letter-spacing:.04em;max-width:800px;margin:8px auto 0;line-height:1.6;">Legal Disclaimer: HorseBreeding.ai is an independent informational platform operated by Bridle &amp; Bit Magazine. Stallion and breeding information is provided for informational purposes only. We do not represent any breeding operation, guarantee breeding outcomes, or provide veterinary advice.</p>
+  <div class="footer-brand">Silver Spurs Stallion Matchmaker</div>
+  <div class="footer-powered">Powered by HorseBreeding.ai &mdash; predictive breeding solution from <a href="https://www.bridleandbit.com" target="_blank" rel="noopener">Bridle &amp; Bit Magazine</a></div>
+  <div class="footer-contact">
+    Silver Spurs Equine &middot; <a href="https://www.silverspursequine.com" target="_blank" rel="noopener">silverspursequine.com</a><br>
+    Scottsdale, Arizona 480.563.1966 &middot; Purcell, Oklahoma 405.600.1990
+  </div>
+  <div class="footer-ai-note">This service is provided with AI and can make mistakes. Double-check responses before making breeding decisions.</div>
+  <p class="footer-legal">Legal Disclaimer: HorseBreeding.ai is an independent informational platform operated by Bridle &amp; Bit Magazine. Stallion and breeding information is provided for informational purposes only. We do not represent any breeding operation, guarantee breeding outcomes, or provide veterinary advice.</p>
 </footer>
 
 
