@@ -467,7 +467,7 @@ footer a:hover{color:#fff}
     <div class="results-header" id="results-header"></div>
     <div class="cards-grid" id="cards-grid"></div>
     <div class="more-wrap" id="more-wrap" style="display:none;">
-      <button class="more-btn" id="more-btn" onclick="showMoreMatches()">Show 3 More Matches</button>
+      <button class="more-btn" id="more-btn" type="button">Show 3 More Matches</button>
     </div>
     <div id="second-row-container"></div>
   </div>
@@ -817,6 +817,8 @@ async function runMatch() {
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span>Finding matches…';
   grid.innerHTML = '';
+  document.getElementById('second-row-container').innerHTML = '';
+  document.getElementById('more-wrap').style.display = 'none';
   section.style.display = 'none';
   empty.style.display = 'none';
 
@@ -879,7 +881,6 @@ async function runMatch() {
 
     // Render TOP ROW
     const area = document.getElementById('results-section');
-    area.innerHTML = '';
     area.style.display='block';
     document.getElementById('empty-state').style.display='none';
     document.getElementById('loading-bar').classList.remove('active');
@@ -926,7 +927,7 @@ async function runMatch() {
     </div>\n    `;
       grid3.appendChild(card);
     });
-    area.appendChild(grid3);
+    grid.appendChild(grid3);
 
     // SECOND ROW
     if (altPicks.length > 0) {
